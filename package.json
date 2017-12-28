@@ -1,0 +1,10 @@
+{
+  "name": "zinnoa-items",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "fs-jetpack": "^1.2.0",
+    "lodash": "^4.17.4"
+  }
+}

@@ -1,0 +1,3 @@
+execute unless score @p blaze_powder >= 1 blaze_costs run tellraw @p ["",{"text":"Insufficient reagents!","color":"red","italic":true},{"text":"\nRequired: ","color":"red","italic":true},{"text":"blaze powder","color":"gold"},{"text":" x 4\n","color":"red"}]
+execute if score @p blaze_powder >= 1 blaze_costs run summon minecraft:fireball ~ ~1 ~ {ExplosionPower:1,direction:[0.0d,0.0d,0.0d],Motion:[0.0,0.0,0.0]}
+execute if score @p blaze_powder >= 1 blaze_costs run clear @p minecraft:blaze_powder 4

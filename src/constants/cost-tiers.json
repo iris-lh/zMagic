@@ -1,0 +1,32 @@
+{
+  "lapis_lazuli": {
+    "name": "lapis_costs",
+    "resource": "lapis_lazuli",
+    "color": "blue",
+    "tiers": [2,4,8,16,32,64]
+  },
+  "blaze_powder": {
+    "name": "blaze_costs",
+    "resource": "blaze_powder",
+    "color": "gold",
+    "tiers": [2,4,8,16,32,64]
+  },
+  "iron_ingot": {
+    "name": "iron_costs",
+    "resource": "iron_ingot",
+    "color": "gray",
+    "tiers": [2,4,8,16,32,64]
+  },
+  "bone_meal": {
+    "name": "bone_costs",
+    "resource": "bone_meal",
+    "color": "white",
+    "tiers": [2,4,8,16,32,64]
+  },
+  "glowstone_dust": {
+    "name": "glowstone_costs",
+    "resource": "glowstone_dust",
+    "color": "yellow",
+    "tiers": [2,4,8,16,32,64]
+  }
+}
