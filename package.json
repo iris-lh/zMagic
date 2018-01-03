@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "fs-jetpack": "^1.2.0",
+    "js-yaml": "^3.10.0",
     "lodash": "^4.17.4"
   }
 }

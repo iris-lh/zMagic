@@ -1,0 +1,21 @@
+---
+name: Fireball
+costTableName: blaze_powder
+executor: '@s'
+tiers:
+- name: I
+  costTier: 1
+  explosionPower: 1
+- name: II
+  costTier: 3
+  explosionPower: 2
+- name: III
+  costTier: 5
+  explosionPower: 5
+nbt:
+  fireball:
+    ExplosionPower: $tier.explosionPower
+    direction: '[0.0d,0.0d,0.0d]'
+    Motion: '[0.0,0.0,0.0]'
+commands:
+- summon minecraft:fireball ~ ~1 ~ $nbt.fireball

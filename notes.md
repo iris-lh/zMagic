@@ -24,6 +24,9 @@ spells based around stealth, agility, and gathering intelligence.
   - detect mobs within a certain radius
 - detect humans
   - detect players within a certain radius
+- reveal monsters
+  - apply glowing effect within radius
+- reveal humans
 - invisibility
   - cause invisibility effect
   - POSSIBLY use scoreboard magic to give channeling cost
@@ -33,6 +36,7 @@ spells based around stealth, agility, and gathering intelligence.
   - search nearby blocks for containers with loot?
 - agility
   - increase movement speed and jump height
+
 
 
 

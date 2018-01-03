@@ -1,0 +1,16 @@
+---
+name: Insulate
+costTableName: blaze_powder
+executor: '@s'
+tiers:
+- name: I
+  costTier: 0
+  duration: 30
+- name: II
+  costTier: 3
+  duration: 120
+- name: III
+  costTier: 5
+  duration: 1800
+commands:
+- effect give $executor minecraft:fire_resistance $tier.duration

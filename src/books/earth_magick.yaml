@@ -1,0 +1,11 @@
+---
+name: Earth Magick
+content:
+  title: $name
+  author: Zinnoa
+  display:
+    Lore: ["Get back to your roots."]
+  pages:
+  - - summon_golem
+    -
+    - canopy

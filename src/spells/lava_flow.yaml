@@ -1,0 +1,11 @@
+---
+name: Lava Flow
+costTableName: blaze_powder
+executor: '@s'
+tiers:
+- name: I
+  costTier: 1
+commands:
+- setblock ~ ~ ~ minecraft:lava
+- setblock ~ ~1 ~ minecraft:lava
+- setblock ~ ~1 ~ minecraft:air

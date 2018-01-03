@@ -1,0 +1,19 @@
+---
+name: Gnosis Fieldbook
+content:
+  title: $name
+  author: Zinnoa
+  display:
+    Lore: ["Essential magick for clandestine activities."]
+  pages:
+  - - invisibility i
+    -
+    - eagle_eye
+    -
+    - detect_monsters i
+
+  - - invisibility ii
+    -
+    - detect_monsters ii
+
+  - - detect_monsters iii

@@ -1,1 +1,0 @@
-tellraw @p ["",{"text":"A blood offering is required.","color":"dark_red","bold":true,"italic":true,"insertion":"/give @p sign 1 0 {BlockEntityTag:{%s,id:\"Sign\"}}"},{"text":"\nCLICK HERE","color":"red","bold":true,"underlined":true,"clickEvent":{"action":"run_command","value":"/function zinnoa:private/summon_brick"},"italic":false}]

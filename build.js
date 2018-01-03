@@ -1,20 +1,18 @@
 const jp = require('fs-jetpack')
 const _ = require('lodash')
+const yaml = require('js-yaml')
+const SpellHelpers = require('./src/helpers/spell-helpers')
+const BookHelpers = require('./src/helpers/book-helpers')
+const tagHelpers = require('./src/helpers/tag-helpers')
+const interpolateYaml = require('./src/helpers/interpolate-yaml')
 
-const spellsPath = './src/spells'
-const constantsPath = './src/constants'
-const booksPath = './src/books'
+const spellsPath = './src/spells/'
+const constantsPath = './src/constants/'
+const booksPath = './src/books/'
+const tagsPath = './src/tags/'
 const costTiers = require(constantsPath+'/cost-tiers.json')
 
-const spellList = [
-  'fireball',
-  'lava_flow'
-]
-
-const bookList = [
-  'spellbook',
-  'firebug'
-]
+const spells = {}
 
 const pipe = (arg, ...fns) => {
   const _pipe = (f, g) => {
@@ -25,41 +23,50 @@ const pipe = (arg, ...fns) => {
   return fns.reduce(_pipe)(arg)
 }
 
-function importSpells(spellList) {
-  console.log('IMPORTING SPELLS...')
-  return spellList.map(spellId => {
-    const spellPath = `${spellsPath}/${spellId}.js`
-    console.log('  '+spellPath)
-    return require(spellPath)
-  })
+
+
+// TAGS
+
+function writeTags() {
+  tagHelpers.writeTickTag('./data/minecraft/tags/functions/tick.json')
+  tagHelpers.writeTags(tagsPath, './data/zinnoa/tags/')
 }
 
-function hydrateSpellTiers(spells) {
-  let hydratedSpells = []
-  spells.map(spell => {
-    spell.tiers.map(tier => {
-      const hydratedSpell = {
-        name: spell.name,
-        id: spell.id,
-        tier: tier.name,
-        isOneOff: spell.tiers.length > 1 ? false : true,
-        mcfunction: spell.getMcFunction(tier)
-      }
-      hydratedSpells.push(hydratedSpell)
-    })
-  })
-  return hydratedSpells
+
+
+// SPELLS
+
+function importSpells() {
+  const spellHelpers = new SpellHelpers()
+  return spellHelpers.importSpells(spellsPath)
 }
 
-function writeSpells(hydratedSpells) {
-  console.log('WRITING SPELLS...')
-  return hydratedSpells.map(spell => {
-    const tierStr = spell.isOneOff ? '' : `_${_.lowerCase(spell.tier)}`
-    const functionPath = `./data/zinnoa/functions/spells/${spell.id}${tierStr}.mcfunction`
-    console.log('  '+functionPath)
-    jp.write(functionPath, spell.mcfunction)
+function processSpells(importedSpellYamls) {
+  const spellHelpers = new SpellHelpers()
+  const processedSpells = spellHelpers.processSpells(importedSpellYamls)
+  processedSpells.forEach(spell => {
+    spells[spell.id] = spell
   })
+  return processedSpells
 }
+
+function writeSpells(processedSpells) {
+  const spellHelpers = new SpellHelpers()
+  spellHelpers.writeSpells(processedSpells)
+}
+
+function buildSpells() {
+  pipe(
+    importSpells()
+    , processSpells
+    , writeSpells
+  )
+}
+
+
+
+
+// REAGENTS
 
 function buildInitReagentScores(costTiers) {
   let lines = []
@@ -82,7 +89,7 @@ function buildInitReagentScores(costTiers) {
 function buildUpdateReagentScores(costTiers) {
   let lines = []
   _.forOwn(costTiers, function(value, key) {
-    const line = `execute store result score @a ${value.resource} run clear @a minecraft:${value.resource} 0`
+    const line = `execute as @a store result score @s ${value.resource} run clear @s minecraft:${value.resource} 0`
     lines.push(line)
   });
   const functionPath = `./data/zinnoa/functions/sys/update_reagent_scores.mcfunction`
@@ -96,35 +103,37 @@ function writeScoreboards() {
   buildUpdateReagentScores(costTiers)
 }
 
-function importBooks(bookList) {
-  console.log('IMPORTING BOOKS...')
-  return bookList.map(bookId => {
-    const bookPath = `${booksPath}/${bookId}.js`
-    console.log('  '+bookPath)
-    return require(bookPath)
-  })
+
+
+// BOOKS
+
+
+function importBooks() {
+  const bookHelpers = new BookHelpers(spells)
+  return bookHelpers.importBooks(booksPath)
 }
 
-function writeBooks(importedBooks) {
-  console.log('WRITING BOOKS...')
-  return importedBooks.map(book => {
-    const functionPath = `./data/zinnoa/functions/books/${book.id}.mcfunction`
-    console.log('  '+functionPath)
-    jp.write(functionPath, 'give @p written_book'+book.content)
-  })
+function processBooks(importedBookYamls) {
+  const bookHelpers = new BookHelpers(spells)
+  return bookHelpers.processBooks(importedBookYamls)
 }
 
-pipe(
-  spellList
-  , importSpells
-  , hydrateSpellTiers
-  , writeSpells
-)
+function writeBooks(processedBooks) {
+  const bookHelpers = new BookHelpers(spells)
+  bookHelpers.writeBooks(processedBooks)
+}
 
-pipe(
-  bookList
-  , importBooks
-  , writeBooks
-)
+function buildBooks() {
+  pipe(
+    importBooks()
+    , processBooks
+    , writeBooks
+  )
+}
 
+
+
+buildSpells()
+buildBooks()
+writeTags()
 writeScoreboards()

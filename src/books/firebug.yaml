@@ -1,0 +1,24 @@
+---
+name: Firebug
+content:
+  title: $name
+  author: Zinnoa
+  display:
+    Lore: ["Ignan cantrips for the aspiring arsonist."]
+    # needs to come out as {Lore:["Ignan cantrips for the pyromaniac."]}
+  pages:
+  - - fireball i
+    -
+    - insulate i
+    -
+    - lava_flow
+
+  - - fireball ii
+    -
+    - insulate ii
+    -
+    - self_destruct
+
+  - - fireball iii
+    -
+    - insulate iii

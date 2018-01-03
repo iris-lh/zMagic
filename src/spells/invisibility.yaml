@@ -1,0 +1,13 @@
+---
+name: Invisibility
+costTableName: lapis_lazuli
+executor: '@s'
+tiers:
+- name: I
+  costTier: 0
+  duration: 10
+- name: II
+  costTier: 2
+  duration: 30
+commands:
+- effect give $executor minecraft:invisibility $tier.duration

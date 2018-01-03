@@ -1,0 +1,13 @@
+{
+ "values": [
+   "minecraft:water",
+   "minecraft:air",
+   "minecraft:lava",
+   "minecraft:oak_leaves",
+   "minecraft:acacia_leaves",
+   "minecraft:spruce_leaves",
+   "minecraft:birch_leaves",
+   "minecraft:jungle_leaves",
+   "minecraft:dark_oak_leaves"
+ ]
+}
