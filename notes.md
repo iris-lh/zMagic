@@ -37,7 +37,7 @@ zMagic/
           books.json
 ```
 
-under this new system, each spell yaml will specify a trigger. For example, "Fireball" gets "fireballI", "fireballII", "fireballiii". A long spell name like "Wrath of the Forgotten King" with more than 16 characters would need a shortened trigger name like "wrathOfKingIII".
+under this new system, each spell yaml will specify a trigger name. For example, "Fireball" gets "fireballI", "fireballII", "fireballiii". A long spell name like "Wrath of the Forgotten King" with more than 16 characters would need a shortened trigger name like "wrathOfKingIII".
 
 Sounds like a human's job, honestly. The human-specified trigger name ideally would be no more than 13 characters long in order to make room for tier roman numerals. Could incorporate some error handling to that effect.
 
