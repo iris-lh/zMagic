@@ -42,6 +42,7 @@ under this new system, each spell yaml will specify a trigger name. For example,
 Sounds like a human's job, honestly. The human-specified trigger name ideally would be no more than 13 characters long in order to make room for tier roman numerals. Could incorporate some error handling to that effect.
 
 The goal is to have everything in /data built out with Node, giving me quite possibly the dryest code of any datapack maker. :)
+Ultimately, I'd also like the majority of these systems and tools to be useable for future datapack projects.
 
 
 
