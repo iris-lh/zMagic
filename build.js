@@ -75,7 +75,7 @@ function buildInitReagentScores(costTiers) {
     const line1 = `scoreboard objectives add ${value.name} dummy`
     lines.push(line0, line1)
     for (var i=0; i<value.tiers.length; i++) {
-      const line = `scoreboard players add ${i} ${value.name} ${value.tiers[i]}`
+      const line = `scoreboard players set ${i} ${value.name} ${value.tiers[i]}`
       lines.push(line)
     }
   });
