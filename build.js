@@ -25,6 +25,20 @@ const pipe = (arg, ...fns) => {
 
 
 
+// TODO FUNCTIONS
+
+// TODO RECIPES
+
+// TODO STRUCTURES
+
+// TODO LOOT TABLES
+
+// TODO TRIGGERS
+
+// TODO INIT
+
+
+
 // TAGS
 
 function writeTags() {
@@ -83,7 +97,6 @@ function buildInitReagentScores(costTiers) {
   const functionPath = `./data/zinnoa/functions/sys/init_reagent_scores.mcfunction`
   console.log('  '+functionPath)
   jp.write(functionPath, lines.join('\n'))
-
 }
 
 function buildUpdateReagentScores(costTiers) {

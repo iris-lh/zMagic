@@ -35,6 +35,7 @@ class BookHelpers {
           clickEvent:{
             action:'run_command',
             value:`/function zinnoa:spells/${spellData.id}`
+            // TODO: value:`/trigger ${spellData.trigger} set 1`
           }
         }
       } else {
