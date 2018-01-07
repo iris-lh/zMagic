@@ -1,3 +1,0 @@
-execute unless score @s blaze_powder >= 5 blaze_costs run tellraw @s ["",{"text":"Insufficient reagents!","color":"red","italic":true},{"text":"\nRequired: ","color":"red","italic":true},{"text":"blaze powder","color":"gold"},{"text":" x 64\n","color":"red"}]
-execute if score @s blaze_powder >= 5 blaze_costs run summon minecraft:fireball ~ ~1 ~ {ExplosionPower:5,direction:[0.0d,0.0d,0.0d],Motion:[0.0,0.0,0.0]}
-execute if score @s blaze_powder >= 5 blaze_costs run clear @s minecraft:blaze_powder 64
