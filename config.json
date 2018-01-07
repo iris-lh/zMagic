@@ -1,0 +1,6 @@
+{
+  "spellsPath": "./src/spells/",
+  "constantsPath": "./src/constants/",
+  "booksPath": "./src/books/",
+  "tagsPath": "./src/tags/"
+}
