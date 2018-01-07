@@ -1,17 +1,23 @@
 const jp = require('fs-jetpack')
 const _ = require('lodash')
 const yaml = require('js-yaml')
+
 const SpellHelpers = require('./src/helpers/spell-helpers')
 const BookHelpers = require('./src/helpers/book-helpers')
 const tagHelpers = require('./src/helpers/tag-helpers')
 const interpolateYaml = require('./src/helpers/interpolate-yaml')
 const pipe = require('./src/helpers/pipe')
 
-const spellsPath = './src/spells/'
 const constantsPath = './src/constants/'
-const booksPath = './src/books/'
-const tagsPath = './src/tags/'
+const contentPath   = './src/content/'
+const spellsPath    = contentPath+'/spells/'
+const initsPath     = contentPath+'/init/'
+const booksPath     = contentPath+'/books/'
+const tagsPath      = contentPath+'/tags/'
+
 const costTiers = require(constantsPath+'/cost-tiers.json')
+
+
 
 const spells = {}
 
