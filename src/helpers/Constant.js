@@ -6,14 +6,14 @@ const spellHelpers = new SpellHelpers()
 const interpolateYaml = require('./interpolate-yaml')
 
 
-class ConstantHelpers {
+class Constant {
   constructor() {
-    this.commandify       = this.commandify.bind(this)
-    this.importConstant   = this.importConstant.bind(this)
-    this.importConstants  = this.importConstants.bind(this)
-    this.processConstant  = this.processConstant.bind(this)
-    this.processConstants = this.processConstants.bind(this)
-    this.writeConstants   = this.writeConstants.bind(this)
+    this.commandify = this.commandify.bind(this)
+    this.import     = this.import.bind(this)
+    this.importAll  = this.importAll.bind(this)
+    this.process    = this.process.bind(this)
+    this.processAll = this.processAll.bind(this)
+    this.write      = this.write.bind(this)
   }
 
   commandify(constantObject) {
@@ -28,12 +28,12 @@ class ConstantHelpers {
     return commands
   }
 
-  importConstant(constantPath) {
+  import(constantPath) {
     console.log('  '+constantPath)
     return jp.read(constantPath)
   }
 
-  importConstants(constantsPath) {
+  importAll(constantsPath) {
     console.log('IMPORTING CONSTANTS...')
     let constantYamls = []
     const constantFileNames = jp.list(constantsPath).filter(fileName => {
@@ -41,28 +41,28 @@ class ConstantHelpers {
     })
     constantFileNames.map(fileName => {
       const path = constantsPath + fileName
-      constantYamls.push(this.importConstant(path))
+      constantYamls.push(this.import(path))
     })
     return constantYamls
   }
 
-  processConstant(constantYaml) {
+  process(constantYaml) {
     const rawJson = yaml.load(constantYaml)
     const processedConstant = yaml.load(interpolateYaml(constantYaml))
     const commandified = this.commandify(processedConstant)
     return commandified
   }
 
-  processConstants(importedConstantYamls) {
+  processAll(importedConstantYamls) {
     console.log('PROCESSING CONSTANTS...');
     let commands = []
     importedConstantYamls.map(constantYaml => {
-      commands.push(this.processConstant(constantYaml))
+      commands.push(this.process(constantYaml))
     })
     return _.flatten(commands)
   }
 
-  writeConstants(commands) {
+  write(commands) {
     const functionPath = `./data/zinnoa/functions/init/constants.mcfunction`
     console.log('  '+functionPath)
     const mcFunction = commands.join('\n')
@@ -73,4 +73,4 @@ class ConstantHelpers {
   }
 }
 
-module.exports = ConstantHelpers
+module.exports = Constant

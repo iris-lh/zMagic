@@ -7,16 +7,16 @@ const pipe = require('./pipe')
 const interpolateYaml = require('./interpolate-yaml')
 
 
-class SpellHelpers {
+class Spell {
   constructor() {
-    this.importSpell = this.importSpell.bind(this)
-    this.importSpells = this.importSpells.bind(this)
-    this.processSpell = this.processSpell.bind(this)
-    this.processSpells = this.processSpells.bind(this)
-    this.buildMcFunction = this.buildMcFunction.bind(this)
+    this.import           = this.import.bind(this)
+    this.importAll        = this.importAll.bind(this)
+    this.process          = this.process.bind(this)
+    this.processAll       = this.processAll.bind(this)
+    this.buildMcFunction  = this.buildMcFunction.bind(this)
     this.buildMcFunctions = this.buildMcFunctions.bind(this)
-    this.writeSpell = this.writeSpell.bind(this)
-    this.writeSpells = this.writeSpells.bind(this)
+    this.write            = this.write.bind(this)
+    this.writeAll         = this.writeAll.bind(this)
 
     this.colors = _.reduce(costTiers, (result, value, key) => {
       return _.set(result, `${key}`, value.color)
@@ -38,12 +38,12 @@ class SpellHelpers {
     return lines
   }
 
-  importSpell(path) {
+  import(path) {
     console.log('  '+path)
     return jp.read(path)
   }
 
-  importSpells(spellsPath) {
+  importAll(spellsPath) {
     console.log('IMPORTING SPELLS...')
     let spellYamls = []
     const spellFileNames = jp.list(spellsPath).filter(fileName => {
@@ -51,12 +51,12 @@ class SpellHelpers {
     })
     spellFileNames.map(fileName => {
       const path = spellsPath + fileName
-      spellYamls.push(this.importSpell(path))
+      spellYamls.push(this.import(path))
     })
     return spellYamls
   }
 
-  processSpell(importedSpellYaml, tier) {
+  process(importedSpellYaml, tier) {
     const rawJson = yaml.load(importedSpellYaml)
     const processedSpell = yaml.load(interpolateYaml(importedSpellYaml, {tier: tier}))
     processedSpell.tier = tier
@@ -68,13 +68,13 @@ class SpellHelpers {
     return processedSpell
   }
 
-  processSpells(importedSpellYamls) {
+  processAll(importedSpellYamls) {
     console.log('PROCESSING SPELLS...');
     let processedSpells = []
     importedSpellYamls.map(spellYaml => {
     const rawJson = yaml.load(spellYaml)
       rawJson.tiers.map(tier => {
-        processedSpells.push(this.processSpell(spellYaml, tier))
+        processedSpells.push(this.process(spellYaml, tier))
       })
     })
     return processedSpells
@@ -90,7 +90,7 @@ class SpellHelpers {
     })
   }
 
-  writeSpell(processedSpell) {
+  write(processedSpell) {
     const rawJson = processedSpell
     const isOneOff = rawJson.tiers.length <= 1
     const functionPath = `./data/zinnoa/functions/spells/${processedSpell.id}.mcfunction`
@@ -99,15 +99,15 @@ class SpellHelpers {
     jp.write(functionPath, mcFunction)
   }
 
-  writeSpells(processedSpells) {
+  writeAll(processedSpells) {
     console.log('WRITING SPELLS...')
 
     processedSpells.map(spell => {
-      this.writeSpell(spell)
+      this.write(spell)
     })
   }
 
 }
 
 
-module.exports = SpellHelpers
+module.exports = Spell

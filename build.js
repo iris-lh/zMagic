@@ -2,9 +2,9 @@ const jp = require('fs-jetpack')
 const _ = require('lodash')
 const yaml = require('js-yaml')
 
-const SpellHelpers = require('./src/helpers/spell-helpers')
-const BookHelpers = require('./src/helpers/book-helpers')
-const tagHelpers = require('./src/helpers/tag-helpers')
+const Spell = require('./src/helpers/Spell')
+const Book = require('./src/helpers/Book')
+const tagHelpers = require('./src/helpers/tag')
 const interpolateYaml = require('./src/helpers/interpolate-yaml')
 const pipe = require('./src/helpers/pipe')
 
@@ -49,13 +49,13 @@ function writeTags() {
 // SPELLS
 
 function importSpells() {
-  const spellHelpers = new SpellHelpers()
-  return spellHelpers.importSpells(spellsPath)
+  const spellHelpers = new Spell()
+  return spellHelpers.importAll(spellsPath)
 }
 
 function processSpells(importedSpellYamls) {
-  const spellHelpers = new SpellHelpers()
-  const processedSpells = spellHelpers.processSpells(importedSpellYamls)
+  const spellHelpers = new Spell()
+  const processedSpells = spellHelpers.processAll(importedSpellYamls)
   processedSpells.forEach(spell => {
     spells[spell.id] = spell
   })
@@ -63,8 +63,8 @@ function processSpells(importedSpellYamls) {
 }
 
 function writeSpells(processedSpells) {
-  const spellHelpers = new SpellHelpers()
-  spellHelpers.writeSpells(processedSpells)
+  const spellHelpers = new Spell()
+  spellHelpers.writeAll(processedSpells)
 }
 
 function buildSpells() {
@@ -120,18 +120,18 @@ function writeScoreboards() {
 
 
 function importBooks() {
-  const bookHelpers = new BookHelpers(spells)
-  return bookHelpers.importBooks(booksPath)
+  const bookHelpers = new Book(spells)
+  return bookHelpers.importAll(booksPath)
 }
 
 function processBooks(importedBookYamls) {
-  const bookHelpers = new BookHelpers(spells)
-  return bookHelpers.processBooks(importedBookYamls)
+  const bookHelpers = new Book(spells)
+  return bookHelpers.processAll(importedBookYamls)
 }
 
 function writeBooks(processedBooks) {
-  const bookHelpers = new BookHelpers(spells)
-  bookHelpers.writeBooks(processedBooks)
+  const bookHelpers = new Book(spells)
+  bookHelpers.writeAll(processedBooks)
 }
 
 function buildBooks() {

@@ -1,21 +1,22 @@
 const _ = require('lodash')
 const jp = require('fs-jetpack')
 const yaml = require('js-yaml')
-const SpellHelpers = require('./spell-helpers')
-const spellHelpers = new SpellHelpers()
+const Spell = require('./Spell')
+const spellHelpers = new Spell()
 const interpolateYaml = require('./interpolate-yaml')
 
 
-class BookHelpers {
+class Book {
   constructor(spells) {
     this.spells = spells
     this.constructPage = this.constructPage.bind(this)
     this.constructPages = this.constructPages.bind(this)
-    this.importBooks = this.importBooks.bind(this)
-    this.processBook = this.processBook.bind(this)
-    this.processBooks = this.processBooks.bind(this)
-    this.writeBook = this.writeBook.bind(this)
-    this.writeBooks = this.writeBooks.bind(this)
+    this.import = this.import.bind(this)
+    this.importAll = this.importAll.bind(this)
+    this.process = this.process.bind(this)
+    this.processAll = this.processAll.bind(this)
+    this.write = this.write.bind(this)
+    this.writeAll = this.writeAll.bind(this)
   }
 
   constructPage(spellList) {
@@ -35,7 +36,7 @@ class BookHelpers {
           clickEvent:{
             action:'run_command',
             value:`/function zinnoa:spells/${spellData.id}`
-            // TODO: value:`/trigger ${spellData.trigger} set 1`
+            // TODO: change to value:`/trigger ${spellData.trigger} set 1`
           }
         }
       } else {
@@ -57,12 +58,12 @@ class BookHelpers {
     return pages
   }
 
-  importBook(bookPath) {
+  import(bookPath) {
     console.log('  '+bookPath)
     return jp.read(bookPath)
   }
 
-  importBooks(booksPath) {
+  importAll(booksPath) {
     console.log('IMPORTING BOOKS...')
     let bookYamls = []
     const bookFileNames = jp.list(booksPath).filter(fileName => {
@@ -70,12 +71,12 @@ class BookHelpers {
     })
     bookFileNames.map(fileName => {
       const path = booksPath + fileName
-      bookYamls.push(this.importBook(path))
+      bookYamls.push(this.import(path))
     })
     return bookYamls
   }
 
-  processBook(bookYaml) {
+  process(bookYaml) {
     const rawJson = yaml.load(bookYaml)
     const processedBook = yaml.load(interpolateYaml(bookYaml))
     processedBook.content.pages = this.constructPages(processedBook.content.pages)
@@ -83,16 +84,16 @@ class BookHelpers {
     return processedBook
   }
 
-  processBooks(importedBookYamls) {
+  processAll(importedBookYamls) {
     console.log('PROCESSING BOOKS...');
     let processedBooks = []
     importedBookYamls.map(bookYaml => {
-      processedBooks.push(this.processBook(bookYaml))
+      processedBooks.push(this.process(bookYaml))
     })
     return processedBooks
   }
 
-  writeBook(book) {
+  write(book) {
     const functionPath = `./data/zinnoa/functions/books/${_.snakeCase(book.name)}.mcfunction`
     console.log('  '+functionPath)
     const mcFunction = 'give @p written_book'+JSON.stringify(book.content)
@@ -100,12 +101,12 @@ class BookHelpers {
     jp.write(functionPath, mcFunction)
   }
 
-  writeBooks(importedBooks) {
+  writeAll(importedBooks) {
     console.log('WRITING BOOKS...')
     return importedBooks.map(book => {
-      this.writeBook(book)
+      this.write(book)
     })
   }
 }
 
-module.exports = BookHelpers
+module.exports = Book

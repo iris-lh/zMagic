@@ -1,6 +1,6 @@
 const jp = require('fs-jetpack')
 
-const tagHelpers = {
+const tag = {
   writeTickTag: function(writePath) {
     console.log('WRITING TICK TAG...');
 
@@ -46,6 +46,6 @@ const tagHelpers = {
   }
 }
 
-tagHelpers.writeTags('./src/tags/', './data/zinnoa/tags/')
+tag.writeTags('./src/tags/', './data/zinnoa/tags/')
 
-module.exports = tagHelpers
+module.exports = tag
