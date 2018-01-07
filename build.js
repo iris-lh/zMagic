@@ -5,6 +5,7 @@ const SpellHelpers = require('./src/helpers/spell-helpers')
 const BookHelpers = require('./src/helpers/book-helpers')
 const tagHelpers = require('./src/helpers/tag-helpers')
 const interpolateYaml = require('./src/helpers/interpolate-yaml')
+const pipe = require('./src/helpers/pipe')
 
 const spellsPath = './src/spells/'
 const constantsPath = './src/constants/'
@@ -13,15 +14,6 @@ const tagsPath = './src/tags/'
 const costTiers = require(constantsPath+'/cost-tiers.json')
 
 const spells = {}
-
-const pipe = (arg, ...fns) => {
-  const _pipe = (f, g) => {
-    return (arg) => {
-      return g(f(arg))
-    }
-  }
-  return fns.reduce(_pipe)(arg)
-}
 
 
 
