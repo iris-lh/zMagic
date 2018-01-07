@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "build": "node ./build.js",
+    "todo": "node ./node_modules/leasot/bin/leasot.js leasot './**/*.js' --ignore './node_modules/**/*'"
+  },
   "dependencies": {
     "fs-jetpack": "^1.2.0",
     "js-yaml": "^3.10.0",
+    "leasot": "^4.13.0",
     "lodash": "^4.17.4"
   }
 }
