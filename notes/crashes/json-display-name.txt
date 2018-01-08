@@ -1,0 +1,92 @@
+---- Minecraft Crash Report ----
+// Oh - I know what I did wrong!
+
+Time: 1/8/18 8:40 AM
+Description: Unexpected error
+
+com.google.gson.JsonSyntaxException: com.google.gson.stream.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 1 column 1 path $
+	at com.google.gson.internal.Streams.parse(Streams.java:60)
+	at com.google.gson.internal.bind.TreeTypeAdapter.read(TreeTypeAdapter.java:65)
+	at vf.a(SourceFile:493)
+	at vf.a(SourceFile:518)
+	at hn$a.a(SourceFile:241)
+	at anp.q(SourceFile:508)
+	at bon.c(SourceFile:584)
+	at bon.a(SourceFile:231)
+	at cao.a(SourceFile:979)
+	at bnv.b(SourceFile:822)
+	at bnv.a(SourceFile:382)
+	at net.minecraft.client.main.Main.main(SourceFile:140)
+Caused by: com.google.gson.stream.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 1 column 1 path $
+	at com.google.gson.stream.JsonReader.syntaxError(JsonReader.java:1559)
+	at com.google.gson.stream.JsonReader.checkLenient(JsonReader.java:1401)
+	at com.google.gson.stream.JsonReader.doPeek(JsonReader.java:593)
+	at com.google.gson.stream.JsonReader.peek(JsonReader.java:425)
+	at com.google.gson.internal.Streams.parse(Streams.java:46)
+	... 11 more
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Client thread
+Stacktrace:
+	at com.google.gson.internal.Streams.parse(Streams.java:60)
+	at com.google.gson.internal.bind.TreeTypeAdapter.read(TreeTypeAdapter.java:65)
+	at vf.a(SourceFile:493)
+	at vf.a(SourceFile:518)
+	at hn$a.a(SourceFile:241)
+	at anp.q(SourceFile:508)
+	at bon.c(SourceFile:584)
+	at bon.a(SourceFile:231)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [cab['TextComponent{text='zinnoa', siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/46, l='MpServer', x=959.40, y=56.00, z=-1562.25]]
+	Chunk stats: MultiplayerChunkCache: 289, 289
+	Level seed: 0
+	Level generator: ID 01 - flat, ver 0. Features enabled: false
+	Level generator options:
+	Level spawn location: World: (962,4,-1568), Chunk: (at 2,0,0 in 60,-98; contains blocks 960,0,-1568 to 975,255,-1553), Region: (1,-4; contains chunks 32,-128 to 63,-97, blocks 512,0,-2048 to 1023,255,-1537)
+	Level time: 27942 game time, 27942 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 11 total; [ahh['TranslatableComponent{key='block.minecraft.sandstone', args=[], siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/16, l='MpServer', x=912.58, y=55.00, z=-1570.91], ahh['TranslatableComponent{key='block.minecraft.sandstone', args=[], siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/17, l='MpServer', x=913.23, y=56.00, z=-1569.68], cab['TextComponent{text='zinnoa', siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/46, l='MpServer', x=959.40, y=56.00, z=-1562.25], ahh['TranslatableComponent{key='block.minecraft.sandstone', args=[], siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/22, l='MpServer', x=928.13, y=55.00, z=-1593.52], ahh['TranslatableComponent{key='block.minecraft.sandstone', args=[], siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/23, l='MpServer', x=929.23, y=55.00, z=-1592.60], ahq['TranslatableComponent{key='entity.Enderman.name', args=[], siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/24, l='MpServer', x=933.62, y=56.00, z=-1542.58], ahh['TranslatableComponent{key='block.minecraft.sandstone', args=[], siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/25, l='MpServer', x=959.83, y=55.00, z=-1558.78], ahh['TranslatableComponent{key='block.minecraft.sandstone', args=[], siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/26, l='MpServer', x=958.13, y=55.00, z=-1558.45], ahh['TranslatableComponent{key='item.minecraft.arrow', args=[], siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/12, l='MpServer', x=909.61, y=56.00, z=-1544.35], ahh['TranslatableComponent{key='item.minecraft.bone', args=[], siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/13, l='MpServer', x=910.03, y=56.00, z=-1545.39], ahh['TranslatableComponent{key='block.minecraft.sandstone', args=[], siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/15, l='MpServer', x=912.87, y=55.00, z=-1572.88]]
+	Retry entities: 0 total; []
+	Server brand: vanilla
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at byc.a(SourceFile:357)
+	at bnv.b(SourceFile:1833)
+	at bnv.a(SourceFile:396)
+	at net.minecraft.client.main.Main.main(SourceFile:140)
+
+-- System Details --
+Details:
+	Minecraft Version: 18w01a
+	Operating System: Mac OS X (x86_64) version 10.12.6
+	Java Version: 1.8.0_74, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 232582560 bytes (221 MB) / 436207616 bytes (416 MB) up to 2147483648 bytes (2048 MB)
+	JVM Flags: 7 total; -Xmx2G -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	Launched Version: 18w01a
+	LWJGL: 3.1.2 build 29
+	OpenGL: NVIDIA GeForce GT 650M OpenGL Engine GL version 2.1 NVIDIA-10.17.5 355.10.05.45f01, NVIDIA Corporation
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because ARB_framebuffer_object is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: Yes
+	Is Modded: Probably not. Jar signature remains and client brand is untouched.
+	Type: Client (map_client.txt)
+	Resource Packs: vanilla
+	Current Language: ~~ERROR~~ NullPointerException: null
+	Profiler Position: N/A (disabled)
+	CPU: 8x Intel(R) Core(TM) i7-3820QM CPU @ 2.70GHz

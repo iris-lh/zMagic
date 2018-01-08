@@ -1,0 +1,106 @@
+---- Minecraft Crash Report ----
+// But it works on my machine.
+
+Time: 1/8/18 2:01 PM
+Description: Ticking entity
+
+java.lang.NullPointerException: Ticking entity
+	at um.a(SourceFile:28)
+	at um.a(SourceFile:22)
+	at um.<init>(SourceFile:15)
+	at uo.a(SourceFile:24)
+	at java.util.Map.computeIfAbsent(Map.java:957)
+	at uo.a(SourceFile:24)
+	at uo.b(SourceFile:41)
+	at rp.a(SourceFile:456)
+	at aam.a(SourceFile:849)
+	at aiz.a(SourceFile:883)
+	at rp.a(SourceFile:526)
+	at ajd.a(SourceFile:344)
+	at ajd.H_(SourceFile:265)
+	at ajw.H_(SourceFile:98)
+	at arv.a(SourceFile:1564)
+	at rn.a(SourceFile:704)
+	at arv.h(SourceFile:1540)
+	at arv.l(SourceFile:1422)
+	at rn.l(SourceFile:537)
+	at net.minecraft.server.MinecraftServer.w(SourceFile:679)
+	at net.minecraft.server.MinecraftServer.v(SourceFile:604)
+	at cmd.v(SourceFile:152)
+	at net.minecraft.server.MinecraftServer.run(SourceFile:509)
+	at java.lang.Thread.run(Thread.java:745)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at um.a(SourceFile:28)
+	at um.a(SourceFile:22)
+	at um.<init>(SourceFile:15)
+	at uo.a(SourceFile:24)
+	at java.util.Map.computeIfAbsent(Map.java:957)
+	at uo.a(SourceFile:24)
+	at uo.b(SourceFile:41)
+	at rp.a(SourceFile:456)
+	at aam.a(SourceFile:849)
+	at aiz.a(SourceFile:883)
+	at rp.a(SourceFile:526)
+	at ajd.a(SourceFile:344)
+	at ajd.H_(SourceFile:265)
+	at ajw.H_(SourceFile:98)
+	at arv.a(SourceFile:1564)
+	at rn.a(SourceFile:704)
+	at arv.h(SourceFile:1540)
+
+-- Entity being ticked --
+Details:
+	Entity Type: minecraft:arrow (ajw)
+	Entity ID: 369
+	Entity Name: Arrow
+	Entity's Exact location: 956.14, 58.40, -1579.76
+	Entity's Block location: World: (956,58,-1580), Chunk: (at 12,3,4 in 59,-99; contains blocks 944,0,-1584 to 959,255,-1569), Region: (1,-4; contains chunks 32,-128 to 63,-97, blocks 512,0,-2048 to 1023,255,-1537)
+	Entity's Momentum: -0.01, -2.16, -0.01
+	Entity's Passengers: []
+	Entity's Vehicle: ~~ERROR~~ NullPointerException: null
+Stacktrace:
+	at arv.l(SourceFile:1422)
+	at rn.l(SourceFile:537)
+
+-- Affected level --
+Details:
+	Level name: magic-test-2
+	All players: 2 total; [rp['TextComponent{text='yelimsxela', siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/66, l='magic-test-2', x=949.11, y=59.55, z=-1588.72], rp['TextComponent{text='zinnoa', siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/44, l='magic-test-2', x=956.17, y=56.00, z=-1579.63]]
+	Chunk stats: ServerChunkCache: 322 Drop: 0
+	Level seed: 3209532511793000095
+	Level generator: ID 01 - flat, ver 0. Features enabled: false
+	Level generator options: minecraft:bedrock,3*minecraft:stone,52*minecraft:sandstone;2;
+	Level spawn location: World: (962,4,-1568), Chunk: (at 2,0,0 in 60,-98; contains blocks 960,0,-1568 to 975,255,-1553), Region: (1,-4; contains chunks 32,-128 to 63,-97, blocks 512,0,-2048 to 1023,255,-1537)
+	Level time: 114906 game time, 56114 day time
+	Level dimension: 0
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 5144 (now: true), thunder time: 81141 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.w(SourceFile:679)
+	at net.minecraft.server.MinecraftServer.v(SourceFile:604)
+	at cmd.v(SourceFile:152)
+	at net.minecraft.server.MinecraftServer.run(SourceFile:509)
+	at java.lang.Thread.run(Thread.java:745)
+
+-- System Details --
+Details:
+	Minecraft Version: 18w01a
+	Operating System: Mac OS X (x86_64) version 10.12.6
+	Java Version: 1.8.0_74, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 598995056 bytes (571 MB) / 1073741824 bytes (1024 MB) up to 2147483648 bytes (2048 MB)
+	JVM Flags: 7 total; -Xmx2G -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	Profiler Position: N/A (disabled)
+	Player Count: 2 / 8; [rp['TextComponent{text='yelimsxela', siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/66, l='magic-test-2', x=949.11, y=59.55, z=-1588.72], rp['TextComponent{text='zinnoa', siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/44, l='magic-test-2', x=956.17, y=56.00, z=-1579.63]]
+	Data Packs: vanilla, file/zMagic (incompatible)
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Probably not. Jar signature remains and both client + server brands are untouched.
