@@ -4,6 +4,7 @@ const yaml = require('js-yaml')
 
 const Spell = require('./src/helpers/Spell')
 const Book = require('./src/helpers/Book')
+const Scribing = require('./src/helpers/Scribing')
 const tagHelpers = require('./src/helpers/tag')
 const interpolateYaml = require('./src/helpers/interpolate-yaml')
 const pipe = require('./src/helpers/pipe')
@@ -21,6 +22,7 @@ const costTiers = require(constantsPath+'/cost-tiers.json')
 
 const spells = {}
 
+// TODO scribing
 // TODO error handling!
 // TODO get a roman numeral converter up in here
 // TODO verbose mode
@@ -29,7 +31,6 @@ const spells = {}
 // TODO fancy recipes
 // TODO structures???
 // TODO loot tables???
-// TODO scribing
 // TODO proper init-helper
 
 
@@ -112,6 +113,14 @@ function writeScoreboards() {
   buildUpdateReagentScores(costTiers)
 }
 
+function writeScribing() {
+  console.log('WRITING SCRIBING...');
+  const scribingHelpers = new Scribing()
+  scribingHelpers.writeInit()
+  scribingHelpers.writeTick()
+  scribingHelpers.writeGivers()
+}
+
 
 function writeInit() {
   console.log('WRITING INIT...');
@@ -129,8 +138,8 @@ function writeTick() {
   console.log('WRITING TICK...');
     const lines = [
       'function zmagic:triggers/spells/tick',
-      'function zmagic:reagents/tick',
-      'function zmagic:scribing/tick'
+      'function zmagic:triggers/scribing/tick',
+      'function zmagic:reagents/tick'
     ]
   const functionPath = `./data/zmagic/functions/tick.mcfunction`
   console.log('  '+functionPath)
@@ -171,5 +180,6 @@ buildSpells()
 buildBooks()
 writeTags()
 writeScoreboards()
+writeScribing()
 writeInit()
 writeTick()

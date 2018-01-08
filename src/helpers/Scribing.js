@@ -4,6 +4,9 @@ const jp = require('fs-jetpack')
 
 const Book = require('./Book')
 
+const triggerTickPath = './data/zmagic/functions/triggers/scribing/tick.mcfunction'
+const initPath        = './data/zmagic/functions/init/scribing.mcfunction'
+const givePath        = './data/zmagic/functions/give/page/'
 
 class Scribing {
   constructor() {
@@ -16,7 +19,7 @@ class Scribing {
         name: 'Ignus Page',
         enchantId: 1,
         triggerObjective: 'scrIgnusPage',
-        reagent: 'lapis_lazuli',
+        reagent: 'blaze_powder',
         tiers: [
           {
             name: 'I',
@@ -56,7 +59,6 @@ class Scribing {
   }
 
   getIngredientsToClear(paper, index) {
-    console.log('getIngredientsToClear');
     let ingredients = ''
     switch(index) {
       case 0:
@@ -66,13 +68,15 @@ class Scribing {
         break;
       case 1:
         var line1 = `clear @s minecraft:paper 1`
-        var pageConsumed = `minecraft:paper{ench:[{id:${paper.enchantId},lvl:${index}}]}`
+        var pageConsumed = `minecraft:paper{ench:[{id:${paper.enchantId},lvl:${index-1}}]}`
         var line2 = `clear @s ${pageConsumed} 4`
+        ingredients = line1+'\n'+line2
         break;
       case 2:
         var line1 = `clear @s minecraft:paper 1`
-        var pageConsumed = `minecraft:paper{ench:[{id:${paper.enchantId},lvl:${index}}]}`
+        var pageConsumed = `minecraft:paper{ench:[{id:${paper.enchantId},lvl:${index-1}}]}`
         var line2 = `clear @s ${pageConsumed} 4`
+        ingredients = line1+'\n'+line2
         break;
     }
     return ingredients
@@ -82,16 +86,15 @@ class Scribing {
     let lines = []
     this.papers.forEach(paper => {
       lines.push(`scoreboard objectives add scribePage trigger`)
-      lines.push(`scoreboard objectives add scribePage dummy`)
       paper.tiers.forEach((tier, index) => {
         const item = `minecraft:paper{ench:[{id:${paper.enchantId},lvl:${index}}]}`
-        // const line = `execute as @a store result score @s ${_.camelCase(paper.name)+tier.name} run clear @s ${item} 0`
         const line = `scoreboard objectives add ${_.camelCase(paper.name)+tier.name} dummy`
 
         lines.push(line)
       })
     })
-    console.log(lines.join('\n'));
+    console.log('  '+initPath);
+    jp.write(initPath, lines.join('\n'))
   }
 
   writeTick() {
@@ -101,29 +104,29 @@ class Scribing {
       lines.push(`execute as @a store result score @s paper run clear @s minecraft:paper 0`)
       paper.tiers.forEach((tier, index) => {
         const ingredients = this.getIngredientsScores(paper, index)
-        const execute = `execute at @a[scores={scribePage=${tier.trigger},${ingredients}] run`
+        const execute = `execute at @a[scores={scribePage=${tier.trigger},${ingredients}}] run`
         const mcfunction = `function zmagic:scribe/${_.snakeCase(paper.name+tier.name)}`
         const line = `${execute} ${mcfunction}`
         lines.push(line)
       })
       lines.push(`scoreboard players set @a[scores={scribePage=1..}] scribePage -1`)
     })
-    console.log(lines.join('\n'));
+    console.log('  '+triggerTickPath);
+    jp.write(triggerTickPath, lines.join('\n'))
   }
 
   writeGivers() {
-    let lines = []
     this.papers.forEach(paper => {
       paper.tiers.forEach((tier, index) => {
         let color = ''
-        switch(tier.name) {
-          case 'I':
+        switch(index) {
+          case 0:
             color = 'green'
             break;
-          case 'II':
+          case 1:
             color = 'aqua'
             break;
-          case 'III':
+          case 2:
             color = 'light_purple'
             break;
         }
@@ -135,26 +138,18 @@ class Scribing {
         const pageConsumed = `minecraft:paper{ench:[{id:${paper.enchantId},lvl:${index}}]}`
         const line3 = this.getIngredientsToClear(paper, index)
 
-        const sublines = [
+        const lines = [
           line1,
           line3
         ]
-        lines.push(sublines.join('\n'))
+
+        const writePath = `${givePath}${_.snakeCase(paper.name+tier.name)}.mcfunction`
+        console.log('  '+writePath);
+        jp.write(writePath, lines.join('\n'))
       })
     })
-    console.log(lines.join('\n\n'));
   }
 }
 
 
 module.exports = Scribing
-
-
-
-const scribingHelpers = new Scribing()
-console.log('\nINIT');
-scribingHelpers.writeInit()
-console.log('\nTICK');
-scribingHelpers.writeTick()
-console.log('\nGIVERS');
-scribingHelpers.writeGivers()
