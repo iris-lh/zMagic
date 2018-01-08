@@ -63,7 +63,8 @@ class Objective {
   }
 
   write(commands) {
-    const functionPath = `./data/zinnoa/functions/init/objectives.mcfunction`
+    const functionPath = `./data/zmagic
+    /functions/init/objectives.mcfunction`
     console.log('  '+functionPath)
     const mcFunction = commands.join('\n')
 

@@ -6,7 +6,7 @@ const tag = {
 
     const tag = {
       "values": [
-        "#zinnoa:tick"
+        "zmagic:tick"
       ]
     }
 
@@ -46,6 +46,6 @@ const tag = {
   }
 }
 
-tag.writeTags('./src/tags/', './data/zinnoa/tags/')
+tag.writeTags('./src/tags/', './data/zmagic/tags/')
 
 module.exports = tag

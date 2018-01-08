@@ -90,10 +90,28 @@ class Spell {
     })
   }
 
+  writeTriggers(spells) {
+    console.log('WRITING SPELL TRIGGERS...')
+    let commands = []
+    commands.push('scoreboard players enable @a cast_spell')
+    spells.forEach(spell => {
+      commands.push(`execute as @a[scores={cast_spell=${spell.tier.trigger}}] run function zmagic:cast/${spell.id}`)
+    })
+    commands.push('scoreboard players set @a cast_spell -1')
+    const tickPath = `./data/zmagic/functions/triggers/spells/tick.mcfunction`
+    const mcFunction = commands.join('\n')
+    jp.write(tickPath, mcFunction)
+
+    const initPath = `./data/zmagic/functions/init/spells.mcfunction`
+    const initCommand = 'scoreboard objectives add cast_spell trigger'
+    jp.write(initPath, initCommand)
+    console.log('  '+tickPath)
+  }
+
   write(processedSpell) {
     const rawJson = processedSpell
     const isOneOff = rawJson.tiers.length <= 1
-    const functionPath = `./data/zinnoa/functions/spells/${processedSpell.id}.mcfunction`
+    const functionPath = `./data/zmagic/functions/cast/${processedSpell.id}.mcfunction`
     console.log('  '+functionPath)
     const mcFunction = this.buildMcFunction(processedSpell).join('\n')
     jp.write(functionPath, mcFunction)

@@ -1,7 +1,7 @@
 {
   "values": [
-    "zinnoa:books/firebug",
-    "zinnoa:books/earth_magick",
-    "zinnoa:books/gnosis_fieldbook"
+    "zmagic:books/firebug",
+    "zmagic:books/earth_magick",
+    "zmagic:books/gnosis_fieldbook"
   ]
 }

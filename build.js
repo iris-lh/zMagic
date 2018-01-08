@@ -23,15 +23,18 @@ const spells = {}
 
 
 
-// TODO FUNCTIONS
+// TODO RAW FUNCTIONS
 
-// TODO RECIPES
+// TODO RAW RECIPES
+
+// TODO FANCY RECIPES
 
 // TODO STRUCTURES
 
 // TODO LOOT TABLES
 
-// TODO TRIGGERS
+// TODO SPELL TRIGGERS
+// TODO SCRIBING TRIGGERS
 
 // TODO INIT
 
@@ -41,7 +44,7 @@ const spells = {}
 
 function writeTags() {
   tagHelpers.writeTickTag('./data/minecraft/tags/functions/tick.json')
-  tagHelpers.writeTags(tagsPath, './data/zinnoa/tags/')
+  tagHelpers.writeTags(tagsPath, './data/zmagic/tags/')
 }
 
 
@@ -92,7 +95,7 @@ function buildInitReagentScores(costTiers) {
     }
   });
 
-  const functionPath = `./data/zinnoa/functions/sys/init_reagent_scores.mcfunction`
+  const functionPath = `./data/zmagic/functions/init/reagents.mcfunction`
   console.log('  '+functionPath)
   jp.write(functionPath, lines.join('\n'))
 }
@@ -103,7 +106,7 @@ function buildUpdateReagentScores(costTiers) {
     const line = `execute as @a store result score @s ${value.resource} run clear @s minecraft:${value.resource} 0`
     lines.push(line)
   });
-  const functionPath = `./data/zinnoa/functions/sys/update_reagent_scores.mcfunction`
+  const functionPath = `./data/zmagic/functions/reagents/tick.mcfunction`
   console.log('  '+functionPath)
   jp.write(functionPath, lines.join('\n'))
 }
@@ -112,6 +115,29 @@ function writeScoreboards() {
   console.log('WRITING SCOREBOARDS...');
   buildInitReagentScores(costTiers)
   buildUpdateReagentScores(costTiers)
+}
+
+
+function writeInit() {
+  console.log('WRITING INIT...');
+    const lines = [
+      'function zmagic:init/spells',
+      'function zmagic:init/reagents'
+    ]
+  const functionPath = `./data/zmagic/functions/init.mcfunction`
+  console.log('  '+functionPath)
+  jp.write(functionPath, lines.join('\n'))
+}
+
+function writeTick() {
+  console.log('WRITING TICK...');
+    const lines = [
+      'function zmagic:triggers/spells/tick',
+      'function zmagic:reagents/tick'
+    ]
+  const functionPath = `./data/zmagic/functions/tick.mcfunction`
+  console.log('  '+functionPath)
+  jp.write(functionPath, lines.join('\n'))
 }
 
 

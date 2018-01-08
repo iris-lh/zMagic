@@ -94,7 +94,7 @@ class Book {
   }
 
   write(book) {
-    const functionPath = `./data/zinnoa/functions/books/${_.snakeCase(book.name)}.mcfunction`
+    const functionPath = `./data/zmagic/functions/give/book/${_.snakeCase(book.name)}.mcfunction`
     console.log('  '+functionPath)
     const mcFunction = 'give @p written_book'+JSON.stringify(book.content)
 
