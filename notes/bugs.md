@@ -3,7 +3,8 @@ I really should be reporting these.
 
 
 ## Items with custom names
-version: 18w50a
+last seen: 18w50a
+
 On minecraft 18w01a there is a bug that causes the game to crash if you select an item with the wrong JSON formatting in its display.Name data.
 
 #### To reproduce:
@@ -25,8 +26,9 @@ Example:
 
 
 ## Killing blows from player-launched projectiles
-version: 18w50a
-They currently crash the game for some reason. Who knows.
+last seen: 18w50a
+
+They currently crash the game with null pointer exceptions for some reason. Who knows.
 
 UPDATE: seems to happen with any lethal player-launched projectile.
 
@@ -46,7 +48,8 @@ None yet. I want to have fiery wizard duels, and to the death, dang it!
 
 
 ## Shooting arrows with downward levitation effect
-version: 18w50a
+last seen: 18w50a
+
 For some reason, a downward levitation effecct (amplifiers 128-255) causes a player to be unable to shoot arrows. Which defeats the entire purpose of the Eagle Eye spell.
 
 #### To reproduce:
