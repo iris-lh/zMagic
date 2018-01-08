@@ -1,9 +1,10 @@
 # BUGS
-I really should be reporting these.
 
 
 ## Items with custom names
 last seen: 18w50a
+
+[tracked here](https://bugs.mojang.com/browse/MC-123782)
 
 On minecraft 18w01a there is a bug that causes the game to crash if you select an item with the wrong JSON formatting in its display.Name data.
 
@@ -29,6 +30,8 @@ Example:
 ## Killing blows from player-launched projectiles
 last seen: 18w50a
 
+[tracked here](https://bugs.mojang.com/browse/MC-122883)
+
 They currently crash the game with null pointer exceptions for some reason. Who knows.
 
 UPDATE: seems to happen with any lethal player-launched projectile.
@@ -48,6 +51,8 @@ None yet. I want to have fiery wizard duels, and to the death, dang it!
 ## Shooting arrows with downward levitation effect
 last seen: 18w50a
 
+[tracked here](https://bugs.mojang.com/browse/MC-98222?jql=text%20~%20%22levitation%20bow%22)
+
 For some reason, a downward levitation effecct (amplifiers 128-255) causes a player to be unable to shoot arrows. Which defeats the entire purpose of the Eagle Eye spell.
 
 #### To reproduce:
@@ -61,3 +66,5 @@ and try to shoot an arrow.
 Currently the only workarounds I can think of are to either remove the levitation effect and have Eagle Eye root the caster in place, or to use a upward levitation effect (amplifier 0) and deal with the annoyances that creates.
 
 Neither workaround is really ideal.
+
+Unfortunately, there does not appear to be any help on the way from Mojang for this one.
