@@ -1,3 +1,34 @@
+# BUGS
+I really should be reporting these.
+
+
+## Items with custom names
+On minecraft 18w01a there is a bug that causes the game to crash if you select an item with the wrong JSON formatting in its display.Name data.
+
+#### To reproduce:
+Literally just give yourself an item the "wrong" way.
+```
+/give zinnoa minecraft:paper{display: {Name: "Ignus Page I"}}
+```
+
+#### Workaround:
+
+Make sure to cross your T's and dot your I's when writing display.Name JSON.
+
+Example:
+
+```
+/give zinnoa minecraft:paper{display: {Name: "{\"text\":\"Ignus Page I\"}"}}
+```
+
+
+## Killing blows with fireballs
+They currently crash the game for some reason. Who knows. Currently only tested on port-forwarded lan worlds.
+
+I want to have fiery wizard duels, and to the death, dang it!
+
+---
+
 # desired file structure
 ```
 zMagic/
@@ -44,7 +75,7 @@ Sounds like a human's job, honestly. The human-specified trigger name ideally wo
 The goal is to have everything in /data built out with Node, giving me quite possibly the dryest code of any datapack maker. :)
 Ultimately, I'd also like the majority of these systems and tools to be useable for future datapack projects.
 
-
+---
 
 # schools of magic
 
@@ -85,7 +116,6 @@ spells based around stealth, agility, and gathering intelligence.
   - search nearby blocks for containers with loot?
 - agility
   - increase movement speed and jump height
-
 
 
 
