@@ -21,6 +21,7 @@ const costTiers = require(constantsPath+'/cost-tiers.json')
 
 const spells = {}
 
+// TODO error handling!
 // TODO get a roman numeral converter up in here
 // TODO verbose mode
 // TODO raw functions
