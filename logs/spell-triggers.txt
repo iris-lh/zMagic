@@ -4,7 +4,7 @@
 003: detect_monsters_i
 004: detect_monsters_ii
 005: detect_monsters_iii
-005: eagle_eye
+006: eagle_eye
 006: invisibility_i
 007: invisibility_ii
 100: fireball_i
