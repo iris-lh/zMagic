@@ -21,22 +21,22 @@ const costTiers = require(constantsPath+'/cost-tiers.json')
 
 const spells = {}
 
+// TODO verbose mode
 
+// TODO raw functions
 
-// TODO RAW FUNCTIONS
+// TODO raw recipes
 
-// TODO RAW RECIPES
+// TODO fancy recipes
 
-// TODO FANCY RECIPES
+// TODO structures???
 
-// TODO STRUCTURES
+// TODO loot tables???
 
-// TODO LOOT TABLES
+// TODO scribing
 
-// TODO SPELL TRIGGERS
-// TODO SCRIBING TRIGGERS
+// TODO proper init-helper
 
-// TODO INIT
 
 
 
@@ -123,7 +123,8 @@ function writeInit() {
   console.log('WRITING INIT...');
     const lines = [
       'function zmagic:init/spells',
-      'function zmagic:init/reagents'
+      'function zmagic:init/reagents',
+      'function zmagic:init/scribing'
     ]
   const functionPath = `./data/zmagic/functions/init.mcfunction`
   console.log('  '+functionPath)
@@ -134,7 +135,8 @@ function writeTick() {
   console.log('WRITING TICK...');
     const lines = [
       'function zmagic:triggers/spells/tick',
-      'function zmagic:reagents/tick'
+      'function zmagic:reagents/tick',
+      'function zmagic:scribing/tick'
     ]
   const functionPath = `./data/zmagic/functions/tick.mcfunction`
   console.log('  '+functionPath)
