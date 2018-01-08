@@ -12,6 +12,7 @@ Literally just give yourself an item the "wrong" way.
 ```
 /give zinnoa minecraft:paper{display: {Name: "Ignus Page I"}}
 ```
+[crash report](https://github.com/isaachelbling/zMagic/blob/master/notes/crashes/json-display-name.txt)
 
 #### Workaround:
 
@@ -33,14 +34,11 @@ They currently crash the game with null pointer exceptions for some reason. Who 
 UPDATE: seems to happen with any lethal player-launched projectile.
 
 #### To reproduce:
-Get on LAN and try any of the following:
-- Kill another player with a fireball you summoned.
-- Kill another player with a with an arrow.
-- Kill yourself with an arrow.
-- Kill another player with a potion of harming.
-- Kill yourself with a potion of harming.
+- [Kill another player with a fireball you summoned. (not self)](https://github.com/isaachelbling/zMagic/blob/master/notes/crashes/fireball.txt)
+- [Kill any player with a with an arrow.](https://github.com/isaachelbling/zMagic/blob/master/notes/crashes/arrow.txt)
+- [Kill any player with a potion of harming.](https://github.com/isaachelbling/zMagic/blob/master/notes/crashes/potion.txt)
 
-Need to figure out if it happens in other contexts.
+Could it be related to ```Entity's Vehicle: ~~ERROR~~ NullPointerException: null```?
 
 
 #### Workaround:
