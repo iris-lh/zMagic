@@ -10,8 +10,6 @@ function interpolateYaml(yamlStr, externalValues = {}, pass = 0) {
   let processedYaml = yamlStr + ''
 
   const replaceables = yamlStr.match(/\$([a-z]|[A-Z]|\.)*/g)
-  // console.log(replaceables);
-  // console.log(yamlStr);
 
   if (replaceables !== null) {
     replaceables.map(instance => {

@@ -1,10 +1,14 @@
 const _ = require('lodash')
 const yaml = require('js-yaml')
 const jp = require('fs-jetpack')
+const Log = require('./Log')
 const costTiers = require('../constants/cost-tiers.json')
 const messages = require('./messages')
 const pipe = require('./pipe')
 const interpolateYaml = require('./interpolate-yaml')
+
+const triggerTickPath = `./data/zmagic/functions/triggers/spells/tick.mcfunction`
+const initPath = `./data/zmagic/functions/init/spells.mcfunction`
 
 
 class Spell {
@@ -15,8 +19,12 @@ class Spell {
     this.processAll       = this.processAll.bind(this)
     this.buildMcFunction  = this.buildMcFunction.bind(this)
     this.buildMcFunctions = this.buildMcFunctions.bind(this)
+    this.writeTriggers    = this.writeTriggers.bind(this)
     this.write            = this.write.bind(this)
     this.writeAll         = this.writeAll.bind(this)
+
+    this.log = new Log('./logs/spell-triggers.txt')
+
 
     this.colors = _.reduce(costTiers, (result, value, key) => {
       return _.set(result, `${key}`, value.color)
@@ -90,14 +98,15 @@ class Spell {
     })
   }
 
-  writeTriggers(spells) {
-    // TODO Refactor. This function is way too busy.
+  writeTriggers(processedSpells) {
     console.log('WRITING SPELL TRIGGERS...')
+
     let commands = []
-    let log = []
+
     commands.push('scoreboard players enable @a cast_spell')
-    spells.forEach(spell => {
-      log.push({
+
+    processedSpells.forEach(spell => {
+      this.log.push({
         trigger: spell.tier.trigger,
         id: spell.id
       })
@@ -105,33 +114,14 @@ class Spell {
     })
     commands.push('scoreboard players set @a cast_spell -1')
 
+    this.log.write()
 
-    log = _.sortBy(log, entry => {
-      return entry.trigger
-    }).map(entry => {
-      let triggerStr = ''
-      if (entry.trigger < 10) {
-        triggerStr = `00${entry.trigger}`
-      } else if (entry.trigger < 100) {
-        triggerStr = `0${entry.trigger}`
-      } else {
-        triggerStr = entry.trigger
-      }
-      return `${triggerStr}: ${entry.id}`
-    }).join('\n')
-
-    const logPath = `./spell-triggers.txt`
-    jp.write(logPath, log)
-
-
-    const tickPath = `./data/zmagic/functions/triggers/spells/tick.mcfunction`
     const mcFunction = commands.join('\n')
-    jp.write(tickPath, mcFunction)
+    jp.write(triggerTickPath, mcFunction)
 
-    const initPath = `./data/zmagic/functions/init/spells.mcfunction`
     const initCommand = 'scoreboard objectives add cast_spell trigger'
     jp.write(initPath, initCommand)
-    console.log('  '+tickPath)
+    console.log('  '+triggerTickPath)
   }
 
   write(processedSpell) {
