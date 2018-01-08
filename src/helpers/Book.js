@@ -35,9 +35,7 @@ class Book {
           underlined:'true',
           clickEvent:{
             action:'run_command',
-            // value:`/function zmagic:spells/${spellData.id}`
             value: `/trigger cast_spell set ${spellData.tier.trigger}`
-            // TODO: change to value:`/trigger cast_spell set ${spellData.tier.trigger}`
           }
         }
       } else {
