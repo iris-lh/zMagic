@@ -13,7 +13,8 @@ Literally just give yourself an item the "wrong" way.
 
 #### Workaround:
 
-Make sure to cross your T's and dot your I's when writing display.Name JSON.
+For a while I was worried this would completely prevent me from using custom-named items.
+Luckily, you just need to make sure to cross your T's and dot your I's when writing display.Name JSON.
 
 Example:
 
