@@ -91,13 +91,39 @@ class Spell {
   }
 
   writeTriggers(spells) {
+    // TODO Refactor Spell.writeTriggers. This function is way too busy.
     console.log('WRITING SPELL TRIGGERS...')
     let commands = []
+    let log = []
     commands.push('scoreboard players enable @a cast_spell')
     spells.forEach(spell => {
+      log.push({
+        trigger: spell.tier.trigger,
+        id: spell.id
+      })
       commands.push(`execute as @a[scores={cast_spell=${spell.tier.trigger}}] run function zmagic:cast/${spell.id}`)
     })
     commands.push('scoreboard players set @a cast_spell -1')
+
+
+    log = _.sortBy(log, entry => {
+      return entry.trigger
+    }).map(entry => {
+      let triggerStr = ''
+      if (entry.trigger < 10) {
+        triggerStr = `00${entry.trigger}`
+      } else if (entry.trigger < 100) {
+        triggerStr = `0${entry.trigger}`
+      } else {
+        triggerStr = entry.trigger
+      }
+      return `${triggerStr}: ${entry.id}`
+    }).join('\n')
+
+    const logPath = `./spell-triggers.txt`
+    jp.write(logPath, log)
+
+
     const tickPath = `./data/zmagic/functions/triggers/spells/tick.mcfunction`
     const mcFunction = commands.join('\n')
     jp.write(tickPath, mcFunction)
