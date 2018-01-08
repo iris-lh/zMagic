@@ -68,6 +68,7 @@ function processSpells(importedSpellYamls) {
 function writeSpells(processedSpells) {
   const spellHelpers = new Spell()
   spellHelpers.writeAll(processedSpells)
+  spellHelpers.writeTriggers(processedSpells)
 }
 
 function buildSpells() {
@@ -174,3 +175,5 @@ buildSpells()
 buildBooks()
 writeTags()
 writeScoreboards()
+writeInit()
+writeTick()

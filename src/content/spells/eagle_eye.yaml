@@ -4,9 +4,10 @@ costTableName: lapis_lazuli
 executor: '@s'
 tiers:
 - name: I
+  trigger: 5
   costTier: 1
   duration: 10
 commands:
-- effect give $executor minecraft:levitation $tier.duration 255
-- effect give $executor minecraft:slowness $tier.duration 127
-- effect give $executor minecraft:night_vision $tier.duration
+- execute at $executor run effect give $executor minecraft:levitation $tier.duration 255
+- execute at $executor run effect give $executor minecraft:slowness $tier.duration 127
+- execute at $executor run effect give $executor minecraft:night_vision $tier.duration

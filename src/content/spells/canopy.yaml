@@ -5,29 +5,30 @@ executor: '@s'
 height: 2
 tiers:
 - name: I
+  trigger: 200
   costTier: 4
   trunkSides: 2
   trunkTop: 3
   leavesMid: 4
   leavesTop: 5
 commands:
-- 'fill ~1 ~ ~ ~1 ~$tier.trunkSides ~ minecraft:oak_log replace #zinnoa:buildable'
-- 'fill ~-1 ~ ~ ~-1 ~$tier.trunkSides ~ minecraft:oak_log replace #zinnoa:buildable'
-- 'fill ~ ~ ~1 ~ ~$tier.trunkSides ~1 minecraft:oak_log replace #zinnoa:buildable'
-- 'fill ~ ~ ~-1 ~ ~$tier.trunkSides ~-1 minecraft:oak_log replace #zinnoa:buildable'
-- 'fill ~ ~-1 ~ ~ ~-1 ~ minecraft:oak_log replace #zinnoa:buildable'
-- 'fill ~ ~$tier.trunkTop ~ ~ ~$tier.trunkTop ~ minecraft:oak_log replace #zinnoa:buildable'
+- 'execute at $executor run fill ~1 ~ ~ ~1 ~$tier.trunkSides ~ minecraft:oak_log replace #zmagic:buildable'
+- 'execute at $executor run fill ~-1 ~ ~ ~-1 ~$tier.trunkSides ~ minecraft:oak_log replace #zmagic:buildable'
+- 'execute at $executor run fill ~ ~ ~1 ~ ~$tier.trunkSides ~1 minecraft:oak_log replace #zmagic:buildable'
+- 'execute at $executor run fill ~ ~ ~-1 ~ ~$tier.trunkSides ~-1 minecraft:oak_log replace #zmagic:buildable'
+- 'execute at $executor run fill ~ ~-1 ~ ~ ~-1 ~ minecraft:oak_log replace #zmagic:buildable'
+- 'execute at $executor run fill ~ ~$tier.trunkTop ~ ~ ~$tier.trunkTop ~ minecraft:oak_log replace #zmagic:buildable'
 
-- 'fill ~1 ~$tier.trunkTop ~1 ~-1 ~$tier.leavesTop ~-1 minecraft:oak_leaves replace #zinnoa:buildable'
+- 'execute at $executor run fill ~1 ~$tier.trunkTop ~1 ~-1 ~$tier.leavesTop ~-1 minecraft:oak_leaves replace #zmagic:buildable'
 
-- 'fill ~1 ~$tier.trunkTop ~2 ~-1 ~$tier.trunkTop ~-2 minecraft:oak_leaves replace #zinnoa:buildable'
-- 'fill ~2 ~$tier.trunkTop ~1 ~-2 ~$tier.trunkTop ~-1 minecraft:oak_leaves replace #zinnoa:buildable'
+- 'execute at $executor run fill ~1 ~$tier.trunkTop ~2 ~-1 ~$tier.trunkTop ~-2 minecraft:oak_leaves replace #zmagic:buildable'
+- 'execute at $executor run fill ~2 ~$tier.trunkTop ~1 ~-2 ~$tier.trunkTop ~-1 minecraft:oak_leaves replace #zmagic:buildable'
 
-- 'fill ~3 ~$tier.trunkTop ~ ~-3 ~$tier.trunkTop ~ minecraft:oak_leaves replace #zinnoa:buildable'
-- 'fill ~ ~$tier.trunkTop ~3 ~ ~$tier.trunkTop ~-3 minecraft:oak_leaves replace #zinnoa:buildable'
+- 'execute at $executor run fill ~3 ~$tier.trunkTop ~ ~-3 ~$tier.trunkTop ~ minecraft:oak_leaves replace #zmagic:buildable'
+- 'execute at $executor run fill ~ ~$tier.trunkTop ~3 ~ ~$tier.trunkTop ~-3 minecraft:oak_leaves replace #zmagic:buildable'
 
-- 'fill ~2 ~$tier.leavesMid ~ ~-2 ~$tier.leavesMid ~ minecraft:oak_leaves replace #zinnoa:buildable'
-- 'fill ~ ~$tier.leavesMid ~2 ~ ~$tier.leavesMid ~-2 minecraft:oak_leaves replace #zinnoa:buildable'
+- 'execute at $executor run fill ~2 ~$tier.leavesMid ~ ~-2 ~$tier.leavesMid ~ minecraft:oak_leaves replace #zmagic:buildable'
+- 'execute at $executor run fill ~ ~$tier.leavesMid ~2 ~ ~$tier.leavesMid ~-2 minecraft:oak_leaves replace #zmagic:buildable'
 
-- fill ~ ~1 ~ ~ ~2 ~ minecraft:air
-- fill ~ ~ ~ ~ ~ ~ minecraft:torch
+- execute at $executor run fill ~ ~1 ~ ~ ~2 ~ minecraft:air
+- execute at $executor run fill ~ ~ ~ ~ ~ ~ minecraft:torch

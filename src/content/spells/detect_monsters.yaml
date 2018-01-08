@@ -4,15 +4,18 @@ costTableName: lapis_lazuli
 executor: '@s'
 tiers:
 - name: I
+  trigger: 3
   costTier: 0
   distance: 10
 - name: II
+  trigger: 4
   costTier: 1
   distance: 25
 - name: III
+  trigger: 5
   costTier: 3
   distance: 50
 commands:
-- tellraw $executor ["",{"text":"\nYou quiet your mind and search for auras...","italic":true,"color":"aqua"}]
-- execute as @e[distance=..$tier.distance,type=!item,type=!player] run tellraw @p ["",{"text":"- You sense a ","italic":true},{"selector":"@s","italic":true},{"text":".","italic":true}]
-- tellraw $executor ""
+- execute at $executor run tellraw $executor ["",{"text":"\nYou quiet your mind and search for auras...","italic":true,"color":"aqua"}]
+- execute at $executor run execute as @e[distance=..$tier.distance,type=!item,type=!player] run tellraw @p ["",{"text":"- You sense a ","italic":true},{"selector":"@s","italic":true},{"text":".","italic":true}]
+- execute at $executor run tellraw $executor ""

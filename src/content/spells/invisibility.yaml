@@ -4,10 +4,12 @@ costTableName: lapis_lazuli
 executor: '@s'
 tiers:
 - name: I
+  trigger: 6
   costTier: 0
   duration: 10
 - name: II
+  trigger: 7
   costTier: 2
   duration: 30
 commands:
-- effect give $executor minecraft:invisibility $tier.duration
+- execute at $executor run effect give $executor minecraft:invisibility $tier.duration

@@ -4,10 +4,12 @@ costTableName: iron_ingot
 executor: '@s'
 tiers:
   - name: 'I'
+    trigger: 201
     costTier: 1
     dimensions: ~1 ~ ~1 ~-1 ~ ~-1
   - name: 'II'
+    trigger: 202
     costTier: 2
     dimensions: ~2 ~ ~2 ~-2 ~ ~-2
 commands:
-  - 'execute at @e[distance=1..10,limit=1,type=!item,type=!arrow,type=!fireball] run fill $tier.dimensions minecraft:sand replace #zinnoa:buildable'
+  - 'execute at $executor run execute at @e[distance=1..10,limit=1,type=!item,type=!arrow,type=!fireball] run fill $tier.dimensions minecraft:sand replace #zmagic:buildable'
