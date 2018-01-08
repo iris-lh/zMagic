@@ -28,34 +28,15 @@ function interpolateYaml(yamlStr, externalValues = {}, pass = 0) {
   }
 
 
-  // console.log(pass+'\n'+processedYaml);
 
   const match = processedYaml.match(/\$([a-z]|[A-Z]|\.)*/g) !== null
   const needsAnotherPass = match
 
   if (replaceables !== null) {
-    // console.log('doing another pass');
     return interpolateYaml(processedYaml, externalValues, pass+1)
   }
 
   return processedYaml
 }
-
-// const spellsPath = jp.cwd()+'/src/spells/'
-// const fireballPath = spellsPath+'/fireball.yaml'
-// const fireballYaml = jp.read(fireballPath)
-// const fireball = yaml.load(fireballYaml)
-//
-// const externalValues = {
-//   tier: {
-//     name: 'I',
-//     costTier: 1,
-//     explosionPower: 1
-//   }
-// }
-//
-// const result = interpolateYaml(fireballYaml, externalValues)
-//
-// console.log(yaml.load(result));
 
 module.exports = interpolateYaml
