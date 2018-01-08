@@ -22,21 +22,13 @@ const costTiers = require(constantsPath+'/cost-tiers.json')
 const spells = {}
 
 // TODO verbose mode
-
 // TODO raw functions
-
 // TODO raw recipes
-
 // TODO fancy recipes
-
 // TODO structures???
-
 // TODO loot tables???
-
 // TODO scribing
-
 // TODO proper init-helper
-
 
 
 
