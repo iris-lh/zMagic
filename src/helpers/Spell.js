@@ -91,7 +91,7 @@ class Spell {
   }
 
   writeTriggers(spells) {
-    // TODO Refactor Spell.writeTriggers. This function is way too busy.
+    // TODO Refactor. This function is way too busy.
     console.log('WRITING SPELL TRIGGERS...')
     let commands = []
     let log = []
