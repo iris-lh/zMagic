@@ -24,9 +24,14 @@ Example:
 
 
 ## Killing blows with fireballs
-They currently crash the game for some reason. Who knows. Currently only tested on port-forwarded lan worlds.
+They currently crash the game for some reason. Who knows.
 
-I want to have fiery wizard duels, and to the death, dang it!
+#### To reproduce:
+Kill another player with a fireball you summoned on a LAN world. Currently only tested on port-forwarded lan worlds. Need to figure out if it happens in other contexts.
+
+
+#### Workaround:
+None yet. I want to have fiery wizard duels, and to the death, dang it!
 
 ---
 
