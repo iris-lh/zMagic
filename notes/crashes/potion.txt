@@ -1,7 +1,7 @@
 ---- Minecraft Crash Report ----
-// Shall we play a game?
+// Don't be sad, have a hug! <3
 
-Time: 1/8/18 2:10 PM
+Time: 1/8/18 4:45 PM
 Description: Ticking entity
 
 java.lang.NullPointerException: Ticking entity
@@ -60,11 +60,11 @@ Stacktrace:
 -- Entity being ticked --
 Details:
 	Entity Type: minecraft:potion (ajv)
-	Entity ID: 189
+	Entity ID: 70935
 	Entity Name: Potion
-	Entity's Exact location: 948.20, 62.49, -1602.78
-	Entity's Block location: World: (948,62,-1603), Chunk: (at 4,3,13 in 59,-101; contains blocks 944,0,-1616 to 959,255,-1601), Region: (1,-4; contains chunks 32,-128 to 63,-97, blocks 512,0,-2048 to 1023,255,-1537)
-	Entity's Momentum: -0.00, -0.58, 0.00
+	Entity's Exact location: -437.08, 4.48, -2311.32
+	Entity's Block location: World: (-438,4,-2312), Chunk: (at 10,0,8 in -28,-145; contains blocks -448,0,-2320 to -433,255,-2305), Region: (-1,-5; contains chunks -32,-160 to -1,-129, blocks -512,0,-2560 to -1,255,-2049)
+	Entity's Momentum: 0.00, -0.58, 0.00
 	Entity's Passengers: []
 	Entity's Vehicle: ~~ERROR~~ NullPointerException: null
 Stacktrace:
@@ -73,17 +73,17 @@ Stacktrace:
 
 -- Affected level --
 Details:
-	Level name: magic-test-2
-	All players: 1 total; [rp['TextComponent{text='zinnoa', siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/182, l='magic-test-2', x=948.20, y=62.00, z=-1602.78]]
-	Chunk stats: ServerChunkCache: 323 Drop: 0
-	Level seed: 3209532511793000095
+	Level name: projectile-crash-test
+	All players: 1 total; [rp['TextComponent{text='zinnoa', siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/0, l='projectile-crash-test', x=-437.08, y=4.00, z=-2311.32]]
+	Chunk stats: ServerChunkCache: 289 Drop: 0
+	Level seed: -8311954520411982675
 	Level generator: ID 01 - flat, ver 0. Features enabled: false
-	Level generator options: minecraft:bedrock,3*minecraft:stone,52*minecraft:sandstone;2;
-	Level spawn location: World: (962,4,-1568), Chunk: (at 2,0,0 in 60,-98; contains blocks 960,0,-1568 to 975,255,-1553), Region: (1,-4; contains chunks 32,-128 to 63,-97, blocks 512,0,-2048 to 1023,255,-1537)
-	Level time: 124782 game time, 65990 day time
+	Level generator options:
+	Level spawn location: World: (-439,4,-2308), Chunk: (at 9,0,12 in -28,-145; contains blocks -448,0,-2320 to -433,255,-2305), Region: (-1,-5; contains chunks -32,-160 to -1,-129, blocks -512,0,-2560 to -1,255,-2049)
+	Level time: 364 game time, 364 day time
 	Level dimension: 0
 	Level storage version: 0x04ABD - Anvil
-	Level weather: Rain time: 98613 (now: false), thunder time: 71265 (now: false)
+	Level weather: Rain time: 40380 (now: false), thunder time: 96822 (now: false)
 	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
 Stacktrace:
 	at net.minecraft.server.MinecraftServer.w(SourceFile:679)
@@ -98,11 +98,11 @@ Details:
 	Operating System: Mac OS X (x86_64) version 10.12.6
 	Java Version: 1.8.0_74, Oracle Corporation
 	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
-	Memory: 381286808 bytes (363 MB) / 671088640 bytes (640 MB) up to 2147483648 bytes (2048 MB)
+	Memory: 632228272 bytes (602 MB) / 771751936 bytes (736 MB) up to 2147483648 bytes (2048 MB)
 	JVM Flags: 7 total; -Xmx2G -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M
 	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
 	Profiler Position: N/A (disabled)
-	Player Count: 1 / 8; [rp['TextComponent{text='zinnoa', siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/182, l='magic-test-2', x=948.20, y=62.00, z=-1602.78]]
-	Data Packs: vanilla, file/zMagic (incompatible)
+	Player Count: 1 / 8; [rp['TextComponent{text='zinnoa', siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}'/0, l='projectile-crash-test', x=-437.08, y=4.00, z=-2311.32]]
+	Data Packs: vanilla
 	Type: Integrated Server (map_client.txt)
 	Is Modded: Probably not. Jar signature remains and both client + server brands are untouched.
