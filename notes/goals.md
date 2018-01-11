@@ -18,18 +18,28 @@ zMagic/
           spell_1.mcfunction
           spell_2.mcfunction
           spell_3.mcfunction
-        give_book/
-          book_1.mcfunction
-          book_2.mcfunction
-          book_3.mcfunction
+        give/
+          reagents.mcfunction
+          page/
+            page_1.mcfunction
+            page_2.mcfunction
+            page_3.mcfunction
+          book/
+            book_1.mcfunction
+            book_2.mcfunction
+            book_3.mcfunction
         init/
           constants.mcfunction
           objectives.mcfunction
           triggers.mcfunction
-        reagents/
-          tick.mcfunction
-        triggers/
-          tick.mcfunction
+        tick/
+          triggers.mcfunction
+          scribing.mcfunction
+          spells.mcfunction
+          reagents.mcfunction
+          triggers/
+            scribing.mcfunction
+            spells.mcfunction
       tags/
         blocks/
           buildable.json
