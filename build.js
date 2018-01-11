@@ -82,6 +82,7 @@ function buildSpells() {
 
 
 // REAGENTS
+// TODO extract to their own helper
 
 function buildInitReagentScores(costTiers) {
   let lines = []
@@ -132,7 +133,8 @@ function writeScribing() {
 function writeInit() {
   console.log('WRITING INIT...');
     const lines = [
-      // 'function zmagic:version'
+      // TODO 'function zmagic:greet'
+      // TODO 'function zmagic:version'
       'tellraw @p {"text":"\\nThank you for using Zinnoa\'s Magic Pack!", "color":"aqua"}',
       `tellraw @p {"text":"Version: zMagic ${version} for Minecraft ${minecraftVersion}", "color":"dark_aqua"}`,
       'tellraw @p {"text":"\\nInitializing...", "color":"aqua"}',
