@@ -38,7 +38,7 @@ class Spell {
     const cost = costTable.tiers[costTier]
     const cannotAffordselector = `@s[scores={${resource}=..${cost-1}}]`
     const canAffordselector = `@s[scores={${resource}=${cost}..}]`
-    
+
     let lines = []
 
     lines.push(`execute as ${cannotAffordselector} run tellraw ${spell.executor} ${messages.cantAfford(costTier, costTable)}`)
@@ -84,7 +84,7 @@ class Spell {
     console.log('PROCESSING SPELLS...');
     let processedSpells = []
     importedSpellYamls.map(spellYaml => {
-    const rawJson = yaml.load(spellYaml)
+      const rawJson = yaml.load(spellYaml)
       rawJson.tiers.map(tier => {
         processedSpells.push(this.process(spellYaml, tier))
       })

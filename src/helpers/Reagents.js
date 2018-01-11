@@ -2,7 +2,7 @@ const _ = require('lodash')
 const jp = require('fs-jetpack')
 const costTiers = require('../constants/cost-tiers.json')
 
-class Reagents{
+class Reagents {
   constructor() {
     this.writeInit = this.writeInit.bind(this)
     this.writeTick = this.writeTick.bind(this)
