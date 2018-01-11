@@ -6,7 +6,6 @@ class Reagents{
   constructor() {
     this.writeInit = this.writeInit.bind(this)
     this.writeTick = this.writeTick.bind(this)
-    // console.log(costTiers);
   }
 
   writeInit() {

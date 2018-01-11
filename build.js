@@ -11,17 +11,12 @@ const Reagents = require('./src/helpers/Reagents')
 const Book = require('./src/helpers/Book')
 const Scribing = require('./src/helpers/Scribing')
 const tagHelpers = require('./src/helpers/tag')
-const interpolateYaml = require('./src/helpers/interpolate-yaml')
 const pipe = require('./src/helpers/pipe')
 
-const constantsPath = './src/constants/'
 const contentPath   = './src/content/'
 const spellsPath    = contentPath+'/spells/'
-const initsPath     = contentPath+'/init/'
 const booksPath     = contentPath+'/books/'
 const tagsPath      = contentPath+'/tags/'
-
-const costTiers = require(constantsPath+'/cost-tiers.json')
 
 
 
