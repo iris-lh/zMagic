@@ -22,16 +22,16 @@ const costTiers = require(constantsPath+'/cost-tiers.json')
 
 const spells = {}
 
-// TODO scribing
-// TODO nbtify
+// TODO nbt/json helpers
 // TODO item helper
 // TODO error handling!
+// TODO tests/checks
 // TODO get a roman numeral converter up in here
 // TODO verbose/quiet modes
 // TODO raw/fancy function helper
 // TODO raw/fancy recipe helper
-// TODO structure helper???
-// TODO loot table helper???
+// TODO structures???
+// TODO loot tables???
 
 
 
