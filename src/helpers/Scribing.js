@@ -2,6 +2,8 @@ const _ = require('lodash')
 const yaml = require('js-yaml')
 const jp = require('fs-jetpack')
 
+const Item = require('./Item')
+
 const packageJson      = require('../../package.json')
 const version          = packageJson.version
 const minecraftVersion = packageJson.minecraftVersion
@@ -11,6 +13,7 @@ const triggerTickPath = './data/zmagic/functions/tick/triggers/scribing.mcfuncti
 const initPath        = './data/zmagic/functions/init/scribing.mcfunction'
 const scribePath      = './data/zmagic/functions/scribe/'
 const givePath        = './data/zmagic/functions/give/page/'
+const itemHelper = new Item()
 
 // TODO scribing tome
 
@@ -194,12 +197,21 @@ class Scribing {
 
         const id = _.snakeCase(paper.name+tier.name)
 
-        const give = `give @s minecraft:paper`
-        const nbt = `{subId:"zmagic:${id}", display: {Name: "{\\"text\\":\\"${paper.name} ${tier.name}\\",\\"color\\":\\"${color}\\"}", Lore:["${tier.lore}","","zMagic ${version}","Minecraft ${minecraftVersion}"]}, ench:[{id:0,lvl:0}], HideFlags:1 }`
-        const line = `${give}${nbt}`
+        // const give = `give @s minecraft:paper`
+        // const nbt = `{subId:"zmagic:${id}", display: {Name: "{\\"text\\":\\"${paper.name} ${tier.name}\\",\\"color\\":\\"${color}\\"}", Lore:["${tier.lore}","","zMagic ${version}","Minecraft ${minecraftVersion}"]}, ench:[{id:0,lvl:0}], HideFlags:1 }`
+
+        const item = itemHelper.createItem({
+          id: 'minecraft:paper',
+          subId: id,
+          name: paper.name+' '+tier.name,
+          color: color,
+          lore: tier.lore,
+          ench: {id:0,lvl:0},
+          hideFlags: 1
+        })
 
         const lines = [
-          line
+          `give @s ${item}`
         ]
 
         const writePath = `${givePath}${id}.mcfunction`
