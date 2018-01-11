@@ -32,18 +32,18 @@ class Item {
 
 module.exports = Item
 
-const itemHelper = new Item()
-
-const options = {
-  id: 'minecraft:dirt',
-  subId: 'zmagic:zdirt',
-  name: 'zDirt',
-  color: 'light_purple',
-  lore: 'no brackets',
-  ench: {id:0,lvl:0},
-  hideFlags: 1
-}
-
-const item = itemHelper.createItem(options)
-
-console.log(item);
+// const itemHelper = new Item()
+//
+// const options = {
+//   id: 'minecraft:dirt',
+//   subId: 'zmagic:zdirt',
+//   name: 'zDirt',
+//   color: 'light_purple',
+//   lore: 'no brackets',
+//   ench: {id:0,lvl:0},
+//   hideFlags: 1
+// }
+//
+// const item = itemHelper.createItem(options)
+//
+// console.log(item);

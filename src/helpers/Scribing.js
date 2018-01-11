@@ -197,9 +197,6 @@ class Scribing {
 
         const id = _.snakeCase(paper.name+tier.name)
 
-        // const give = `give @s minecraft:paper`
-        // const nbt = `{subId:"zmagic:${id}", display: {Name: "{\\"text\\":\\"${paper.name} ${tier.name}\\",\\"color\\":\\"${color}\\"}", Lore:["${tier.lore}","","zMagic ${version}","Minecraft ${minecraftVersion}"]}, ench:[{id:0,lvl:0}], HideFlags:1 }`
-
         const item = itemHelper.createItem({
           id: 'minecraft:paper',
           subId: id,
