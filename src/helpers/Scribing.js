@@ -2,7 +2,9 @@ const _ = require('lodash')
 const yaml = require('js-yaml')
 const jp = require('fs-jetpack')
 
-const Book = require('./Book')
+const packageJson      = require('../../package.json')
+const version          = packageJson.version
+const minecraftVersion = packageJson.minecraftVersion
 
 const tickPath        = './data/zmagic/functions/tick/scribing.mcfunction'
 const triggerTickPath = './data/zmagic/functions/tick/triggers/scribing.mcfunction'
@@ -116,9 +118,7 @@ class Scribing {
         lines.push(line)
       })
     })
-    console.log();
     console.log('  '+tickPath);
-    console.log(lines);
     jp.write(tickPath, lines.join('\n'))
   }
 
@@ -159,7 +159,6 @@ class Scribing {
 
         const give = `execute as @s[scores={${this.getIngredientsScores(paper, index)}}] run function zmagic:give/page/${id}`
         const line1 = `${give}`
-        // const line2 = `clear @s minecraft:paper 1`
         const pageConsumed = `minecraft:paper{subId:"zmagic:${id}"}`
         const line3 = this.getIngredientsToClear(paper, index)
 
@@ -170,7 +169,6 @@ class Scribing {
 
         const writePath = `${scribePath}${id}.mcfunction`
         console.log('  '+writePath);
-        // console.log(lines.join('\n'));
         jp.write(writePath, lines.join('\n'))
       })
     })
@@ -195,7 +193,7 @@ class Scribing {
         const id = _.snakeCase(paper.name+tier.name)
 
         const give = `give @s minecraft:paper`
-        const nbt = `{subId:"zmagic:${id}", display: {Name: "{\\"text\\":\\"${paper.name} ${tier.name}\\",\\"color\\":\\"${color}\\"}", Lore:["${tier.lore}"]}, ench:[{id:0,lvl:0}], HideFlags:1 }`
+        const nbt = `{subId:"zmagic:${id}", display: {Name: "{\\"text\\":\\"${paper.name} ${tier.name}\\",\\"color\\":\\"${color}\\"}", Lore:["${tier.lore}","","zMagic ${version}","Minecraft ${minecraftVersion}"]}, ench:[{id:0,lvl:0}], HideFlags:1 }`
         const line = `${give}${nbt}`
 
         const lines = [
