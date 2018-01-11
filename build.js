@@ -31,7 +31,7 @@ const spells = {}
 // TODO item helper
 // TODO error handling!
 // TODO tests/checks
-// TODO get a roman numeral converter up in here
+// TODO get a roman numeral converter up in here, probably
 // TODO verbose/quiet modes
 // TODO raw/fancy function helper
 // TODO raw/fancy recipe helper
