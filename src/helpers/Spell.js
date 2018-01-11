@@ -35,13 +35,17 @@ class Spell {
     const costTier  = spell.tier.costTier
     const costTable = costTiers[spell.costTableName]
     const resource  = costTiers[spell.costTableName].resource
+    const cost = costTable.tiers[costTier]
+    const cannotAffordselector = `@s[scores={${resource}=..${cost-1}}]`
+    const canAffordselector = `@s[scores={${resource}=${cost}..}]`
+    
     let lines = []
 
-    lines.push(`execute unless score ${spell.executor} ${resource} >= ${costTier} ${costTable.name} run tellraw ${spell.executor} ${messages.cantAfford(costTier, costTable)}`)
+    lines.push(`execute as ${cannotAffordselector} run tellraw ${spell.executor} ${messages.cantAfford(costTier, costTable)}`)
+    lines.push(`execute as ${canAffordselector} run clear ${spell.executor} minecraft:${resource} ${costTable.tiers[costTier]}`)
     spell.commands.forEach(command => {
-      lines.push(`execute if score ${spell.executor} ${resource} >= ${costTier} ${costTable.name} run ${command}`)
+      lines.push(`execute as ${canAffordselector} run ${command}`)
     })
-    lines.push(`execute if score ${spell.executor} ${resource} >= ${costTier} ${costTable.name} run clear ${spell.executor} minecraft:${resource} ${costTable.tiers[costTier]}`)
 
     return lines
   }
