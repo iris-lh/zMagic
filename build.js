@@ -118,6 +118,7 @@ function writeScribing() {
   const scribingHelpers = new Scribing()
   scribingHelpers.writeInit()
   scribingHelpers.writeTick()
+  scribingHelpers.writeScribers()
   scribingHelpers.writeGivers()
 }
 
