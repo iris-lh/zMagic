@@ -7,6 +7,7 @@ const version          = packageJson.version
 const minecraftVersion = packageJson.minecraftVersion
 
 const Spell = require('./src/helpers/Spell')
+const Reagents = require('./src/helpers/Reagents')
 const Book = require('./src/helpers/Book')
 const Scribing = require('./src/helpers/Scribing')
 const tagHelpers = require('./src/helpers/tag')
@@ -80,44 +81,18 @@ function buildSpells() {
 
 
 
-
 // REAGENTS
-// TODO extract to their own helper
 
-function buildInitReagentScores(costTiers) {
-  let lines = []
-  lines.push('tellraw @p {"text":"- Initialize Reagents", "color":"dark_aqua"}')
-  _.forOwn(costTiers, function(value, key) {
-    const line0 = `scoreboard objectives add ${value.resource} dummy`
-    const line1 = `scoreboard objectives add ${value.name} dummy`
-    lines.push(line0, line1)
-    for (var i=0; i<value.tiers.length; i++) {
-      const line = `scoreboard players set ${i} ${value.name} ${value.tiers[i]}`
-      lines.push(line)
-    }
-  });
-
-  const functionPath = `./data/zmagic/functions/init/reagents.mcfunction`
-  console.log('  '+functionPath)
-  jp.write(functionPath, lines.join('\n'))
-}
-
-function buildUpdateReagentScores(costTiers) {
-  let lines = []
-  _.forOwn(costTiers, function(value, key) {
-    const line = `execute as @a store result score @s ${value.resource} run clear @s minecraft:${value.resource} 0`
-    lines.push(line)
-  });
-  const functionPath = `./data/zmagic/functions/tick/reagents.mcfunction`
-  console.log('  '+functionPath)
-  jp.write(functionPath, lines.join('\n'))
-}
-
-function writeScoreboards() {
+function writeReagents() {
   console.log('WRITING SCOREBOARDS...');
-  buildInitReagentScores(costTiers)
-  buildUpdateReagentScores(costTiers)
+  const reagents = new Reagents
+  reagents.writeInit()
+  reagents.writeTick()
 }
+
+
+
+// SCRIBING
 
 function writeScribing() {
   console.log('WRITING SCRIBING...');
@@ -129,6 +104,9 @@ function writeScribing() {
   scribingHelpers.writeGivers()
 }
 
+
+
+// ROOT
 
 function writeInit() {
   console.log('WRITING INIT...');
@@ -194,7 +172,7 @@ function buildBooks() {
 buildSpells()
 buildBooks()
 writeTags()
-writeScoreboards()
+writeReagents()
 writeScribing()
 writeInit()
 writeTick()
