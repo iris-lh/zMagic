@@ -14,7 +14,7 @@ const messages = {
       "text" : `${_.lowerCase(costTable.resource)}`,
       "color": costTable.color
     },{
-      "text" : ` x ${costTable.tiers[costTier]}\n`,
+      "text" : ` x ${costTable.tiers[costTier]}`,
       "color": "red"
     }])
   }
