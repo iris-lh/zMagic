@@ -1,6 +1,7 @@
 {
   "name": "zMagic",
-  "version": "1.0.0",
+  "version": "0.1.0",
+  "minecraftVersion":"18w02a",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
