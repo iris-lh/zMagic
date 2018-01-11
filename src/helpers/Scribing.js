@@ -91,6 +91,8 @@ class Scribing {
   writeInit() {
     let lines = []
 
+    lines.push('tellraw @p {"text":"- Initialize Scribing", "color":"dark_aqua"}')
+
     this.papers.forEach(paper => {
       lines.push(`scoreboard objectives add scribePage trigger`)
       lines.push(`scoreboard objectives add scribingPaper dummy`)

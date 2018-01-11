@@ -119,8 +119,12 @@ class Spell {
     const mcFunction = commands.join('\n')
     jp.write(triggerTickPath, mcFunction)
 
-    const initCommand = 'scoreboard objectives add cast_spell trigger'
-    jp.write(initPath, initCommand)
+    const initLines = [
+      'tellraw @p {"text":"- Initialize Spells", "color":"dark_aqua"}',
+      'scoreboard objectives add cast_spell trigger'
+    ]
+    const initCommand =
+    jp.write(initPath, initLines.join('\n'))
     console.log('  '+triggerTickPath)
   }
 

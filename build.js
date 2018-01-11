@@ -2,6 +2,10 @@ const jp = require('fs-jetpack')
 const _ = require('lodash')
 const yaml = require('js-yaml')
 
+const packageJson      = require('./package.json')
+const version          = packageJson.version
+const minecraftVersion = packageJson.minecraftVersion
+
 const Spell = require('./src/helpers/Spell')
 const Book = require('./src/helpers/Book')
 const Scribing = require('./src/helpers/Scribing')
@@ -81,6 +85,7 @@ function buildSpells() {
 
 function buildInitReagentScores(costTiers) {
   let lines = []
+  lines.push('tellraw @p {"text":"- Initialize Reagents", "color":"dark_aqua"}')
   _.forOwn(costTiers, function(value, key) {
     const line0 = `scoreboard objectives add ${value.resource} dummy`
     const line1 = `scoreboard objectives add ${value.name} dummy`
@@ -127,9 +132,14 @@ function writeScribing() {
 function writeInit() {
   console.log('WRITING INIT...');
     const lines = [
+      // 'function zmagic:version'
+      'tellraw @p {"text":"\\nThank you for using Zinnoa\'s Magic Pack!", "color":"aqua"}',
+      `tellraw @p {"text":"Version: zMagic ${version} for Minecraft ${minecraftVersion}", "color":"dark_aqua"}`,
+      'tellraw @p {"text":"\\nInitializing...", "color":"aqua"}',
       'function zmagic:init/spells',
       'function zmagic:init/reagents',
-      'function zmagic:init/scribing'
+      'function zmagic:init/scribing',
+      'tellraw @p {"text":"Done. Enjoy!\\n", "color":"aqua"}'
     ]
   const functionPath = `./data/zmagic/functions/init.mcfunction`
   console.log('  '+functionPath)
