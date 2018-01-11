@@ -31,6 +31,8 @@ zMagic/
           constants.mcfunction
           objectives.mcfunction
           triggers.mcfunction
+          spells.mcfunction
+          scribing.mcfunction
         tick.mcfunction
         tick/
           triggers.mcfunction

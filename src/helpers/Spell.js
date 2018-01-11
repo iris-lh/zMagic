@@ -7,7 +7,7 @@ const messages = require('./messages')
 const pipe = require('./pipe')
 const interpolateYaml = require('./interpolate-yaml')
 
-const triggerTickPath = `./data/zmagic/functions/triggers/spells/tick.mcfunction`
+const triggerTickPath = `./data/zmagic/functions/tick/triggers/spells.mcfunction`
 const initPath = `./data/zmagic/functions/init/spells.mcfunction`
 
 

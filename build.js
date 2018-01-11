@@ -102,7 +102,7 @@ function buildUpdateReagentScores(costTiers) {
     const line = `execute as @a store result score @s ${value.resource} run clear @s minecraft:${value.resource} 0`
     lines.push(line)
   });
-  const functionPath = `./data/zmagic/functions/reagents/tick.mcfunction`
+  const functionPath = `./data/zmagic/functions/tick/reagents.mcfunction`
   console.log('  '+functionPath)
   jp.write(functionPath, lines.join('\n'))
 }
@@ -118,6 +118,7 @@ function writeScribing() {
   const scribingHelpers = new Scribing()
   scribingHelpers.writeInit()
   scribingHelpers.writeTick()
+  scribingHelpers.writeTriggerTick()
   scribingHelpers.writeScribers()
   scribingHelpers.writeGivers()
 }
@@ -138,9 +139,10 @@ function writeInit() {
 function writeTick() {
   console.log('WRITING TICK...');
     const lines = [
-      'function zmagic:triggers/spells/tick',
-      'function zmagic:triggers/scribing/tick',
-      'function zmagic:reagents/tick'
+      'function zmagic:tick/triggers/spells',
+      'function zmagic:tick/triggers/scribing',
+      'function zmagic:tick/scribing',
+      'function zmagic:tick/reagents'
     ]
   const functionPath = `./data/zmagic/functions/tick.mcfunction`
   console.log('  '+functionPath)

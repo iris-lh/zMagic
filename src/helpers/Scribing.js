@@ -4,23 +4,25 @@ const jp = require('fs-jetpack')
 
 const Book = require('./Book')
 
-const triggerTickPath = './data/zmagic/functions/triggers/scribing/tick.mcfunction'
+const tickPath        = './data/zmagic/functions/tick/scribing.mcfunction'
+const triggerTickPath = './data/zmagic/functions/tick/triggers/scribing.mcfunction'
 const initPath        = './data/zmagic/functions/init/scribing.mcfunction'
-const scribePath        = './data/zmagic/functions/scribe/'
+const scribePath      = './data/zmagic/functions/scribe/'
 const givePath        = './data/zmagic/functions/give/page/'
+
+// TODO scribing tome
 
 class Scribing {
   constructor() {
-    this.writeInit   = this.writeInit.bind(this)
-    this.writeTick   = this.writeTick.bind(this)
-    this.writeGivers = this.writeGivers.bind(this)
+    this.writeInit        = this.writeInit.bind(this)
+    this.writeTriggerTick = this.writeTriggerTick.bind(this)
+    this.writeGivers      = this.writeGivers.bind(this)
 
     this.scribingPaper = 'minecraft:paper{display:{Name:"{\\"text\\":\\"Scribing Paper\\"}"}}'
 
     this.papers = [
       {
         name: 'Ignus Page',
-        enchantId: 1,
         triggerObjective: 'scrIgnusPage',
         reagent: 'blaze_powder',
         tiers: [
@@ -63,6 +65,7 @@ class Scribing {
 
   getIngredientsToClear(paper, index) {
     let ingredients = ''
+    const pageName = _.snakeCase(paper.name)
     var line1 = `clear @s[scores={${this.getIngredientsScores(paper, index)}}] ${this.scribingPaper} 1`
     switch(index) {
       case 0:
@@ -70,12 +73,12 @@ class Scribing {
         ingredients = line1+'\n'+line2
         break;
       case 1:
-        var pageConsumed = `minecraft:paper{ench:[{id:${paper.enchantId},lvl:${index-1}}]}`
+        var pageConsumed = `minecraft:paper{subId:"zmagic:${pageName}_i"}`
         var line2 = `clear @s[scores={${this.getIngredientsScores(paper, index)}}] ${pageConsumed} 4`
         ingredients = line1+'\n'+line2
         break;
       case 2:
-        var pageConsumed = `minecraft:paper{ench:[{id:${paper.enchantId},lvl:${index-1}}]}`
+        var pageConsumed = `minecraft:paper{subId:"zmagic:${pageName}_ii"}`
         var line2 = `clear @s[scores={${this.getIngredientsScores(paper, index)}}] ${pageConsumed} 4`
         ingredients = line1+'\n'+line2
         break;
@@ -85,11 +88,13 @@ class Scribing {
 
   writeInit() {
     let lines = []
+
     this.papers.forEach(paper => {
       lines.push(`scoreboard objectives add scribePage trigger`)
       lines.push(`scoreboard objectives add scribingPaper dummy`)
       paper.tiers.forEach((tier, index) => {
-        const item = `minecraft:paper{ench:[{id:${paper.enchantId},lvl:${index}}]}`
+        const id = _.snakeCase(paper.name+tier.name)
+        const item = `minecraft:paper{subId:"zmagic:${id}"}`
         const line = `scoreboard objectives add ${_.camelCase(paper.name)+tier.name} dummy`
 
         lines.push(line)
@@ -102,8 +107,25 @@ class Scribing {
   writeTick() {
     let lines = []
     this.papers.forEach(paper => {
-      lines.push(`scoreboard players enable @a scribePage`)
       lines.push(`execute as @a store result score @s scribingPaper run clear @s ${this.scribingPaper} 0`)
+      paper.tiers.forEach((tier, index) => {
+        const ingredients = this.getIngredientsScores(paper, index)
+        const objective = _.camelCase(paper.name)+tier.name
+        const id = _.snakeCase(paper.name+tier.name)
+        const line = `execute as @a store result score @s ${objective} run clear @s minecraft:paper{subId: "zmagic:${id}"} 0`
+        lines.push(line)
+      })
+    })
+    console.log();
+    console.log('  '+tickPath);
+    console.log(lines);
+    jp.write(tickPath, lines.join('\n'))
+  }
+
+  writeTriggerTick() {
+    let lines = []
+    this.papers.forEach(paper => {
+      lines.push(`scoreboard players enable @a scribePage`)
       paper.tiers.forEach((tier, index) => {
         const ingredients = this.getIngredientsScores(paper, index)
         const execute = `execute at @a[scores={scribePage=${tier.trigger},${ingredients}}] run`
@@ -138,7 +160,7 @@ class Scribing {
         const give = `execute as @s[scores={${this.getIngredientsScores(paper, index)}}] run function zmagic:give/page/${id}`
         const line1 = `${give}`
         // const line2 = `clear @s minecraft:paper 1`
-        const pageConsumed = `minecraft:paper{ench:[{id:${paper.enchantId},lvl:${index}}]}`
+        const pageConsumed = `minecraft:paper{subId:"zmagic:${id}"}`
         const line3 = this.getIngredientsToClear(paper, index)
 
         const lines = [
@@ -173,7 +195,7 @@ class Scribing {
         const id = _.snakeCase(paper.name+tier.name)
 
         const give = `give @s minecraft:paper`
-        const nbt = `{display: {Name: "{\\"text\\":\\"${paper.name} ${tier.name}\\",\\"color\\":\\"${color}\\"}", Lore:["${tier.lore}"]}, ench:[{id:${paper.enchantId},lvl:${index}}], HideFlags:1 }`
+        const nbt = `{subId:"zmagic:${id}", display: {Name: "{\\"text\\":\\"${paper.name} ${tier.name}\\",\\"color\\":\\"${color}\\"}", Lore:["${tier.lore}"]}, ench:[{id:0,lvl:0}], HideFlags:1 }`
         const line = `${give}${nbt}`
 
         const lines = [
