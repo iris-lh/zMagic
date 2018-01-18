@@ -22,6 +22,8 @@ class Scribing {
     this.writeInit        = this.writeInit.bind(this)
     this.writeTriggerTick = this.writeTriggerTick.bind(this)
     this.writeGivers      = this.writeGivers.bind(this)
+    this.writeGivePapers  = this.writeGivePapers.bind(this)
+    this.writeGiveTome    = this.writeGiveTome.bind(this)
 
     this.scribingPaper = 'minecraft:paper{display:{Name:"{\\"text\\":\\"Scribing Paper\\"}"}}'
 
@@ -179,7 +181,7 @@ class Scribing {
     })
   }
 
-  writeGivers() {
+  writeGivePapers() {
     this.papers.forEach(paper => {
       paper.tiers.forEach((tier, index) => {
         let color = ''
@@ -216,6 +218,25 @@ class Scribing {
         jp.write(writePath, lines.join('\n'))
       })
     })
+  }
+
+  writeGiveTome() {
+    const tome = itemHelper.createItem({
+      id: 'minecraft.written_book',
+      subId: 'zmagic:scribing_tome',
+      name: 'Scribing Tome',
+      color: 'aqua',
+      lore: 'A tome used for scribing spell pages.',
+      ench: {id:0,lvl:0},
+      hideFlags: 1
+    })
+
+    jp.write(`./data/zmagic/functions/give/book/scribing_tome.mcfunction`, `give @s ${tome}`)
+  }
+
+  writeGivers() {
+    this.writeGivePapers()
+    this.writeGiveTome()
   }
 }
 
