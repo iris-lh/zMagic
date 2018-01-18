@@ -9,8 +9,8 @@ const interpolateYaml = require('./interpolate-yaml')
 class Book {
   constructor(spells) {
     this.spells = spells
-    this.constructPage = this.constructPage.bind(this)
-    this.constructPages = this.constructPages.bind(this)
+    this.constructSpellPage = this.constructSpellPage.bind(this)
+    this.constructSpellPages = this.constructSpellPages.bind(this)
     this.import = this.import.bind(this)
     this.importAll = this.importAll.bind(this)
     this.process = this.process.bind(this)
@@ -19,7 +19,7 @@ class Book {
     this.writeAll = this.writeAll.bind(this)
   }
 
-  constructPage(spellList) {
+  constructSpellPage(spellList) {
     let page = []
     spellList.forEach(entry => {
       let json = {}
@@ -49,10 +49,10 @@ class Book {
     return JSON.stringify(page)
   }
 
-  constructPages(spellLists) {
+  constructSpellPages(spellLists) {
     let pages = []
     spellLists.forEach(list => {
-      pages.push(this.constructPage(list))
+      pages.push(this.constructSpellPage(list))
     })
     return pages
   }
@@ -78,7 +78,7 @@ class Book {
   process(bookYaml) {
     const rawJson = yaml.load(bookYaml)
     const processedBook = yaml.load(interpolateYaml(bookYaml))
-    processedBook.content.pages = this.constructPages(processedBook.content.pages)
+    processedBook.content.pages = this.constructSpellPages(processedBook.content.pages)
     console.log('  '+processedBook.name);
     return processedBook
   }
