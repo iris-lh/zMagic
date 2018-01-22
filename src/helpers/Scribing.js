@@ -3,6 +3,7 @@ const yaml = require('js-yaml')
 const jp = require('fs-jetpack')
 
 const Item = require('./Item')
+const Book = require('./Book')
 
 const packageJson      = require('../../package.json')
 const version          = packageJson.version
@@ -221,6 +222,16 @@ class Scribing {
   }
 
   writeGiveTome() {
+    const entry = JSON.stringify({
+      text:`\nIgnus Page I`,
+      color:'green',
+      italic:'true',
+      underlined:'true',
+      clickEvent:{
+        action:'run_command',
+        value: `/trigger scribePage set 10`
+      }
+    })
     const tome = itemHelper.createItem({
       id: 'minecraft.written_book',
       subId: 'zmagic:scribing_tome',
@@ -228,7 +239,8 @@ class Scribing {
       color: 'aqua',
       lore: 'A tome used for scribing spell pages.',
       ench: {id:0,lvl:0},
-      hideFlags: 1
+      hideFlags: 1,
+      pages: [entry]
     })
 
     jp.write(`./data/zmagic/functions/give/book/scribing_tome.mcfunction`, `give @s ${tome}`)
