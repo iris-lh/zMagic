@@ -22,6 +22,7 @@ const tagsPath      = contentPath+'/tags/'
 
 const spells = {}
 
+// TODO split spell commands into effects (do the thing for free) and casts (do the effect if conditions are met)
 // TODO nbt/json helpers
 // TODO item helper
 // TODO error handling!
