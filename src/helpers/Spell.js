@@ -23,8 +23,10 @@ class Spell {
     this.write            = this.write.bind(this)
     this.writeAll         = this.writeAll.bind(this)
 
-    this.log = new Log('./logs/spell-triggers.txt')
-
+    this.triggerLog = new Log({
+      name: 'spell-triggers',
+      type: 'key-value'
+    })
 
     this.colors = _.reduce(costTiers, (result, value, key) => {
       return _.set(result, `${key}`, value.color)
@@ -110,15 +112,16 @@ class Spell {
     commands.push('scoreboard players enable @a cast_spell')
 
     processedSpells.forEach(spell => {
-      this.log.push({
-        trigger: spell.tier.trigger,
-        id: spell.id
+      this.triggerLog.push({
+        key: spell.tier.trigger,
+        value: spell.id
       })
+      // FIXME this.triggerLog.push([spell.tier.trigger])
       commands.push(`execute as @a[scores={cast_spell=${spell.tier.trigger}}] run function zmagic:cast/${spell.id}`)
     })
     commands.push('scoreboard players set @a cast_spell -1')
 
-    this.log.write()
+    this.triggerLog.write()
 
     const mcFunction = commands.join('\n')
     jp.write(triggerTickPath, mcFunction)

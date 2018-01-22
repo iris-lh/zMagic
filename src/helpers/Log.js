@@ -2,30 +2,34 @@ const _ = require('lodash')
 const jp = require('fs-jetpack')
 
 class Log {
-  constructor(path) {
-    this.path = path
-    this.entries = []
+  constructor(options) {
+    this.type = options.type
+    this.name = options.name
+    this._entries = []
+    this._content = []
   }
 
   push(entry) {
-    this.entries.push(entry)
+    this._entries.push(entry)
   }
 
-  _sorted() {
-    return _.sortBy(this.entries, entry => {
-      return entry.trigger
+  _keyValueSorted() {
+    return _.sortBy(this._entries, entry => {
+      return entry.key
     })
   }
 
   _render() {
-    return this._sorted().map(entry => {
-      const triggerStr = _.padStart(entry.trigger, 3, '0')
-      return `${triggerStr}: ${entry.id}`
-    }).join('\n')
+    if (this.type === 'key-value') {
+      return this._keyValueSorted().map(entry => {
+        const key = _.padStart(entry.key, 3, '0')
+        return `${key}: ${entry.value}`
+      }).join('\n')
+    }
   }
 
   write() {
-    jp.write(this.path, this._render())
+    jp.write(`./logs/${this.name}.txt`, this._render())
   }
 }
 
