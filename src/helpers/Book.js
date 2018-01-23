@@ -6,7 +6,7 @@ const spellHelpers = new Spell()
 const interpolateYaml = require('./interpolate-yaml')
 
 const Verbose = require('./Verbose')
-const verbose = new Verbose()
+const verb = new Verbose()
 
 
 class Book {
@@ -61,12 +61,12 @@ class Book {
   }
 
   import(bookPath) {
-    verbose.log('    '+bookPath, 3)
+    verb.log('    '+bookPath, 3)
     return jp.read(bookPath)
   }
 
   importAll(booksPath) {
-    verbose.log('  IMPORTING BOOKS...', 2)
+    verb.log('  IMPORTING BOOKS...', 2)
     let bookYamls = []
     const bookFileNames = jp.list(booksPath).filter(fileName => {
       return fileName.match('.yaml')
@@ -82,12 +82,12 @@ class Book {
     const rawJson = yaml.load(bookYaml)
     const processedBook = yaml.load(interpolateYaml(bookYaml))
     processedBook.content.pages = this.constructSpellPages(processedBook.content.pages)
-    verbose.log('    '+processedBook.name, 3);
+    verb.log('    '+processedBook.name, 3);
     return processedBook
   }
 
   processAll(importedBookYamls) {
-    verbose.log('  PROCESSING BOOKS...', 2);
+    verb.log('  PROCESSING BOOKS...', 2);
     let processedBooks = []
     importedBookYamls.map(bookYaml => {
       processedBooks.push(this.process(bookYaml))
@@ -97,14 +97,14 @@ class Book {
 
   write(book) {
     const functionPath = `./data/zmagic/functions/give/book/${_.snakeCase(book.name)}.mcfunction`
-    verbose.log('    '+functionPath, 3)
+    verb.log('    '+functionPath, 3)
     const mcFunction = 'give @p written_book'+JSON.stringify(book.content)
 
     jp.write(functionPath, mcFunction)
   }
 
   writeAll(importedBooks) {
-    verbose.log('  WRITING BOOK GIVERS...', 2)
+    verb.log('  WRITING BOOK GIVERS...', 2)
     return importedBooks.map(book => {
       this.write(book)
     })

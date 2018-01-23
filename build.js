@@ -3,7 +3,7 @@ const _ = require('lodash')
 const yaml = require('js-yaml')
 
 const Verbose = require('./src/helpers/Verbose')
-const verbose = new Verbose()
+const verb = new Verbose()
 
 const packageJson      = require('./package.json')
 const version          = packageJson.version
@@ -42,7 +42,7 @@ const spells = {}
 // TAGS
 
 function buildTags() {
-  verbose.log('BUILDING TAGS...')
+  verb.log('BUILDING TAGS...')
   tagHelpers.writeTickTag('./data/minecraft/tags/functions/tick.json')
   tagHelpers.writeTags(tagsPath, './data/zmagic/tags/')
 }
@@ -72,7 +72,7 @@ function writeSpells(processedSpells) {
 }
 
 function buildSpells() {
-  verbose.log('BUILDING SPELLS...')
+  verb.log('BUILDING SPELLS...')
   pipe(
     importSpells()
     , processSpells
@@ -85,7 +85,7 @@ function buildSpells() {
 // REAGENTS
 
 function buildReagents() {
-  verbose.log('BUILDING REAGENTS...');
+  verb.log('BUILDING REAGENTS...');
   const reagents = new Reagents
   reagents.writeInit()
   reagents.writeTick()
@@ -96,7 +96,7 @@ function buildReagents() {
 // SCRIBING
 
 function buildScribing() {
-  verbose.log('BUILDING SCRIBING...');
+  verb.log('BUILDING SCRIBING...');
   const scribingHelpers = new Scribing()
   scribingHelpers.writeInit()
   scribingHelpers.writeTick()
@@ -110,7 +110,7 @@ function buildScribing() {
 // ROOT
 
 function buildInit() {
-  verbose.log('BUILDING INIT...');
+  verb.log('BUILDING INIT...');
     const lines = [
       // TODO 'function zmagic:greet'
       // TODO 'function zmagic:version'
@@ -123,12 +123,12 @@ function buildInit() {
       'tellraw @p {"text":"Done. Enjoy!\\n", "color":"aqua"}'
     ]
   const functionPath = `./data/zmagic/functions/init.mcfunction`
-  verbose.log('  '+functionPath, 3)
+  verb.log('  '+functionPath, 3)
   jp.write(functionPath, lines.join('\n'))
 }
 
 function buildTick() {
-  verbose.log('BUILDING TICK...');
+  verb.log('BUILDING TICK...');
     const lines = [
       'function zmagic:tick/triggers/spells',
       'function zmagic:tick/triggers/scribing',
@@ -136,7 +136,7 @@ function buildTick() {
       'function zmagic:tick/reagents'
     ]
   const functionPath = `./data/zmagic/functions/tick.mcfunction`
-  verbose.log('  '+functionPath, 3)
+  verb.log('  '+functionPath, 3)
   jp.write(functionPath, lines.join('\n'))
 }
 
@@ -161,7 +161,7 @@ function writeBooks(processedBooks) {
 }
 
 function buildBooks() {
-  verbose.log('BUILDING BOOKS...')
+  verb.log('BUILDING BOOKS...')
   pipe(
     importBooks()
     , processBooks

@@ -3,7 +3,7 @@ const jp = require('fs-jetpack')
 const costTiers = require('../constants/cost-tiers.json')
 
 const Verbose = require('./Verbose')
-const verbose = new Verbose()
+const verb = new Verbose()
 
 class Reagents {
   constructor() {
@@ -12,7 +12,7 @@ class Reagents {
   }
 
   writeInit() {
-    verbose.log('  WRITING REAGENT INIT...', 2)
+    verb.log('  WRITING REAGENT INIT...', 2)
     let lines = []
     lines.push('tellraw @p {"text":"- Initialize Reagents", "color":"dark_aqua"}')
     _.forOwn(costTiers, function(value, key) {
@@ -26,19 +26,19 @@ class Reagents {
     });
 
     const functionPath = `./data/zmagic/functions/init/reagents.mcfunction`
-    verbose.log('    '+functionPath, 3)
+    verb.log('    '+functionPath, 3)
     jp.write(functionPath, lines.join('\n'))
   }
 
   writeTick() {
-    verbose.log('  WRITING REAGENT TICK...', 2)
+    verb.log('  WRITING REAGENT TICK...', 2)
     let lines = []
     _.forOwn(costTiers, function(value, key) {
       const line = `execute as @a store result score @s ${value.resource} run clear @s minecraft:${value.resource} 0`
       lines.push(line)
     });
     const functionPath = `./data/zmagic/functions/tick/reagents.mcfunction`
-    verbose.log('    '+functionPath, 3)
+    verb.log('    '+functionPath, 3)
     jp.write(functionPath, lines.join('\n'))
   }
 

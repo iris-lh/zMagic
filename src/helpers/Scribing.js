@@ -3,7 +3,7 @@ const yaml = require('js-yaml')
 const jp = require('fs-jetpack')
 
 const Verbose = require('./Verbose')
-const verbose = new Verbose()
+const verb = new Verbose()
 
 const Item = require('./Item')
 const Book = require('./Book')
@@ -98,7 +98,7 @@ class Scribing {
   }
 
   writeInit() {
-    verbose.log('  WRITING SCRIBING INIT...', 2)
+    verb.log('  WRITING SCRIBING INIT...', 2)
     let lines = []
 
     lines.push('tellraw @p {"text":"- Initialize Scribing", "color":"dark_aqua"}')
@@ -114,12 +114,12 @@ class Scribing {
         lines.push(line)
       })
     })
-    verbose.log('    '+initPath, 3);
+    verb.log('    '+initPath, 3);
     jp.write(initPath, lines.join('\n'))
   }
 
   writeTick() {
-    verbose.log('  WRITING SCRIBING TICK...', 2)
+    verb.log('  WRITING SCRIBING TICK...', 2)
     let lines = []
     this.papers.forEach(paper => {
       lines.push(`execute as @a store result score @s scribingPaper run clear @s ${this.scribingPaper} 0`)
@@ -131,12 +131,12 @@ class Scribing {
         lines.push(line)
       })
     })
-    verbose.log('    '+tickPath, 3);
+    verb.log('    '+tickPath, 3);
     jp.write(tickPath, lines.join('\n'))
   }
 
   writeTriggerTick() {
-    verbose.log('  WRITING SCRIBING TRIGGER TICK...', 2)
+    verb.log('  WRITING SCRIBING TRIGGER TICK...', 2)
     let lines = []
     this.papers.forEach(paper => {
       lines.push(`scoreboard players enable @a scribePage`)
@@ -149,12 +149,12 @@ class Scribing {
       })
       lines.push(`scoreboard players set @a[scores={scribePage=1..}] scribePage -1`)
     })
-    verbose.log('    '+triggerTickPath, 3);
+    verb.log('    '+triggerTickPath, 3);
     jp.write(triggerTickPath, lines.join('\n'))
   }
 
   writeScribers() {
-    verbose.log('  WRITING SCRIBERS...', 2)
+    verb.log('  WRITING SCRIBERS...', 2)
     this.papers.forEach(paper => {
       paper.tiers.forEach((tier, index) => {
         let color = ''
@@ -183,7 +183,7 @@ class Scribing {
         ]
 
         const writePath = `${scribePath}${id}.mcfunction`
-        verbose.log('    '+writePath, 3);
+        verb.log('    '+writePath, 3);
         jp.write(writePath, lines.join('\n'))
       })
     })
@@ -222,7 +222,7 @@ class Scribing {
         ]
 
         const writePath = `${givePath}${id}.mcfunction`
-        verbose.log('    '+writePath, verbose);
+        verb.log('    '+writePath, 3);
         jp.write(writePath, lines.join('\n'))
       })
     })
@@ -254,7 +254,7 @@ class Scribing {
   }
 
   writeGivers() {
-    verbose.log('  WRITING SCRIBING GIVERS...', 2)
+    verb.log('  WRITING SCRIBING GIVERS...', 2)
     this.writeGivePapers()
     this.writeGiveTome()
   }

@@ -7,7 +7,7 @@ const messages = require('./messages')
 const pipe = require('./pipe')
 const interpolateYaml = require('./interpolate-yaml')
 const Verbose = require('./Verbose')
-const verbose = new Verbose()
+const verb = new Verbose()
 
 const triggerTickPath = `./data/zmagic/functions/tick/triggers/spells.mcfunction`
 const initPath = `./data/zmagic/functions/init/spells.mcfunction`
@@ -56,12 +56,12 @@ class Spell {
   }
 
   import(path) {
-    verbose.log('    '+path, 3)
+    verb.log('    '+path, 3)
     return jp.read(path)
   }
 
   importAll(spellsPath) {
-    verbose.log('  IMPORTING SPELLS...', 2)
+    verb.log('  IMPORTING SPELLS...', 2)
     let spellYamls = []
     const spellFileNames = jp.list(spellsPath).filter(fileName => {
       return fileName.match('.yaml')
@@ -81,12 +81,12 @@ class Spell {
     processedSpell.id = isOneOff
       ? _.snakeCase(processedSpell.name)
       : _.snakeCase(`${processedSpell.name}_${processedSpell.tier.name}`)
-    verbose.log('    '+processedSpell.name+' '+(isOneOff ? '' : processedSpell.tier.name), 3);
+    verb.log('    '+processedSpell.name+' '+(isOneOff ? '' : processedSpell.tier.name), 3);
     return processedSpell
   }
 
   processAll(importedSpellYamls) {
-    verbose.log('  PROCESSING SPELLS...', 2);
+    verb.log('  PROCESSING SPELLS...', 2);
     let processedSpells = []
     importedSpellYamls.map(spellYaml => {
       const rawJson = yaml.load(spellYaml)
@@ -108,7 +108,7 @@ class Spell {
   }
 
   writeTriggers(processedSpells) {
-    verbose.log('  WRITING SPELL TRIGGERS...', 2)
+    verb.log('  WRITING SPELL TRIGGERS...', 2)
 
     let commands = []
 
@@ -131,20 +131,20 @@ class Spell {
     ]
     const initCommand =
     jp.write(initPath, initLines.join('\n'))
-    verbose.log('    '+triggerTickPath, 3)
+    verb.log('    '+triggerTickPath, 3)
   }
 
   write(processedSpell) {
     const rawJson = processedSpell
     const isOneOff = rawJson.tiers.length <= 1
     const functionPath = `./data/zmagic/functions/cast/${processedSpell.id}.mcfunction`
-    verbose.log('    '+functionPath, 3)
+    verb.log('    '+functionPath, 3)
     const mcFunction = this.buildMcFunction(processedSpell).join('\n')
     jp.write(functionPath, mcFunction)
   }
 
   writeAll(processedSpells) {
-    verbose.log('  WRITING SPELLS...', 2)
+    verb.log('  WRITING SPELLS...', 2)
 
     processedSpells.map(spell => {
       this.write(spell)
