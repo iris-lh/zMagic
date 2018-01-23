@@ -16,6 +16,8 @@ const Scribing   = require('./src/helpers/Scribing')
 const tagHelpers = require('./src/helpers/tag')
 const pipe       = require('./src/helpers/pipe')
 
+const checkBuild = require('./test/check-build')
+
 const contentPath = './src/content/'
 const spellsPath  = contentPath+'/spells/'
 const booksPath   = contentPath+'/books/'
@@ -156,7 +158,7 @@ function buildBooks() {
 }
 
 
-
+// BUILD
 buildSpells()
 buildBooks()
 buildTags()
@@ -164,3 +166,6 @@ buildReagents()
 buildScribing()
 buildInit()
 buildTick()
+
+//CHECK
+checkBuild()
