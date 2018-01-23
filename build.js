@@ -21,21 +21,7 @@ const spellsPath  = contentPath+'/spells/'
 const booksPath   = contentPath+'/books/'
 const tagsPath    = contentPath+'/tags/'
 
-
-
 const spells = {}
-
-// TODO split spell commands into effects (do the thing for free) and casts (do the effect if conditions are met)
-// TODO nbt/json helpers
-// TODO item helper
-// TODO error handling!
-// TODO tests/checks
-// TODO get a roman numeral converter up in here, probably
-// TODO verbose/quiet modes
-// TODO raw/fancy function helper
-// TODO raw/fancy recipe helper
-// TODO structures???
-// TODO loot tables???
 
 
 
