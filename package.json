@@ -1,7 +1,7 @@
 {
   "name": "zMagic",
   "version": "0.1.0",
-  "minecraftVersion":"18w02a",
+  "minecraftVersion": "18w02a",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "fs-jetpack": "^1.2.0",
+    "glob": "^7.1.2",
     "js-yaml": "^3.10.0",
     "leasot": "^4.13.0",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "time-stamp": "^2.0.0"
   }
 }
