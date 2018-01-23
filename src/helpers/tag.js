@@ -1,8 +1,11 @@
 const jp = require('fs-jetpack')
 
+const Verbose = require('./Verbose')
+const verbose = new Verbose()
+
 const tag = {
   writeTickTag: function(writePath) {
-    console.log('WRITING TICK TAG...');
+    verbose.log('  WRITING MINECRAFT:TICK TAG...', 2);
 
     const tag = {
       "values": [
@@ -10,12 +13,12 @@ const tag = {
       ]
     }
 
-    console.log('  '+writePath);
+    verbose.log('    '+writePath, 3);
     jp.write(writePath, tag)
   },
 
   writeTags: function(tagSrcPath, tagWritePath) {
-    console.log('WRITING TAGS...');
+    verbose.log('  WRITING TAGS...', 2);
     const blockTagFileNames    = jp.list(tagSrcPath+'/blocks')    || []
     const itemTagFileNames     = jp.list(tagSrcPath+'/items')     || []
     const functionTagFileNames = jp.list(tagSrcPath+'/functions') || []
@@ -24,7 +27,7 @@ const tag = {
       const srcPath   = `${tagSrcPath}blocks/${fileName}`
       const writePath = `${tagWritePath}blocks/${fileName}`
       const tag = jp.read(srcPath)
-      console.log('  '+writePath);
+      verbose.log('    '+writePath, 3);
       jp.write(writePath, tag)
     })
 
@@ -32,7 +35,7 @@ const tag = {
       const srcPath   = `${tagSrcPath}items/${fileName}`
       const writePath = `${tagWritePath}items/${fileName}`
       const tag = jp.read(srcPath)
-      console.log('  '+writePath);
+      verbose.log('    '+writePath, 3);
       jp.write(writePath, tag)
     })
 
@@ -40,12 +43,10 @@ const tag = {
       const srcPath   = `${tagSrcPath}functions/${fileName}`
       const writePath = `${tagWritePath}functions/${fileName}`
       const tag = jp.read(srcPath)
-      console.log('  '+writePath);
+      verbose.log('    '+writePath, 3);
       jp.write(writePath, tag)
     })
   }
 }
-
-tag.writeTags('./src/tags/', './data/zmagic/tags/')
 
 module.exports = tag

@@ -2,21 +2,24 @@ const jp = require('fs-jetpack')
 const _ = require('lodash')
 const yaml = require('js-yaml')
 
+const Verbose = require('./src/helpers/Verbose')
+const verbose = new Verbose()
+
 const packageJson      = require('./package.json')
 const version          = packageJson.version
 const minecraftVersion = packageJson.minecraftVersion
 
-const Spell = require('./src/helpers/Spell')
-const Reagents = require('./src/helpers/Reagents')
-const Book = require('./src/helpers/Book')
-const Scribing = require('./src/helpers/Scribing')
+const Spell      = require('./src/helpers/Spell')
+const Reagents   = require('./src/helpers/Reagents')
+const Book       = require('./src/helpers/Book')
+const Scribing   = require('./src/helpers/Scribing')
 const tagHelpers = require('./src/helpers/tag')
-const pipe = require('./src/helpers/pipe')
+const pipe       = require('./src/helpers/pipe')
 
-const contentPath   = './src/content/'
-const spellsPath    = contentPath+'/spells/'
-const booksPath     = contentPath+'/books/'
-const tagsPath      = contentPath+'/tags/'
+const contentPath = './src/content/'
+const spellsPath  = contentPath+'/spells/'
+const booksPath   = contentPath+'/books/'
+const tagsPath    = contentPath+'/tags/'
 
 
 
@@ -38,7 +41,8 @@ const spells = {}
 
 // TAGS
 
-function writeTags() {
+function buildTags() {
+  verbose.log('BUILDING TAGS...')
   tagHelpers.writeTickTag('./data/minecraft/tags/functions/tick.json')
   tagHelpers.writeTags(tagsPath, './data/zmagic/tags/')
 }
@@ -68,6 +72,7 @@ function writeSpells(processedSpells) {
 }
 
 function buildSpells() {
+  verbose.log('BUILDING SPELLS...')
   pipe(
     importSpells()
     , processSpells
@@ -79,8 +84,8 @@ function buildSpells() {
 
 // REAGENTS
 
-function writeReagents() {
-  console.log('WRITING SCOREBOARDS...');
+function buildReagents() {
+  verbose.log('BUILDING REAGENTS...');
   const reagents = new Reagents
   reagents.writeInit()
   reagents.writeTick()
@@ -90,8 +95,8 @@ function writeReagents() {
 
 // SCRIBING
 
-function writeScribing() {
-  console.log('WRITING SCRIBING...');
+function buildScribing() {
+  verbose.log('BUILDING SCRIBING...');
   const scribingHelpers = new Scribing()
   scribingHelpers.writeInit()
   scribingHelpers.writeTick()
@@ -104,8 +109,8 @@ function writeScribing() {
 
 // ROOT
 
-function writeInit() {
-  console.log('WRITING INIT...');
+function buildInit() {
+  verbose.log('BUILDING INIT...');
     const lines = [
       // TODO 'function zmagic:greet'
       // TODO 'function zmagic:version'
@@ -118,12 +123,12 @@ function writeInit() {
       'tellraw @p {"text":"Done. Enjoy!\\n", "color":"aqua"}'
     ]
   const functionPath = `./data/zmagic/functions/init.mcfunction`
-  console.log('  '+functionPath)
+  verbose.log('  '+functionPath, 3)
   jp.write(functionPath, lines.join('\n'))
 }
 
-function writeTick() {
-  console.log('WRITING TICK...');
+function buildTick() {
+  verbose.log('BUILDING TICK...');
     const lines = [
       'function zmagic:tick/triggers/spells',
       'function zmagic:tick/triggers/scribing',
@@ -131,7 +136,7 @@ function writeTick() {
       'function zmagic:tick/reagents'
     ]
   const functionPath = `./data/zmagic/functions/tick.mcfunction`
-  console.log('  '+functionPath)
+  verbose.log('  '+functionPath, 3)
   jp.write(functionPath, lines.join('\n'))
 }
 
@@ -156,6 +161,7 @@ function writeBooks(processedBooks) {
 }
 
 function buildBooks() {
+  verbose.log('BUILDING BOOKS...')
   pipe(
     importBooks()
     , processBooks
@@ -167,8 +173,8 @@ function buildBooks() {
 
 buildSpells()
 buildBooks()
-writeTags()
-writeReagents()
-writeScribing()
-writeInit()
-writeTick()
+buildTags()
+buildReagents()
+buildScribing()
+buildInit()
+buildTick()

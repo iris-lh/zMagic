@@ -6,6 +6,8 @@ const costTiers = require('../constants/cost-tiers.json')
 const messages = require('./messages')
 const pipe = require('./pipe')
 const interpolateYaml = require('./interpolate-yaml')
+const Verbose = require('./Verbose')
+const verbose = new Verbose()
 
 const triggerTickPath = `./data/zmagic/functions/tick/triggers/spells.mcfunction`
 const initPath = `./data/zmagic/functions/init/spells.mcfunction`
@@ -54,12 +56,12 @@ class Spell {
   }
 
   import(path) {
-    console.log('  '+path)
+    verbose.log('    '+path, 3)
     return jp.read(path)
   }
 
   importAll(spellsPath) {
-    console.log('IMPORTING SPELLS...')
+    verbose.log('  IMPORTING SPELLS...', 2)
     let spellYamls = []
     const spellFileNames = jp.list(spellsPath).filter(fileName => {
       return fileName.match('.yaml')
@@ -79,12 +81,12 @@ class Spell {
     processedSpell.id = isOneOff
       ? _.snakeCase(processedSpell.name)
       : _.snakeCase(`${processedSpell.name}_${processedSpell.tier.name}`)
-    console.log('  '+processedSpell.name+' '+(isOneOff ? '' : processedSpell.tier.name));
+    verbose.log('    '+processedSpell.name+' '+(isOneOff ? '' : processedSpell.tier.name), 3);
     return processedSpell
   }
 
   processAll(importedSpellYamls) {
-    console.log('PROCESSING SPELLS...');
+    verbose.log('  PROCESSING SPELLS...', 2);
     let processedSpells = []
     importedSpellYamls.map(spellYaml => {
       const rawJson = yaml.load(spellYaml)
@@ -106,7 +108,7 @@ class Spell {
   }
 
   writeTriggers(processedSpells) {
-    console.log('WRITING SPELL TRIGGERS...')
+    verbose.log('  WRITING SPELL TRIGGERS...', 2)
 
     let commands = []
 
@@ -129,20 +131,20 @@ class Spell {
     ]
     const initCommand =
     jp.write(initPath, initLines.join('\n'))
-    console.log('  '+triggerTickPath)
+    verbose.log('    '+triggerTickPath, 3)
   }
 
   write(processedSpell) {
     const rawJson = processedSpell
     const isOneOff = rawJson.tiers.length <= 1
     const functionPath = `./data/zmagic/functions/cast/${processedSpell.id}.mcfunction`
-    console.log('  '+functionPath)
+    verbose.log('    '+functionPath, 3)
     const mcFunction = this.buildMcFunction(processedSpell).join('\n')
     jp.write(functionPath, mcFunction)
   }
 
   writeAll(processedSpells) {
-    console.log('WRITING SPELLS...')
+    verbose.log('  WRITING SPELLS...', 2)
 
     processedSpells.map(spell => {
       this.write(spell)

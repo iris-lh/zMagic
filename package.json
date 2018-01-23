@@ -5,10 +5,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "node ./build.js",
+    "build-silent": "VERBOSITY=0 node ./build.js",
+    "build-quieter": "VERBOSITY=1 node ./build.js",
+    "build-quiet": "VERBOSITY=2 node ./build.js",
+    "build": "VERBOSITY=3 node ./build.js",
     "todo": "node ./node_modules/leasot/bin/leasot.js leasot './**/*.js' --ignore './node_modules/**/*'"
   },
   "dependencies": {
+    "fancy-log": "^1.3.2",
     "fs-jetpack": "^1.2.0",
     "glob": "^7.1.2",
     "js-yaml": "^3.10.0",
