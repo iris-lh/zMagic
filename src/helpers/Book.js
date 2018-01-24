@@ -61,12 +61,12 @@ class Book {
   }
 
   import(bookPath) {
-    verb.log('    '+bookPath, 3)
+    verb.buildLog('    '+bookPath, 3)
     return jp.read(bookPath)
   }
 
   importAll(booksPath) {
-    verb.log('  IMPORTING BOOKS...', 2)
+    verb.buildLog('  IMPORTING BOOKS...', 2)
     let bookYamls = []
     const bookFileNames = jp.list(booksPath).filter(fileName => {
       return fileName.match('.yaml')
@@ -82,12 +82,12 @@ class Book {
     const rawJson = yaml.load(bookYaml)
     const processedBook = yaml.load(interpolateYaml(bookYaml))
     processedBook.content.pages = this.constructSpellPages(processedBook.content.pages)
-    verb.log('    '+processedBook.name, 3);
+    verb.buildLog('    '+processedBook.name, 3);
     return processedBook
   }
 
   processAll(importedBookYamls) {
-    verb.log('  PROCESSING BOOKS...', 2);
+    verb.buildLog('  PROCESSING BOOKS...', 2);
     let processedBooks = []
     importedBookYamls.map(bookYaml => {
       processedBooks.push(this.process(bookYaml))
@@ -97,14 +97,14 @@ class Book {
 
   write(book) {
     const functionPath = `./data/zmagic/functions/give/book/${_.snakeCase(book.name)}.mcfunction`
-    verb.log('    '+functionPath, 3)
+    verb.buildLog('    '+functionPath, 3)
     const mcFunction = 'give @p written_book'+JSON.stringify(book.content)
 
     jp.write(functionPath, mcFunction)
   }
 
   writeAll(importedBooks) {
-    verb.log('  WRITING BOOK GIVERS...', 2)
+    verb.buildLog('  WRITING BOOK GIVERS...', 2)
     return importedBooks.map(book => {
       this.write(book)
     })

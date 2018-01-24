@@ -56,12 +56,12 @@ class Spell {
   }
 
   import(path) {
-    verb.log('    '+path, 3)
+    verb.buildLog('    '+path, 3)
     return jp.read(path)
   }
 
   importAll(spellsPath) {
-    verb.log('  IMPORTING SPELLS...', 2)
+    verb.buildLog('  IMPORTING SPELLS...', 2)
     let spellYamls = []
     const spellFileNames = jp.list(spellsPath).filter(fileName => {
       return fileName.match('.yaml')
@@ -81,12 +81,12 @@ class Spell {
     processedSpell.id = isOneOff
       ? _.snakeCase(processedSpell.name)
       : _.snakeCase(`${processedSpell.name}_${processedSpell.tier.name}`)
-    verb.log('    '+processedSpell.name+' '+(isOneOff ? '' : processedSpell.tier.name), 3);
+    verb.buildLog('    '+processedSpell.name+' '+(isOneOff ? '' : processedSpell.tier.name), 3);
     return processedSpell
   }
 
   processAll(importedSpellYamls) {
-    verb.log('  PROCESSING SPELLS...', 2);
+    verb.buildLog('  PROCESSING SPELLS...', 2);
     let processedSpells = []
     importedSpellYamls.map(spellYaml => {
       const rawJson = yaml.load(spellYaml)
@@ -108,7 +108,7 @@ class Spell {
   }
 
   writeTriggers(processedSpells) {
-    verb.log('  WRITING SPELL TRIGGERS...', 2)
+    verb.buildLog('  WRITING SPELL TRIGGERS...', 2)
 
     let commands = []
 
@@ -131,20 +131,20 @@ class Spell {
     ]
     const initCommand =
     jp.write(initPath, initLines.join('\n'))
-    verb.log('    '+triggerTickPath, 3)
+    verb.buildLog('    '+triggerTickPath, 3)
   }
 
   write(processedSpell) {
     const rawJson = processedSpell
     const isOneOff = rawJson.tiers.length <= 1
     const functionPath = `./data/zmagic/functions/cast/${processedSpell.id}.mcfunction`
-    verb.log('    '+functionPath, 3)
+    verb.buildLog('    '+functionPath, 3)
     const mcFunction = this.buildMcFunction(processedSpell).join('\n')
     jp.write(functionPath, mcFunction)
   }
 
   writeAll(processedSpells) {
-    verb.log('  WRITING SPELLS...', 2)
+    verb.buildLog('  WRITING SPELLS...', 2)
 
     processedSpells.map(spell => {
       this.write(spell)

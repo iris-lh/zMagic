@@ -12,7 +12,7 @@ class Reagents {
   }
 
   writeInit() {
-    verb.log('  WRITING REAGENT INIT...', 2)
+    verb.buildLog('  WRITING REAGENT INIT...', 2)
     let lines = []
     lines.push('tellraw @p {"text":"- Initialize Reagents", "color":"dark_aqua"}')
     _.forOwn(costTiers, function(value, key) {
@@ -26,19 +26,19 @@ class Reagents {
     });
 
     const functionPath = `./data/zmagic/functions/init/reagents.mcfunction`
-    verb.log('    '+functionPath, 3)
+    verb.buildLog('    '+functionPath, 3)
     jp.write(functionPath, lines.join('\n'))
   }
 
   writeTick() {
-    verb.log('  WRITING REAGENT TICK...', 2)
+    verb.buildLog('  WRITING REAGENT TICK...', 2)
     let lines = []
     _.forOwn(costTiers, function(value, key) {
       const line = `execute as @a store result score @s ${value.resource} run clear @s minecraft:${value.resource} 0`
       lines.push(line)
     });
     const functionPath = `./data/zmagic/functions/tick/reagents.mcfunction`
-    verb.log('    '+functionPath, 3)
+    verb.buildLog('    '+functionPath, 3)
     jp.write(functionPath, lines.join('\n'))
   }
 

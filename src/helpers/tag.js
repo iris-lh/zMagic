@@ -5,7 +5,7 @@ const verb = new Verbose()
 
 const tag = {
   writeTickTag: function(writePath) {
-    verb.log('  WRITING MINECRAFT:TICK TAG...', 2);
+    verb.buildLog('  WRITING MINECRAFT:TICK TAG...', 2);
 
     const tag = {
       "values": [
@@ -13,12 +13,12 @@ const tag = {
       ]
     }
 
-    verb.log('    '+writePath, 3);
+    verb.buildLog('    '+writePath, 3);
     jp.write(writePath, tag)
   },
 
   writeTags: function(tagSrcPath, tagWritePath) {
-    verb.log('  WRITING TAGS...', 2);
+    verb.buildLog('  WRITING TAGS...', 2);
     const blockTagFileNames    = jp.list(tagSrcPath+'/blocks')    || []
     const itemTagFileNames     = jp.list(tagSrcPath+'/items')     || []
     const functionTagFileNames = jp.list(tagSrcPath+'/functions') || []
@@ -27,7 +27,7 @@ const tag = {
       const srcPath   = `${tagSrcPath}blocks/${fileName}`
       const writePath = `${tagWritePath}blocks/${fileName}`
       const tag = jp.read(srcPath)
-      verb.log('    '+writePath, 3);
+      verb.buildLog('    '+writePath, 3);
       jp.write(writePath, tag)
     })
 
@@ -35,7 +35,7 @@ const tag = {
       const srcPath   = `${tagSrcPath}items/${fileName}`
       const writePath = `${tagWritePath}items/${fileName}`
       const tag = jp.read(srcPath)
-      verb.log('    '+writePath, 3);
+      verb.buildLog('    '+writePath, 3);
       jp.write(writePath, tag)
     })
 
@@ -43,7 +43,7 @@ const tag = {
       const srcPath   = `${tagSrcPath}functions/${fileName}`
       const writePath = `${tagWritePath}functions/${fileName}`
       const tag = jp.read(srcPath)
-      verb.log('    '+writePath, 3);
+      verb.buildLog('    '+writePath, 3);
       jp.write(writePath, tag)
     })
   }

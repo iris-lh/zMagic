@@ -11,7 +11,7 @@ function highlightResults(results, target) {
 }
 
 function checkBuild() {
-  verb.log('CHECKING BUILD FOR RED FLAGS...')
+  verb.buildLog('CHECKING BUILD FOR RED FLAGS...')
 
   glob('./data/**/*.*', {}, (er, files) => {
     let clean = true
@@ -50,7 +50,7 @@ function checkBuild() {
       }
     })
     if (clean) {
-      verb.log('ALL CLEAR.')
+      verb.buildLog('ALL CLEAR.')
     }
   })
 }

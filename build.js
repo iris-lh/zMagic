@@ -30,7 +30,7 @@ const spells = {}
 // TAGS
 
 function buildTags() {
-  verb.log('BUILDING TAGS...')
+  verb.buildLog('BUILDING TAGS...')
   tagHelpers.writeTickTag('./data/minecraft/tags/functions/tick.json')
   tagHelpers.writeTags(tagsPath, './data/zmagic/tags/')
 }
@@ -60,7 +60,7 @@ function writeSpells(processedSpells) {
 }
 
 function buildSpells() {
-  verb.log('BUILDING SPELLS...')
+  verb.buildLog('BUILDING SPELLS...')
   pipe(
     importSpells()
     , processSpells
@@ -73,7 +73,7 @@ function buildSpells() {
 // REAGENTS
 
 function buildReagents() {
-  verb.log('BUILDING REAGENTS...');
+  verb.buildLog('BUILDING REAGENTS...');
   const reagents = new Reagents
   reagents.writeInit()
   reagents.writeTick()
@@ -84,7 +84,7 @@ function buildReagents() {
 // SCRIBING
 
 function buildScribing() {
-  verb.log('BUILDING SCRIBING...');
+  verb.buildLog('BUILDING SCRIBING...');
   const scribingHelpers = new Scribing()
   scribingHelpers.writeInit()
   scribingHelpers.writeTick()
@@ -98,7 +98,7 @@ function buildScribing() {
 // ROOT
 
 function buildInit() {
-  verb.log('BUILDING INIT...');
+  verb.buildLog('BUILDING INIT...');
     const lines = [
       // TODO 'function zmagic:greet'
       // TODO 'function zmagic:version'
@@ -111,12 +111,12 @@ function buildInit() {
       'tellraw @p {"text":"Done. Enjoy!\\n", "color":"aqua"}'
     ]
   const functionPath = `./data/zmagic/functions/init.mcfunction`
-  verb.log('  '+functionPath, 3)
+  verb.buildLog('  '+functionPath, 3)
   jp.write(functionPath, lines.join('\n'))
 }
 
 function buildTick() {
-  verb.log('BUILDING TICK...');
+  verb.buildLog('BUILDING TICK...');
     const lines = [
       'function zmagic:tick/triggers/spells',
       'function zmagic:tick/triggers/scribing',
@@ -124,7 +124,7 @@ function buildTick() {
       'function zmagic:tick/reagents'
     ]
   const functionPath = `./data/zmagic/functions/tick.mcfunction`
-  verb.log('  '+functionPath, 3)
+  verb.buildLog('  '+functionPath, 3)
   jp.write(functionPath, lines.join('\n'))
 }
 
@@ -149,7 +149,7 @@ function writeBooks(processedBooks) {
 }
 
 function buildBooks() {
-  verb.log('BUILDING BOOKS...')
+  verb.buildLog('BUILDING BOOKS...')
   pipe(
     importBooks()
     , processBooks
@@ -157,6 +157,7 @@ function buildBooks() {
   )
 }
 
+verb.buildLog(`zMagic ${version} build ${buildVersion+1} for Minecraft ${minecraftVersion}`)
 
 // BUILD
 buildSpells()
