@@ -240,7 +240,7 @@ class Scribing {
       }
     })
     const tome = itemHelper.createItem({
-      id: 'minecraft.written_book',
+      id: 'minecraft:written_book',
       subId: 'zmagic:scribing_tome',
       name: 'Scribing Tome',
       color: 'aqua',
