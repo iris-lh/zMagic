@@ -7,6 +7,7 @@ const verb = new Verbose()
 
 const packageJson      = require('./package.json')
 const version          = packageJson.version
+const buildVersion     = require('./build-version.json')
 const minecraftVersion = packageJson.minecraftVersion
 
 const Spell      = require('./src/helpers/Spell')
@@ -170,3 +171,5 @@ buildTick()
 
 //CHECK
 checkBuild()
+
+jp.write('./build-version.json', _.toString(buildVersion+1))
