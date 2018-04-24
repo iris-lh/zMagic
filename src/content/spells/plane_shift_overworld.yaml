@@ -1,0 +1,10 @@
+---
+name: Plane Shift (Overworld)
+costTableName: bone_meal
+executor: '@s'
+tiers:
+- name: I
+  trigger: 208
+  costTier: 2
+commands:
+- execute as @s in overworld run tp ~ ~ ~

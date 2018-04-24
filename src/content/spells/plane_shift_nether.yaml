@@ -1,14 +1,10 @@
 ---
 name: Plane Shift (The Nether)
-costTableName: blaze_powder
+costTableName: bone_meal
 executor: '@s'
-height: 2
 tiers:
 - name: I
   trigger: 208
-  costTier: 2
+  costTier: 3
 commands:
-- gamemode spectator @s
-- execute as @s in the_nether run tp ~ ~500 ~
-- execute if block ~ ~-499 ~ air run tp ~ ~-500 ~
-# - gamemode creative @s
+- execute as @s in the_nether run tp ~ ~ ~
