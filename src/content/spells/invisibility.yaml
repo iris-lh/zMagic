@@ -4,11 +4,11 @@ costTableName: lapis_lazuli
 executor: '@s'
 tiers:
 - name: I
-  trigger: 6
+  trigger: 7
   costTier: 0
   duration: 10
 - name: II
-  trigger: 7
+  trigger: 8
   costTier: 2
   duration: 30
 commands:
