@@ -7,6 +7,6 @@ tiers:
   trigger: 106
   costTier: 1
 commands:
-- execute at $executor run execute at $executor run setblock ~ ~ ~ minecraft:lava
-- execute at $executor run execute at $executor run setblock ~ ~1 ~ minecraft:lava
-- execute at $executor run execute at $executor run setblock ~ ~1 ~ minecraft:air
+- execute at $executor run setblock ~ ~ ~ minecraft:lava
+- execute at $executor run setblock ~ ~1 ~ minecraft:lava
+- execute at $executor run setblock ~ ~1 ~ minecraft:air
