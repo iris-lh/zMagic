@@ -7,4 +7,4 @@ tiers:
   trigger: 208
   costTier: 4
 commands:
-- execute as @s in the_end run tp ~ ~ ~
+- execute in the_end run tp ~ ~ ~

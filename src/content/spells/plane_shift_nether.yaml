@@ -7,4 +7,4 @@ tiers:
   trigger: 208
   costTier: 3
 commands:
-- execute as @s in the_nether run tp ~ ~ ~
+- execute in the_nether run tp ~ ~ ~

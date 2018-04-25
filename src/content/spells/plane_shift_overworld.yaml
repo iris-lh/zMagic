@@ -7,4 +7,4 @@ tiers:
   trigger: 208
   costTier: 2
 commands:
-- execute as @s in overworld run tp ~ ~ ~
+- execute in overworld run tp ~ ~ ~
