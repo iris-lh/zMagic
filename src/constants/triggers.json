@@ -1,14 +1,118 @@
 [
   {
-    "id": "foo",
-    "trigger": "01234567898765432"
+    "id": "canopy",
+    "trigger": "45174670"
   },
   {
-    "id": "bar",
-    "trigger": "87945986345698765"
+    "id": "detect_humans_i",
+    "trigger": "09811720"
   },
   {
-    "id": "asdf",
-    "trigger": "5468596537384899"
+    "id": "detect_humans_ii",
+    "trigger": "01830973"
+  },
+  {
+    "id": "detect_humans_iii",
+    "trigger": "74127181"
+  },
+  {
+    "id": "detect_monsters_i",
+    "trigger": "80961809"
+  },
+  {
+    "id": "detect_monsters_ii",
+    "trigger": "10891416"
+  },
+  {
+    "id": "detect_monsters_iii",
+    "trigger": "09407535"
+  },
+  {
+    "id": "eagle_eye",
+    "trigger": "41430844"
+  },
+  {
+    "id": "fireball_i",
+    "trigger": "80393586"
+  },
+  {
+    "id": "fireball_ii",
+    "trigger": "23192353"
+  },
+  {
+    "id": "fireball_iii",
+    "trigger": "28294702"
+  },
+  {
+    "id": "insulate_i",
+    "trigger": "93344376"
+  },
+  {
+    "id": "insulate_ii",
+    "trigger": "88736447"
+  },
+  {
+    "id": "insulate_iii",
+    "trigger": "16243982"
+  },
+  {
+    "id": "invisibility_i",
+    "trigger": "82922340"
+  },
+  {
+    "id": "invisibility_ii",
+    "trigger": "93512241"
+  },
+  {
+    "id": "landslide_i",
+    "trigger": "49561020"
+  },
+  {
+    "id": "landslide_ii",
+    "trigger": "53685196"
+  },
+  {
+    "id": "lava_flow",
+    "trigger": "22175141"
+  },
+  {
+    "id": "plane_shift_the_nether",
+    "trigger": "80015841"
+  },
+  {
+    "id": "plane_shift_overworld",
+    "trigger": "22016833"
+  },
+  {
+    "id": "plane_shift_the_end",
+    "trigger": "23613418"
+  },
+  {
+    "id": "sand_trap_i",
+    "trigger": "37693813"
+  },
+  {
+    "id": "sand_trap_ii",
+    "trigger": "33270164"
+  },
+  {
+    "id": "self_destruct",
+    "trigger": "57862451"
+  },
+  {
+    "id": "summon_golem",
+    "trigger": "78824258"
+  },
+  {
+    "id": "ignus_page_i",
+    "trigger": "43293647"
+  },
+  {
+    "id": "ignus_page_ii",
+    "trigger": "06178504"
+  },
+  {
+    "id": "ignus_page_iii",
+    "trigger": "31313897"
   }
 ]
