@@ -4,3 +4,4 @@ scratch.md
 logs/*
 !.gitkeep
 .DS_Store
+yarn-error.log
