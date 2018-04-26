@@ -1,6 +1,7 @@
 const _ = require('lodash')
 const yaml = require('js-yaml')
 const jp = require('fs-jetpack')
+const romanize = require('romanize')
 
 const Verbose = require('./Verbose')
 const verb = new Verbose()
@@ -107,9 +108,9 @@ class Scribing {
       lines.push(`scoreboard objectives add scribePage trigger`)
       lines.push(`scoreboard objectives add scribingPaper dummy`)
       paper.tiers.forEach((tier, index) => {
-        const id = _.snakeCase(paper.name+tier.name)
+        const id = _.snakeCase(paper.name+romanize(index + 1))
         const item = `minecraft:paper{subId:"zmagic:${id}"}`
-        const line = `scoreboard objectives add ${_.camelCase(paper.name)+tier.name} dummy`
+        const line = `scoreboard objectives add ${_.camelCase(paper.name)+romanize(index + 1)} dummy`
 
         lines.push(line)
       })
@@ -125,8 +126,8 @@ class Scribing {
       lines.push(`execute as @a store result score @s scribingPaper run clear @s ${this.scribingPaper} 0`)
       paper.tiers.forEach((tier, index) => {
         const ingredients = this.getIngredientsScores(paper, index)
-        const objective = _.camelCase(paper.name)+tier.name
-        const id = _.snakeCase(paper.name+tier.name)
+        const objective = _.camelCase(paper.name)+romanize(index + 1)
+        const id = _.snakeCase(paper.name+romanize(index + 1))
         const line = `execute as @a store result score @s ${objective} run clear @s minecraft:paper{subId: "zmagic:${id}"} 0`
         lines.push(line)
       })
@@ -143,7 +144,7 @@ class Scribing {
       paper.tiers.forEach((tier, index) => {
         const ingredients = this.getIngredientsScores(paper, index)
         const execute = `execute at @a[scores={scribePage=${tier.trigger},${ingredients}}] run`
-        const mcfunction = `function zmagic:scribe/${_.snakeCase(paper.name+tier.name)}`
+        const mcfunction = `function zmagic:scribe/${_.snakeCase(paper.name+romanize(index + 1))}`
         const line = `${execute} ${mcfunction}`
         lines.push(line)
       })
@@ -170,7 +171,7 @@ class Scribing {
             break;
         }
 
-        const id = _.snakeCase(paper.name+tier.name)
+        const id = _.snakeCase(paper.name+romanize(index + 1))
 
         const give = `execute as @s[scores={${this.getIngredientsScores(paper, index)}}] run function zmagic:give/page/${id}`
         const line1 = `${give}`
@@ -205,12 +206,12 @@ class Scribing {
             break;
         }
 
-        const id = _.snakeCase(paper.name+tier.name)
+        const id = _.snakeCase(paper.name+romanize(index + 1))
 
         const item = itemHelper.createItem({
           id: 'minecraft:paper',
           subId: id,
-          name: paper.name+' '+tier.name,
+          name: paper.name+' '+romanize(index + 1),
           color: color,
           lore: tier.lore,
           ench: {id:0,lvl:0},

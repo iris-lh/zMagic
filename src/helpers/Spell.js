@@ -1,6 +1,7 @@
 const _ = require('lodash')
 const yaml = require('js-yaml')
 const jp = require('fs-jetpack')
+const romanize = require('romanize')
 const Log = require('./Log')
 const costTiers = require('../constants/cost-tiers.json')
 const messages = require('./messages')
@@ -73,15 +74,15 @@ class Spell {
     return spellYamls
   }
 
-  process(importedSpellYaml, tier) {
+  process(importedSpellYaml, tier, index) {
     const rawJson = yaml.load(importedSpellYaml)
     const processedSpell = yaml.load(interpolateYaml(importedSpellYaml, {tier: tier}))
     processedSpell.tier = tier
     const isOneOff = rawJson.tiers.length <= 1
     processedSpell.id = isOneOff
       ? _.snakeCase(processedSpell.name)
-      : _.snakeCase(`${processedSpell.name}_${processedSpell.tier.name}`)
-    verb.buildLog('    '+processedSpell.name+' '+(isOneOff ? '' : processedSpell.tier.name), 3);
+      : _.snakeCase(`${processedSpell.name}_${romanize(index + 1)}`)
+    verb.buildLog('    '+processedSpell.name+' '+(isOneOff ? '' : romanize(index + 1)), 3);
     return processedSpell
   }
 
@@ -89,9 +90,11 @@ class Spell {
     verb.buildLog('  PROCESSING SPELLS...', 2);
     let processedSpells = []
     importedSpellYamls.map(spellYaml => {
+      let i = 0
       const rawJson = yaml.load(spellYaml)
       rawJson.tiers.map(tier => {
-        processedSpells.push(this.process(spellYaml, tier))
+        processedSpells.push(this.process(spellYaml, tier, i))
+        i ++
       })
     })
     return processedSpells
