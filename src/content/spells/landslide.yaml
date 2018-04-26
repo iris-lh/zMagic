@@ -3,12 +3,10 @@ name: Landslide
 costTableName: iron_ingot
 executor: '@s'
 tiers:
-  - name: 'I'
-    trigger: 205
+  - trigger: 205
     costTier: 1
     dimensions: ~ ~2 ~ ~ ~3 ~
-  - name: 'II'
-    trigger: 206
+  - trigger: 206
     costTier: 3
     dimensions: ~-1 ~2 ~-1 ~1 ~4 ~1
 commands:

@@ -3,8 +3,7 @@ name: Eagle Eye
 costTableName: lapis_lazuli
 executor: '@s'
 tiers:
-- name: I
-  trigger: 6
+- trigger: 6
   costTier: 1
   duration: 10
 commands:

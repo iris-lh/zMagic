@@ -3,12 +3,10 @@ name: Sand Trap
 costTableName: iron_ingot
 executor: '@s'
 tiers:
-  - name: 'I'
-    trigger: 201
+  - trigger: 201
     costTier: 1
     dimensions: ~1 ~ ~1 ~-1 ~ ~-1
-  - name: 'II'
-    trigger: 202
+  - trigger: 202
     costTier: 2
     dimensions: ~2 ~ ~2 ~-2 ~ ~-2
 commands:

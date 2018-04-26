@@ -3,16 +3,13 @@ name: Insulate
 costTableName: blaze_powder
 executor: '@s'
 tiers:
-- name: I
-  trigger: 103
+- trigger: 103
   costTier: 0
   duration: 30
-- name: II
-  trigger: 104
+- trigger: 104
   costTier: 3
   duration: 120
-- name: III
-  trigger: 105
+- trigger: 105
   costTier: 5
   duration: 1800
 commands:

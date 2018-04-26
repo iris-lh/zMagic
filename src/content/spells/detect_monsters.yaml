@@ -3,16 +3,13 @@ name: Detect Monsters
 costTableName: lapis_lazuli
 executor: '@s'
 tiers:
-- name: I
-  trigger: 3
+- trigger: 3
   costTier: 0
   distance: 10
-- name: II
-  trigger: 4
+- trigger: 4
   costTier: 1
   distance: 25
-- name: III
-  trigger: 5
+- trigger: 5
   costTier: 3
   distance: 50
 commands:
