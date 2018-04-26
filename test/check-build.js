@@ -10,6 +10,8 @@ function highlightResults(results, target) {
   })
 }
 
+// TODO check for duplicate triggers
+
 function checkBuild() {
   verb.buildLog('CHECKING BUILD FOR RED FLAGS...')
 
