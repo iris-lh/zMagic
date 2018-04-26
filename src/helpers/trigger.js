@@ -25,7 +25,7 @@ function updateList(spellId) {
     const newTrigger = generate()
     const entry = {id: spellId, trigger: newTrigger}
     triggerList.push(entry)
-    jp.write(triggerListPath, triggerList)
+    jp.write(triggerListPath, _.sortBy(triggerList, 'id'))
     return newTrigger
   }
 
