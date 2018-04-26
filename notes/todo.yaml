@@ -1,12 +1,12 @@
 # TODO split spell commands into effects (do the thing for free) and casts (do the effect if conditions are met)
 
-# TODO nbt/json helpers
+# TODO nbt/json helpers (in progress)
 
 # TODO error handling!
 
-# TODO tests/checks
+# TODO tests/checks (in progress)
 
-# TODO get a roman numeral converter up in here, probably
+# TODO get a roman numeral converter up in here, probably?
 
 # TODO raw/fancy function helper
 
