@@ -4,8 +4,7 @@ costTableName: iron_ingot
 executor: '@s'
 height: 2
 tiers:
-- trigger: 200
-  costTier: 4
+- costTier: 4
   trunkSides: 2
   trunkTop: 3
   leavesMid: 4

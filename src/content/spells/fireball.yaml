@@ -3,14 +3,11 @@ name: Fireball
 costTableName: blaze_powder
 executor: '@s'
 tiers:
-- trigger: 100
-  costTier: 1
+- costTier: 1
   explosionPower: 1
-- trigger: 101
-  costTier: 3
+- costTier: 3
   explosionPower: 2
-- trigger: 102
-  costTier: 5
+- costTier: 5
   explosionPower: 5
 nbt:
   fireball:

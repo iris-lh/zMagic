@@ -3,14 +3,11 @@ name: Insulate
 costTableName: blaze_powder
 executor: '@s'
 tiers:
-- trigger: 103
-  costTier: 0
+- costTier: 0
   duration: 30
-- trigger: 104
-  costTier: 3
+- costTier: 3
   duration: 120
-- trigger: 105
-  costTier: 5
+- costTier: 5
   duration: 1800
 commands:
 - execute at $executor run effect give $executor minecraft:fire_resistance $tier.duration

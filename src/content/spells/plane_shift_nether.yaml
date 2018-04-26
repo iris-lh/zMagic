@@ -3,7 +3,6 @@ name: Plane Shift (The Nether)
 costTableName: bone_meal
 executor: '@s'
 tiers:
-- trigger: 208
-  costTier: 3
+- costTier: 3
 commands:
 - execute in the_nether run tp ~ ~ ~

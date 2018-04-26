@@ -3,11 +3,9 @@ name: Sand Trap
 costTableName: iron_ingot
 executor: '@s'
 tiers:
-  - trigger: 201
-    costTier: 1
+  - costTier: 1
     dimensions: ~1 ~ ~1 ~-1 ~ ~-1
-  - trigger: 202
-    costTier: 2
+  - costTier: 2
     dimensions: ~2 ~ ~2 ~-2 ~ ~-2
 commands:
   - 'execute at $executor run execute at @e[distance=1..10,limit=1,type=!item,type=!arrow,type=!fireball] run fill $tier.dimensions minecraft:sand replace #zmagic:buildable'

@@ -3,7 +3,6 @@ name: Plane Shift (The End)
 costTableName: bone_meal
 executor: '@s'
 tiers:
-- trigger: 208
-  costTier: 4
+- costTier: 4
 commands:
 - execute in the_end run tp ~ ~ ~

@@ -3,11 +3,9 @@ name: Landslide
 costTableName: iron_ingot
 executor: '@s'
 tiers:
-  - trigger: 205
-    costTier: 1
+  - costTier: 1
     dimensions: ~ ~2 ~ ~ ~3 ~
-  - trigger: 206
-    costTier: 3
+  - costTier: 3
     dimensions: ~-1 ~2 ~-1 ~1 ~4 ~1
 commands:
   - 'execute at $executor run execute at @e[distance=1..10,limit=1,type=!item,type=!arrow,type=!fireball] run fill $tier.dimensions minecraft:gravel replace #zmagic:buildable'

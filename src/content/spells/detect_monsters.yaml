@@ -3,14 +3,11 @@ name: Detect Monsters
 costTableName: lapis_lazuli
 executor: '@s'
 tiers:
-- trigger: 3
-  costTier: 0
+- costTier: 0
   distance: 10
-- trigger: 4
-  costTier: 1
+- costTier: 1
   distance: 25
-- trigger: 5
-  costTier: 3
+- costTier: 3
   distance: 50
 commands:
 - execute at $executor run tellraw $executor ["",{"text":"\nYou quiet your mind and search for auras...","italic":true,"color":"aqua"}]

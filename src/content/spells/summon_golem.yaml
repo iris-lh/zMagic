@@ -3,7 +3,6 @@ name: Summon Golem
 costTableName: iron_ingot
 executor: '@s'
 tiers:
-- trigger: 204
-  costTier: 3
+- costTier: 3
 commands:
 - execute at $executor run summon minecraft:villager_golem ~ ~ ~ {CustomName:"Summoned Golem",rewardExp:false,ActiveEffects:[{Id:20,Duration:1000,Amplifier:6}]}

@@ -3,7 +3,6 @@ name: Self Destruct
 costTableName: blaze_powder
 executor: '@s'
 tiers:
-- trigger: 107
-  costTier: 3
+- costTier: 3
 commands:
 - execute at $executor run summon minecraft:tnt ~ ~1 ~
