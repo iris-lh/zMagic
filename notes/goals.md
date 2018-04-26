@@ -12,6 +12,10 @@ zMagic/
         misc_root_function_1.mcfunction
         misc_root_function_2.mcfunction
         misc_root_function_3.mcfunction
+        effect/
+          effect_1.mcfunction
+          effect_2.mcfunction
+          effect_3.mcfunction
         cast/
           spell_1.mcfunction
           spell_2.mcfunction
@@ -26,6 +30,10 @@ zMagic/
             book_1.mcfunction
             book_2.mcfunction
             book_3.mcfunction
+        scribe/
+          page_1.mcfunction
+          page_2.mcfunction
+          page_3.mcfunction
         init.mcfunction
         init/
           constants.mcfunction
@@ -35,10 +43,10 @@ zMagic/
           scribing.mcfunction
         tick.mcfunction
         tick/
-          triggers.mcfunction
           scribing.mcfunction
           spells.mcfunction
           reagents.mcfunction
+          triggers.mcfunction
           triggers/
             scribing.mcfunction
             spells.mcfunction
