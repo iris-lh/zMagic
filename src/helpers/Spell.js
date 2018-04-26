@@ -4,8 +4,10 @@ const jp = require('fs-jetpack')
 const romanize = require('romanize')
 const Log = require('./Log')
 const costTiers = require('../constants/cost-tiers.json')
+const triggerList = require('../constants/triggers.json')
 const messages = require('./messages')
 const pipe = require('./pipe')
+const updateTriggerList = require('./trigger')
 const interpolateYaml = require('./interpolate-yaml')
 const Verbose = require('./Verbose')
 const verb = new Verbose()
@@ -25,12 +27,6 @@ class Spell {
     this.writeTriggers    = this.writeTriggers.bind(this)
     this.write            = this.write.bind(this)
     this.writeAll         = this.writeAll.bind(this)
-
-    this.triggerLog = new Log({
-      name: 'spell-triggers',
-      type: 'key-value',
-      overwrite: true
-    })
 
     this.colors = _.reduce(costTiers, (result, value, key) => {
       return _.set(result, `${key}`, value.color)
@@ -111,19 +107,26 @@ class Spell {
   }
 
   writeTriggers(processedSpells) {
+
     verb.buildLog('  WRITING SPELL TRIGGERS...', 2)
 
     let commands = []
 
     commands.push('scoreboard players enable @a cast_spell')
 
+
+    // processedSpells.forEach(spell => {
+    //   updateTriggerList(spell.id)
+    // })
+
+
     processedSpells.forEach(spell => {
-      this.triggerLog.push([spell.tier.trigger, spell.id])
-      commands.push(`execute as @a[scores={cast_spell=${spell.tier.trigger}}] run function zmagic:cast/${spell.id}`)
+      // TODO async-proof this
+      // const entry = _.find(triggerList, {id: spell.id})
+      const trigger = updateTriggerList(spell.id)
+      commands.push(`execute as @a[scores={cast_spell=${trigger}}] run function zmagic:cast/${spell.id}`)
     })
     commands.push('scoreboard players set @a cast_spell -1')
-
-    this.triggerLog.write()
 
     const mcFunction = commands.join('\n')
     jp.write(triggerTickPath, mcFunction)

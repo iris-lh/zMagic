@@ -9,6 +9,9 @@ const verb = new Verbose()
 const Item = require('./Item')
 const Book = require('./Book')
 
+const updateTriggerList = require('./trigger')
+const triggerList = require('../constants/triggers.json')
+
 const packageJson      = require('../../package.json')
 const version          = packageJson.version
 const minecraftVersion = packageJson.minecraftVersion
@@ -39,18 +42,12 @@ class Scribing {
         reagent: 'blaze_powder',
         tiers: [
           {
-            name: 'I',
-            trigger: 10,
             lore: 'Page detailing basic Ignan spellcasting.'
           },
           {
-            name: 'II',
-            trigger: 11,
             lore: 'Page detailing intermediate Ignan spellcasting.'
           },
           {
-            name: 'III',
-            trigger: 12,
             lore: 'Page detailing advanced Ignan spellcasting.'
           }
         ]
@@ -139,12 +136,18 @@ class Scribing {
   writeTriggerTick() {
     verb.buildLog('  WRITING SCRIBING TRIGGER TICK...', 2)
     let lines = []
+
     this.papers.forEach(paper => {
       lines.push(`scoreboard players enable @a scribePage`)
+
       paper.tiers.forEach((tier, index) => {
         const ingredients = this.getIngredientsScores(paper, index)
-        const execute = `execute at @a[scores={scribePage=${tier.trigger},${ingredients}}] run`
-        const mcfunction = `function zmagic:scribe/${_.snakeCase(paper.name+romanize(index + 1))}`
+
+        const pageId = _.snakeCase(paper.name+romanize(index + 1))
+        const trigger = updateTriggerList(pageId)
+
+        const execute = `execute at @a[scores={scribePage=${trigger},${ingredients}}] run`
+        const mcfunction = `function zmagic:scribe/${pageId}`
         const line = `${execute} ${mcfunction}`
         lines.push(line)
       })

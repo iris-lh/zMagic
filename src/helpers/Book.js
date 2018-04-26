@@ -4,6 +4,7 @@ const yaml = require('js-yaml')
 const Spell = require('./Spell')
 const spellHelpers = new Spell()
 const interpolateYaml = require('./interpolate-yaml')
+const triggerList = require('../constants/triggers.json')
 
 const Verbose = require('./Verbose')
 const verb = new Verbose()
@@ -27,6 +28,7 @@ class Book {
     spellList.forEach(entry => {
       let json = {}
       if (entry) {
+        const trigger = _.find(triggerList, {id: _.snakeCase(entry)}).trigger
         const spellId = entry.split(' ')[0]
         const spellTier = entry.split(' ')[1]
         const spellTierStr = spellTier ? ' '+_.upperCase(spellTier) : ''
@@ -38,7 +40,7 @@ class Book {
           underlined:'true',
           clickEvent:{
             action:'run_command',
-            value: `/trigger cast_spell set ${spellData.tier.trigger}`
+            value: `/trigger cast_spell set ${trigger}`
           }
         }
       } else {
