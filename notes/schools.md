@@ -6,7 +6,6 @@ There are multiple schools of magic, each with its own domains, play style, and 
 
 
 ## gnosis
-triggers 0-99
 
 #### description
 spells based around stealth, agility, and gathering intelligence.
@@ -41,7 +40,6 @@ spells based around stealth, agility, and gathering intelligence.
 
 
 ## ignus
-triggers 100-199
 
 #### description
 extremely destructive but expensive fire-based spells. many ignan spells pose a danger to the caster if not handled carefully.
@@ -72,7 +70,6 @@ extremely destructive but expensive fire-based spells. many ignan spells pose a 
 
 
 ## terra
-triggers 200-299
 
 #### description
 magic focused on nature, mining, and terrain manipulation. terran magic tends to be more defensive.
@@ -102,7 +99,6 @@ magic focused on nature, mining, and terrain manipulation. terran magic tends to
 
 
 ## chaos
-triggers 300-399
 
 #### description
 a school of magic that deals with necromancy, poison, murder, and (as the name would suggest) sowing chaos.
@@ -134,7 +130,6 @@ a school of magic that deals with necromancy, poison, murder, and (as the name w
 
 
 ## aurus
-triggers 400-499
 
 #### description
 auran magic focuses on the improvement of the body.
