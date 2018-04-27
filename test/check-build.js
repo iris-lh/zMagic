@@ -6,13 +6,12 @@ const triggerList = require('../src/constants/triggers.json')
 const Verbose = require('../src/helpers/Verbose')
 const verb = new Verbose
 
+
 function highlightResults(results, target) {
   return results.map(result => {
     return result.replace(target, chalk.red(target))
   })
 }
-
-// TODO check for duplicate triggers
 
 function checkBuild() {
   verb.buildLog('CHECKING BUILD FOR RED FLAGS...')
