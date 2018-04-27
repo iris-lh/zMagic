@@ -12,8 +12,8 @@ const interpolateYaml = require('./interpolate-yaml')
 const Verbose = require('./Verbose')
 const verb = new Verbose()
 
-const triggerTickPath = `./data/zmagic/functions/tick/triggers/spells.mcfunction`
-const initPath = `./data/zmagic/functions/init/spells.mcfunction`
+const triggerTickPath = './data/zmagic/functions/tick/triggers/spells.mcfunction'
+const initPath = './data/zmagic/functions/init/spells.mcfunction'
 
 
 class Spell {
@@ -45,22 +45,7 @@ class Spell {
 
     lines.push(`execute as ${cannotAffordselector} run tellraw ${spell.executor} ${messages.cantAfford(costTier, costTable)}`)
     lines.push(`execute as ${canAffordselector} run clear ${spell.executor} minecraft:${resource} ${costTable.tiers[costTier]}`)
-
-
-    // TODO This is where the split should happen, using this line to trigger the effect.
     lines.push(`execute as ${canAffordselector} run function zmagic:effect/${spell.id}`)
-
-    // TODO Then, the effect function should recieve the following code:
-    // spell.commands.forEach(command => {
-    //   lines.push(command)
-    // })
-    //
-    // return lines
-
-    // TODO This code should be moved the the effect builder.
-    // spell.commands.forEach(command => {
-    //   lines.push(`execute as ${canAffordselector} run ${command}`)
-    // })
 
     return lines
   }
@@ -145,6 +130,13 @@ class Spell {
     verb.buildLog('    '+triggerTickPath, 3)
   }
 
+
+  writeEffect(processedSpell) {
+    const functionPath = `./data/zmagic/functions/effect/${processedSpell.id}.mcfunction`
+    const mcFunction = processedSpell.commands.join('\n')
+    jp.write(functionPath, mcFunction)
+  }
+
   write(processedSpell) {
     const rawJson = processedSpell
     const isOneOff = rawJson.tiers.length <= 1
@@ -155,10 +147,11 @@ class Spell {
   }
 
   writeAll(processedSpells) {
-    verb.buildLog('  WRITING SPELLS...', 2)
+    verb.buildLog('  WRITING SPELLS/EFFECTS...', 2)
 
     processedSpells.map(spell => {
       this.write(spell)
+      this.writeEffect(spell)
     })
   }
 
