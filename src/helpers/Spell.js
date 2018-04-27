@@ -45,6 +45,18 @@ class Spell {
 
     lines.push(`execute as ${cannotAffordselector} run tellraw ${spell.executor} ${messages.cantAfford(costTier, costTable)}`)
     lines.push(`execute as ${canAffordselector} run clear ${spell.executor} minecraft:${resource} ${costTable.tiers[costTier]}`)
+
+    // TODO This is where the split should happen, using this line to trigger the effect.
+    // lines.push(`execute as ${canAffordselector} run function zmagic:effect/${spellId}`)
+
+    // TODO Then, the effect function should recieve the following code:
+    // spell.commands.forEach(command => {
+    //   lines.push(command)
+    // })
+    //
+    // return lines
+
+    // TODO This code should be moved the the effect builder.
     spell.commands.forEach(command => {
       lines.push(`execute as ${canAffordselector} run ${command}`)
     })
@@ -114,15 +126,7 @@ class Spell {
 
     commands.push('scoreboard players enable @a cast_spell')
 
-
-    // processedSpells.forEach(spell => {
-    //   updateTriggerList(spell.id)
-    // })
-
-
     processedSpells.forEach(spell => {
-      // TODO async-proof this
-      // const entry = _.find(triggerList, {id: spell.id})
       const trigger = updateTriggerList(spell.id)
       commands.push(`execute as @a[scores={cast_spell=${trigger}}] run function zmagic:cast/${spell.id}`)
     })
