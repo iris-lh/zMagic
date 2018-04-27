@@ -28,6 +28,7 @@ class Book {
     spellList.forEach(entry => {
       let json = {}
       if (entry) {
+        // TODO Better error handling for incorrect spell IDs
         const trigger = _.find(triggerList, {id: _.snakeCase(entry)}).trigger
         const spellId = entry.split(' ')[0]
         const spellTier = entry.split(' ')[1]
