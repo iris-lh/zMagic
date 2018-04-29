@@ -18,8 +18,4 @@
 
 # TODO implement spell timers
 
-# FIXME move entire actual built datapack (pack.mcmeta, etc) into a build dir
-
 # TODO dream of a minecraft command syntax checker
-
-# FIXME extract build paths out of helpers and into a central file

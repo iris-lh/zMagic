@@ -27,10 +27,10 @@ const tagsPath    = contentPath+'/tags/'
 const spells = {}
 
 
-// FIXME move pack.mcmeta to ./src and copy it to ./build
 function copyPackMcMeta() {
   jp.copy('./src/pack.mcmeta', './build/pack.mcmeta', {overwrite: true})
 }
+
 
 // TAGS
 
