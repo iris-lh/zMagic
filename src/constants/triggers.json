@@ -44,6 +44,30 @@
     "trigger": "28294702"
   },
   {
+    "id": "gather_undead",
+    "trigger": "45727318"
+  },
+  {
+    "id": "gather_undead_i",
+    "trigger": "56040411"
+  },
+  {
+    "id": "gather_undead_ii",
+    "trigger": "77724509"
+  },
+  {
+    "id": "ignus_page_i",
+    "trigger": "43293647"
+  },
+  {
+    "id": "ignus_page_ii",
+    "trigger": "06178504"
+  },
+  {
+    "id": "ignus_page_iii",
+    "trigger": "31313897"
+  },
+  {
     "id": "insulate_i",
     "trigger": "93344376"
   },
@@ -76,16 +100,16 @@
     "trigger": "22175141"
   },
   {
-    "id": "plane_shift_the_nether",
-    "trigger": "80015841"
-  },
-  {
     "id": "plane_shift_overworld",
     "trigger": "22016833"
   },
   {
     "id": "plane_shift_the_end",
     "trigger": "23613418"
+  },
+  {
+    "id": "plane_shift_the_nether",
+    "trigger": "80015841"
   },
   {
     "id": "sand_trap_i",
@@ -102,17 +126,5 @@
   {
     "id": "summon_golem",
     "trigger": "78824258"
-  },
-  {
-    "id": "ignus_page_i",
-    "trigger": "43293647"
-  },
-  {
-    "id": "ignus_page_ii",
-    "trigger": "06178504"
-  },
-  {
-    "id": "ignus_page_iii",
-    "trigger": "31313897"
   }
 ]
