@@ -1,6 +1,6 @@
 # TODO nbt/json helpers (in progress)
 
-# TODO error handling!
+# TODO error handling! (especially in yaml interpolation)
 
 # TODO raw/fancy function helper
 
@@ -17,3 +17,5 @@
 # TODO More spells/books! (at least one book per school)
 
 # TODO implement spell timers
+
+# TODO move entire actual built datapack (pack.mcmeta, etc) into a build dir
