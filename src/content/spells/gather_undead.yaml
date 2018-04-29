@@ -1,0 +1,14 @@
+---
+name: Gather Undead
+costTableName: bone_meal
+executor: '@s'
+height: 2
+tiers:
+- costTier: 2
+  limit: 5
+  distance: '..16'
+- costTier: 4
+  limit: 10
+  distance: '..48'
+commands:
+- tp @e[$group.undead,limit=$tier.limit,distance=$tier.distance] @s
