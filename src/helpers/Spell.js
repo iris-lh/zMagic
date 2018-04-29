@@ -5,6 +5,7 @@ const romanize = require('romanize')
 const Log = require('./Log')
 const costTiers = require('../constants/cost-tiers.json')
 const triggerList = require('../constants/triggers.json')
+const getEntityGroups = require('./entity-groups')
 const messages = require('./messages')
 const pipe = require('./pipe')
 const updateTriggerList = require('./trigger')
@@ -70,7 +71,7 @@ class Spell {
 
   process(importedSpellYaml, tier, index) {
     const rawJson = yaml.load(importedSpellYaml)
-    const processedSpell = yaml.load(interpolateYaml(importedSpellYaml, {tier: tier}))
+    const processedSpell = yaml.load(interpolateYaml(importedSpellYaml, {tier: tier, group: getEntityGroups()}))
     processedSpell.tier = tier
     const isOneOff = rawJson.tiers.length <= 1
     processedSpell.id = isOneOff
