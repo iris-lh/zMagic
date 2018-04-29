@@ -19,3 +19,5 @@
 # TODO implement spell timers
 
 # TODO move entire actual built datapack (pack.mcmeta, etc) into a build dir
+
+# TODO dream of a minecraft command syntax checker
