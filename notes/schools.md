@@ -121,8 +121,8 @@ a school of magic that deals with necromancy, poison, murder, and (as the name w
   - summons a pack of zombie pigmen
 - lightning strike
   - summon a lightning bolt
-- gather skeletons
-  - teleports all skeletons within a certain radius to current location
+- gather undead
+  - teleports all undead within a certain radius to current location
 - scramble
   - teleport all players and mobs within a certain radius in random directions
 - plague
