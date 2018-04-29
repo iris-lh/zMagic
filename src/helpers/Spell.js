@@ -13,8 +13,8 @@ const interpolateYaml = require('./interpolate-yaml')
 const Verbose = require('./Verbose')
 const verb = new Verbose()
 
-const triggerTickPath = './data/zmagic/functions/tick/triggers/spells.mcfunction'
-const initPath = './data/zmagic/functions/init/spells.mcfunction'
+const triggerTickPath = './build/data/zmagic/functions/tick/triggers/spells.mcfunction'
+const initPath = './build/data/zmagic/functions/init/spells.mcfunction'
 
 
 class Spell {
@@ -133,7 +133,7 @@ class Spell {
 
 
   writeEffect(processedSpell) {
-    const functionPath = `./data/zmagic/functions/effect/${processedSpell.id}.mcfunction`
+    const functionPath = `./build/data/zmagic/functions/effect/${processedSpell.id}.mcfunction`
     const mcFunction = processedSpell.commands.join('\n')
     jp.write(functionPath, mcFunction)
   }
@@ -141,7 +141,7 @@ class Spell {
   write(processedSpell) {
     const rawJson = processedSpell
     const isOneOff = rawJson.tiers.length <= 1
-    const functionPath = `./data/zmagic/functions/cast/${processedSpell.id}.mcfunction`
+    const functionPath = `./build/data/zmagic/functions/cast/${processedSpell.id}.mcfunction`
     verb.buildLog('    '+functionPath, 3)
     const mcFunction = this.buildMcFunction(processedSpell).join('\n')
     jp.write(functionPath, mcFunction)

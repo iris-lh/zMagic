@@ -25,7 +25,7 @@ class Reagents {
       }
     });
 
-    const functionPath = `./data/zmagic/functions/init/reagents.mcfunction`
+    const functionPath = `./build/data/zmagic/functions/init/reagents.mcfunction`
     verb.buildLog('    '+functionPath, 3)
     jp.write(functionPath, lines.join('\n'))
   }
@@ -37,7 +37,7 @@ class Reagents {
       const line = `execute as @a store result score @s ${value.resource} run clear @s minecraft:${value.resource} 0`
       lines.push(line)
     });
-    const functionPath = `./data/zmagic/functions/tick/reagents.mcfunction`
+    const functionPath = `./build/data/zmagic/functions/tick/reagents.mcfunction`
     verb.buildLog('    '+functionPath, 3)
     jp.write(functionPath, lines.join('\n'))
   }

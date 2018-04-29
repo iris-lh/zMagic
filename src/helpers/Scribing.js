@@ -16,11 +16,11 @@ const packageJson      = require('../../package.json')
 const version          = packageJson.version
 const minecraftVersion = packageJson.minecraftVersion
 
-const tickPath        = './data/zmagic/functions/tick/scribing.mcfunction'
-const triggerTickPath = './data/zmagic/functions/tick/triggers/scribing.mcfunction'
-const initPath        = './data/zmagic/functions/init/scribing.mcfunction'
-const scribePath      = './data/zmagic/functions/scribe/'
-const givePath        = './data/zmagic/functions/give/page/'
+const tickPath        = './build/data/zmagic/functions/tick/scribing.mcfunction'
+const triggerTickPath = './build/data/zmagic/functions/tick/triggers/scribing.mcfunction'
+const initPath        = './build/data/zmagic/functions/init/scribing.mcfunction'
+const scribePath      = './build/data/zmagic/functions/scribe/'
+const givePath        = './build/data/zmagic/functions/give/page/'
 const itemHelper = new Item()
 
 // TODO scribing tome
@@ -254,7 +254,7 @@ class Scribing {
       pages: [entry]
     })
 
-    jp.write(`./data/zmagic/functions/give/book/scribing_tome.mcfunction`, `give @s ${tome}`)
+    jp.write(`./build/data/zmagic/functions/give/book/scribing_tome.mcfunction`, `give @s ${tome}`)
   }
 
   writeGivers() {

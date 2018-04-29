@@ -99,7 +99,7 @@ class Book {
   }
 
   write(book) {
-    const functionPath = `./data/zmagic/functions/give/book/${_.snakeCase(book.name)}.mcfunction`
+    const functionPath = `./build/data/zmagic/functions/give/book/${_.snakeCase(book.name)}.mcfunction`
     verb.buildLog('    '+functionPath, 3)
     const mcFunction = 'give @p written_book'+JSON.stringify(book.content)
 

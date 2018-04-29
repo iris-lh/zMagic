@@ -63,7 +63,7 @@ class Objective {
   }
 
   write(commands) {
-    const functionPath = `./data/zmagic
+    const functionPath = `./build/data/zmagic
     /functions/init/objectives.mcfunction`
     console.log('  '+functionPath)
     const mcFunction = commands.join('\n')

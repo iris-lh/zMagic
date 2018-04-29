@@ -27,15 +27,16 @@ const tagsPath    = contentPath+'/tags/'
 const spells = {}
 
 
+// FIXME move pack.mcmeta to ./src and copy it to ./build
+
 
 // TAGS
 
 function buildTags() {
   verb.buildLog('BUILDING TAGS...')
-  tagHelpers.writeTickTag('./data/minecraft/tags/functions/tick.json')
-  tagHelpers.writeTags(tagsPath, './data/zmagic/tags/')
+  tagHelpers.writeTickTag('./build/data/minecraft/tags/functions/tick.json')
+  tagHelpers.writeTags(tagsPath, './build/data/zmagic/tags/')
 }
-
 
 
 // SPELLS
@@ -111,7 +112,7 @@ function buildInit() {
       'function zmagic:init/scribing',
       'tellraw @p {"text":"Done. Enjoy!\\n", "color":"aqua"}'
     ]
-  const functionPath = `./data/zmagic/functions/init.mcfunction`
+  const functionPath = `./build/data/zmagic/functions/init.mcfunction`
   verb.buildLog('  '+functionPath, 3)
   jp.write(functionPath, lines.join('\n'))
 }
@@ -124,7 +125,7 @@ function buildTick() {
       'function zmagic:tick/scribing',
       'function zmagic:tick/reagents'
     ]
-  const functionPath = `./data/zmagic/functions/tick.mcfunction`
+  const functionPath = `./build/data/zmagic/functions/tick.mcfunction`
   verb.buildLog('  '+functionPath, 3)
   jp.write(functionPath, lines.join('\n'))
 }

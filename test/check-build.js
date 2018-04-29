@@ -16,7 +16,7 @@ function highlightResults(results, target) {
 function checkBuild() {
   verb.buildLog('CHECKING BUILD FOR RED FLAGS...')
 
-  glob('./data/**/*.*', {}, (er, files) => {
+  glob('./build/data/**/*.*', {}, (er, files) => {
     let clean = true
     files.forEach(file => {
       const resultsUndefined = grep('undefined', file)

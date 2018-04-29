@@ -63,7 +63,7 @@ class Constant {
   }
 
   write(commands) {
-    const functionPath = `./data/zmagic/functions/init/constants.mcfunction`
+    const functionPath = `./build/data/zmagic/functions/init/constants.mcfunction`
     console.log('  '+functionPath)
     const mcFunction = commands.join('\n')
 
