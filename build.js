@@ -7,7 +7,7 @@ const verb = new Verbose()
 
 const packageJson      = require('./package.json')
 const version          = packageJson.version
-const buildVersion     = require('./build-version.json')
+const buildVersion     = require('./build-count.json')
 const minecraftVersion = packageJson.minecraftVersion
 
 const Spell      = require('./src/helpers/Spell')

@@ -5,4 +5,4 @@ logs/*
 !.gitkeep
 .DS_Store
 yarn-error.log
-build-version.json
+build-count.json
