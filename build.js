@@ -28,7 +28,9 @@ const spells = {}
 
 
 // FIXME move pack.mcmeta to ./src and copy it to ./build
-
+function copyPackMcMeta() {
+  jp.copy('./src/pack.mcmeta', './build/pack.mcmeta', {overwrite: true})
+}
 
 // TAGS
 
@@ -162,6 +164,7 @@ function buildBooks() {
 verb.buildLog(`zMagic ${version} build ${buildVersion+1} for Minecraft ${minecraftVersion}`)
 
 // BUILD
+copyPackMcMeta()
 buildSpells()
 buildBooks()
 buildTags()
@@ -173,4 +176,4 @@ buildTick()
 //CHECK
 checkBuild()
 
-jp.write('./build-version.json', _.toString(buildVersion+1))
+jp.write('./build-count.json', _.toString(buildVersion+1))
