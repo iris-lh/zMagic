@@ -45,7 +45,5 @@ function getAllGroups() {
   return groups
 }
 
-// console.log((getAllGroups()));
-// console.log('@e[' + entityGroup('undead') + ']')
 
 module.exports = getAllGroups
