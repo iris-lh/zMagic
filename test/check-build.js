@@ -7,6 +7,9 @@ const Verbose = require('../src/helpers/Verbose')
 const verb = new Verbose
 
 
+// TODO use verblog
+
+
 function highlightResults(results, target) {
   return results.map(result => {
     return result.replace(target, chalk.red(target))

@@ -6,6 +6,8 @@ const spellHelpers = new SpellHelpers()
 const interpolateYaml = require('./interpolate-yaml')
 
 
+// TODO use verbLog
+
 class Objective {
   constructor() {
     this.commandify = this.commandify.bind(this)

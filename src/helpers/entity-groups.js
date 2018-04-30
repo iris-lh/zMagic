@@ -3,6 +3,7 @@ const jp = require('fs-jetpack')
 const chalk = require('chalk')
 const allEntities = require('../constants/entity-groups/all.json')
 
+
 function loadGroup(groupName) {
   const data = jp.read(`./src/constants/entity-groups/${groupName}.json`)
 
@@ -35,7 +36,7 @@ function entityGroup(groupName) {
 function getAllGroups() {
   const groupFiles = jp.list('./src/constants/entity-groups/')
   let groups = {}
-  
+
   groupFiles.forEach(file => {
     const groupName = file.split('.')[0]
     groups[groupName] = entityGroup(groupName)
