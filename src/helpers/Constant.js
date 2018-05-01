@@ -4,9 +4,10 @@ const yaml = require('js-yaml')
 const SpellHelpers = require('./spell-helpers')
 const spellHelpers = new SpellHelpers()
 const interpolateYaml = require('./interpolate-yaml')
+const Verbose = require('./Verbose')
 
-
-// TODO use verbLog
+const Verbose = require('./Verbose')
+const verb = new Verbose()
 
 
 class Constant {
@@ -32,12 +33,12 @@ class Constant {
   }
 
   import(constantPath) {
-    console.log('  '+constantPath)
+    verb.buildLog('    '+constantPath, 3)
     return jp.read(constantPath)
   }
 
   importAll(constantsPath) {
-    console.log('IMPORTING CONSTANTS...')
+    verb.buildLog('  IMPORTING CONSTANTS...', 2)
     let constantYamls = []
     const constantFileNames = jp.list(constantsPath).filter(fileName => {
       return fileName.match('.yaml')
@@ -57,7 +58,7 @@ class Constant {
   }
 
   processAll(importedConstantYamls) {
-    console.log('PROCESSING CONSTANTS...');
+    verb.buildLog('  PROCESSING CONSTANTS...');
     let commands = []
     importedConstantYamls.map(constantYaml => {
       commands.push(this.process(constantYaml))
@@ -67,10 +68,8 @@ class Constant {
 
   write(commands) {
     const functionPath = `./build/data/zmagic/functions/init/constants.mcfunction`
-    console.log('  '+functionPath)
+    verb.buildLog('    '+functionPath, 3)
     const mcFunction = commands.join('\n')
-
-    console.log(mcFunction);
 
     jp.write(functionPath, mcFunction)
   }

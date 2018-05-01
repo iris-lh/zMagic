@@ -4,9 +4,11 @@ const yaml = require('js-yaml')
 const SpellHelpers = require('./spell-helpers')
 const spellHelpers = new SpellHelpers()
 const interpolateYaml = require('./interpolate-yaml')
+const Verbose = require('./Verbose')
 
+const Verbose = require('./Verbose')
+const verb = new Verbose()
 
-// TODO use verbLog
 
 class Objective {
   constructor() {
@@ -31,12 +33,12 @@ class Objective {
   }
 
   import(objectivePath) {
-    console.log('  '+objectivePath)
+    verb.buildLog('    '+objectivePath, 3)
     return jp.read(objectivePath)
   }
 
   importAll(objectivesPath) {
-    console.log('IMPORTING OBJECTIVES...')
+    verb.buildLog('  IMPORTING OBJECTIVES...', 2)
     let objectiveYamls = []
     const objectiveFileNames = jp.list(objectivesPath).filter(fileName => {
       return fileName.match('.yaml')
@@ -56,7 +58,7 @@ class Objective {
   }
 
   processAll(importedObjectiveYamls) {
-    console.log('PROCESSING OBJECTIVES...');
+    verb.buildLog('  PROCESSING OBJECTIVES...', 2);
     let commands = []
     importedObjectiveYamls.map(objectiveYaml => {
       commands.push(this.process(objectiveYaml))
@@ -67,10 +69,10 @@ class Objective {
   write(commands) {
     const functionPath = `./build/data/zmagic
     /functions/init/objectives.mcfunction`
-    console.log('  '+functionPath)
+    verb.buildLog('    '+functionPath, 3)
     const mcFunction = commands.join('\n')
 
-    console.log(mcFunction);
+    verb.buildLog(mcFunction);
 
     jp.write(functionPath, mcFunction)
   }
