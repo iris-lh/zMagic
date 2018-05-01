@@ -14,13 +14,13 @@
   "iron_ingot": {
     "name": "iron_costs",
     "resource": "iron_ingot",
-    "color": "gray",
+    "color": "dark_green",
     "tiers": [2,4,8,16,32,64]
   },
   "bone_meal": {
     "name": "bone_costs",
     "resource": "bone_meal",
-    "color": "white",
+    "color": "gray",
     "tiers": [2,4,8,16,32,64]
   },
   "glowstone_dust": {
