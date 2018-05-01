@@ -16,64 +16,71 @@ function highlightResults(results, target) {
   })
 }
 
-function checkBuild() {
-  verb.buildLog('CHECKING BUILD FOR RED FLAGS...')
+function checkFileFor(target, file) {
+  let clean = true
+  const results = grep(target, file)
+
+  if (results.length > 0) {
+    console.log();
+    console.log(chalk.bold.red(file));
+    clean = false
+  }
+
+  if (results.length > 0) {
+    console.log(chalk.bold.red(`  File contains ${target}!`));
+    const highlighted = highlightResults(results, target)
+    console.log(chalk('    '+highlighted.join('\n    ')));
+  }
+
+  return clean
+}
+
+function checkRedFlags() {
+  console.log('CHECKING BUILD FOR RED FLAGS...')
+
+  let clean = true
 
   glob('./build/data/**/*.*', {}, (er, files) => {
-    let clean = true
     files.forEach(file => {
-      const resultsUndefined = grep('undefined', file)
-      const resultsNaN = grep('NaN', file)
-      const resultsNull = grep('null', file)
+      checkFileFor('undefined', file)
+      checkFileFor('NaN', file)
+      checkFileFor('null', file)
 
-      const foundMatch
-         = resultsUndefined.length > 0
-        || resultsNaN.length > 0
-        || resultsNull.length > 0
-
-      if (foundMatch) {
-        console.log();
-        console.log(chalk.bold.red(file));
-        clean = false
-      }
-
-      if (resultsUndefined.length > 0) {
-        console.log(chalk.bold.red('  File contains undefined!'));
-        const highlighted = highlightResults(resultsUndefined, 'undefined')
-        console.log(chalk('    '+highlighted.join('\n    ')));
-      }
-
-      if (resultsNaN.length > 0) {
-        console.log(chalk.bold.red('  File contains NaN!'));
-        const highlighted = highlightResults(resultsNaN, 'NaN')
-        console.log(chalk('    '+highlighted.join('\n    ')));
-      }
-
-      if (resultsNull.length > 0) {
-        console.log(chalk.bold.red('  File contains null!'));
-        const highlighted = highlightResults(resultsNull, 'null')
-        console.log(chalk('    '+highlighted.join('\n    ')));;
-      }
     })
-    if (clean) {
-      verb.buildLog('ALL CLEAR.')
-    }
   })
-
-  verb.buildLog('CHECKING FOR DUPLICATE TRIGGERS...')
-
-  for (var i=0; i<triggerList.length; i++) {
-  const matches = _.filter(triggerList, {trigger: triggerList[i].trigger})
-  if (matches.length > 1) {
-    console.log(chalk.bold.red(`  Duplicate trigger found! (${matches[0].trigger})`))
-
-    for (var i=0; i<matches.length; i++) {
-      console.log(chalk.red('    ID:', matches[i].id))
-    }
-    console.log()
-  }
-    _.pullAll(triggerList, matches)
+  if (clean) {
+    console.log('ALL CLEAR.')
   }
 }
+
+function checkTriggers() {
+  console.log('CHECKING FOR DUPLICATE TRIGGERS...')
+
+  let clean = true
+
+  for (var i=0; i<triggerList.length; i++) {
+    const matches = _.filter(triggerList, {trigger: triggerList[i].trigger})
+    if (matches.length > 1) {
+      clean = false
+      console.log(chalk.bold.red(`  Duplicate trigger found! (${matches[0].trigger})`))
+
+      for (var i=0; i<matches.length; i++) {
+        console.log(chalk.red('    ID:', matches[i].id))
+      }
+      console.log()
+    }
+    _.pullAll(triggerList, matches)
+  }
+
+  if (clean) {
+    console.log('ALL CLEAR.')
+  }
+}
+
+function checkBuild() {
+  checkRedFlags()
+  checkTriggers()
+}
+
 
 module.exports = checkBuild
