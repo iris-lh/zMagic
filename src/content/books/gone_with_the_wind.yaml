@@ -1,0 +1,19 @@
+---
+name: Gone With The Wind
+content:
+  title: $name
+  author: Zinnoa
+  display:
+    Lore: ["That'll buff out."]
+  pages:
+  - - heal_i
+    -
+    - insulate_i
+    -
+    - invisibility_i
+
+  - - heal_ii
+    -
+    - insulate_ii
+    -
+    - invisibility_ii
