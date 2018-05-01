@@ -1,4 +1,4 @@
-
+const chalk = require('chalk')
 
 class Verbose {
   constructor() {
@@ -9,6 +9,10 @@ class Verbose {
     if (this.level >= requiredVerbosity) {
       console.log(message)
     }
+  }
+
+  warn(warning) {
+    console.log(chalk.bold.red(warning));
   }
 }
 
