@@ -1,0 +1,19 @@
+---
+name: Wild Card
+content:
+  title: $name
+  author: Zinnoa
+  display:
+    Lore: ["Wild Card! WOOOOOOO!!!"]
+  pages:
+  - - gather_undead_i
+    -
+    - plane_shift_overworld
+
+  - - gather_undead_ii
+    -
+    - plane_shift_the_nether
+
+  - - plane_shift_the_end
+    -
+    - self_destruct
