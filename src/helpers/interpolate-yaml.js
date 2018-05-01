@@ -32,8 +32,6 @@ function interpolateYaml(yamlStr, externalValues = {}, pass = 0) {
     })
   }
 
-
-
   const match = processedYaml.match(/\$([a-z]|[A-Z]|\.)*/g) !== null
   const needsAnotherPass = match
 
