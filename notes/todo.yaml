@@ -17,3 +17,7 @@
 # TODO implement spell timers
 
 # TODO dream of a minecraft command syntax checker
+
+# TODO spell ids should go by filename rather than title
+
+# FIXME I think spell tier numerals are not being written into the books
