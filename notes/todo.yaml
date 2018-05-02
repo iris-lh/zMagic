@@ -21,3 +21,5 @@
 # TODO spell ids should go by filename rather than title
 
 # FIXME I think spell tier numerals are not being written into the books
+
+# TODO book titles should be italicized, possibly colorized

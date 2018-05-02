@@ -101,6 +101,8 @@ function buildScribing() {
 
 // ROOT
 
+// TODO extract buildInit
+
 function buildInit() {
   verb.buildLog('BUILDING INIT...');
     const lines = [
@@ -118,6 +120,8 @@ function buildInit() {
   verb.buildLog('  '+functionPath, 3)
   jp.write(functionPath, lines.join('\n'))
 }
+
+// TODO extract buildTick
 
 function buildTick() {
   verb.buildLog('BUILDING TICK...');
