@@ -21,15 +21,15 @@ function checkFileFor(target, file) {
   const results = grep(target, file)
 
   if (results.length > 0) {
-    console.log();
-    console.log(chalk.bold.red(file));
+    console.log()
+    console.log(chalk.bold.red(file))
     clean = false
   }
 
   if (results.length > 0) {
-    console.log(chalk.bold.red(`  File contains ${target}!`));
+    console.log(chalk.bold.red(`  File contains ${target}!`))
     const highlighted = highlightResults(results, target)
-    console.log(chalk('    ' + highlighted.join('\n    ')));
+    console.log(chalk('    ' + highlighted.join('\n    ')))
   }
 
   return clean

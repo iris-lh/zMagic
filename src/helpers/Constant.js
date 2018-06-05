@@ -6,7 +6,6 @@ const spellHelpers = new SpellHelpers()
 const interpolateYaml = require('./interpolate-yaml')
 const Verbose = require('./Verbose')
 
-const Verbose = require('./Verbose')
 const verb = new Verbose()
 
 
@@ -58,7 +57,7 @@ class Constant {
   }
 
   processAll(importedConstantYamls) {
-    verb.buildLog('  PROCESSING CONSTANTS...');
+    verb.buildLog('  PROCESSING CONSTANTS...')
     let commands = []
     importedConstantYamls.map(constantYaml => {
       commands.push(this.process(constantYaml))

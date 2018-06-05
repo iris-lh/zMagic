@@ -87,12 +87,12 @@ class Book {
     const rawJson = yaml.load(bookYaml)
     const processedBook = yaml.load(interpolateYaml(bookYaml))
     processedBook.content.pages = this.constructSpellPages(processedBook.content.pages)
-    verb.buildLog('    ' + processedBook.name, 3);
+    verb.buildLog('    ' + processedBook.name, 3)
     return processedBook
   }
 
   processAll(importedBookYamls) {
-    verb.buildLog('  PROCESSING BOOKS...', 2);
+    verb.buildLog('  PROCESSING BOOKS...', 2)
     let processedBooks = []
     importedBookYamls.map(bookYaml => {
       processedBooks.push(this.process(bookYaml))

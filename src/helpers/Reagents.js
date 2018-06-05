@@ -23,7 +23,7 @@ class Reagents {
         const line = `scoreboard players set ${i} ${value.name} ${value.tiers[i]}`
         lines.push(line)
       }
-    });
+    })
 
     const functionPath = `./build/data/zmagic/functions/init/reagents.mcfunction`
     verb.buildLog('    ' + functionPath, 3)
@@ -36,7 +36,7 @@ class Reagents {
     _.forOwn(costTiers, function (value, key) {
       const line = `execute as @a store result score @s ${value.resource} run clear @s minecraft:${value.resource} 0`
       lines.push(line)
-    });
+    })
     const functionPath = `./build/data/zmagic/functions/tick/reagents.mcfunction`
     verb.buildLog('    ' + functionPath, 3)
     jp.write(functionPath, lines.join('\n'))

@@ -12,7 +12,7 @@ class Verbose {
   }
 
   warn(warning) {
-    console.log(chalk.bold.red(warning));
+    console.log(chalk.bold.red(warning))
   }
 }
 

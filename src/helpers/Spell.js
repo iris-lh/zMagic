@@ -80,12 +80,12 @@ class Spell {
     processedSpell.id = isOneOff ?
       _.snakeCase(processedSpell.name) :
       _.snakeCase(`${processedSpell.name}_${romanize(index + 1)}`)
-    verb.buildLog('    ' + processedSpell.name + ' ' + (isOneOff ? '' : romanize(index + 1)), 3);
+    verb.buildLog('    ' + processedSpell.name + ' ' + (isOneOff ? '' : romanize(index + 1)), 3)
     return processedSpell
   }
 
   processAll(importedSpellYamls) {
-    verb.buildLog('  PROCESSING SPELLS...', 2);
+    verb.buildLog('  PROCESSING SPELLS...', 2)
     let processedSpells = []
     importedSpellYamls.map(spellYaml => {
       let i = 0

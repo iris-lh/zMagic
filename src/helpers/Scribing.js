@@ -59,13 +59,13 @@ class Scribing {
     switch (index) {
       case 0:
         ingredients = `${paper.reagent}=8..,scribingPaper=1..`
-        break;
+        break
       case 1:
         ingredients = `${_.camelCase(paper.name)+'I'}=4..,scribingPaper=1..`
-        break;
+        break
       case 2:
         ingredients = `${_.camelCase(paper.name)+'II'}=4..,scribingPaper=1..`
-        break;
+        break
     }
     return ingredients
   }
@@ -78,17 +78,17 @@ class Scribing {
       case 0:
         var line2 = `clear @s[scores={${this.getIngredientsScores(paper, index)}}] minecraft:${paper.reagent} 8`
         ingredients = line1 + '\n' + line2
-        break;
+        break
       case 1:
         var pageConsumed = `minecraft:paper{subId:"zmagic:${pageName}_i"}`
         var line2 = `clear @s[scores={${this.getIngredientsScores(paper, index)}}] ${pageConsumed} 4`
         ingredients = line1 + '\n' + line2
-        break;
+        break
       case 2:
         var pageConsumed = `minecraft:paper{subId:"zmagic:${pageName}_ii"}`
         var line2 = `clear @s[scores={${this.getIngredientsScores(paper, index)}}] ${pageConsumed} 4`
         ingredients = line1 + '\n' + line2
-        break;
+        break
     }
     return ingredients
   }
@@ -110,7 +110,7 @@ class Scribing {
         lines.push(line)
       })
     })
-    verb.buildLog('    ' + initPath, 3);
+    verb.buildLog('    ' + initPath, 3)
     jp.write(initPath, lines.join('\n'))
   }
 
@@ -127,7 +127,7 @@ class Scribing {
         lines.push(line)
       })
     })
-    verb.buildLog('    ' + tickPath, 3);
+    verb.buildLog('    ' + tickPath, 3)
     jp.write(tickPath, lines.join('\n'))
   }
 
@@ -151,7 +151,7 @@ class Scribing {
       })
       lines.push(`scoreboard players set @a[scores={scribePage=1..}] scribePage -1`)
     })
-    verb.buildLog('    ' + triggerTickPath, 3);
+    verb.buildLog('    ' + triggerTickPath, 3)
     jp.write(triggerTickPath, lines.join('\n'))
   }
 
@@ -163,13 +163,13 @@ class Scribing {
         switch (index) {
           case 0:
             color = 'green'
-            break;
+            break
           case 1:
             color = 'aqua'
-            break;
+            break
           case 2:
             color = 'light_purple'
-            break;
+            break
         }
 
         const id = _.snakeCase(paper.name + romanize(index + 1))
@@ -185,7 +185,7 @@ class Scribing {
         ]
 
         const writePath = `${scribePath}${id}.mcfunction`
-        verb.buildLog('    ' + writePath, 3);
+        verb.buildLog('    ' + writePath, 3)
         jp.write(writePath, lines.join('\n'))
       })
     })
@@ -198,13 +198,13 @@ class Scribing {
         switch (index) {
           case 0:
             color = 'green'
-            break;
+            break
           case 1:
             color = 'aqua'
-            break;
+            break
           case 2:
             color = 'light_purple'
-            break;
+            break
         }
 
         const id = _.snakeCase(paper.name + romanize(index + 1))
@@ -227,7 +227,7 @@ class Scribing {
         ]
 
         const writePath = `${givePath}${id}.mcfunction`
-        verb.buildLog('    ' + writePath, 3);
+        verb.buildLog('    ' + writePath, 3)
         jp.write(writePath, lines.join('\n'))
       })
     })
