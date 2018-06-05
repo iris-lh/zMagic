@@ -76,7 +76,7 @@ function buildSpells() {
 // REAGENTS
 
 function buildReagents() {
-  verb.buildLog('BUILDING REAGENTS...');
+  verb.buildLog('BUILDING REAGENTS...')
   const reagents = new Reagents
   reagents.writeInit()
   reagents.writeTick()
@@ -87,7 +87,7 @@ function buildReagents() {
 // SCRIBING
 
 function buildScribing() {
-  verb.buildLog('BUILDING SCRIBING...');
+  verb.buildLog('BUILDING SCRIBING...')
   const scribingHelpers = new Scribing()
   scribingHelpers.writeInit()
   scribingHelpers.writeTick()
@@ -103,7 +103,7 @@ function buildScribing() {
 // TODO extract buildInit
 
 function buildInit() {
-  verb.buildLog('BUILDING INIT...');
+  verb.buildLog('BUILDING INIT...')
   const lines = [
     // TODO 'function zmagic:greet'
     // TODO 'function zmagic:version'
@@ -123,7 +123,7 @@ function buildInit() {
 // TODO extract buildTick
 
 function buildTick() {
-  verb.buildLog('BUILDING TICK...');
+  verb.buildLog('BUILDING TICK...')
   const lines = [
     'function zmagic:tick/triggers/spells',
     'function zmagic:tick/triggers/scribing',
