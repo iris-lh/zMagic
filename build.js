@@ -5,30 +5,31 @@ const yaml = require('js-yaml')
 const Verbose = require('./src/helpers/Verbose')
 const verb = new Verbose()
 
-const packageJson      = require('./package.json')
-const version          = packageJson.version
-const buildVersion     = require('./build-count.json')
+const packageJson = require('./package.json')
+const version = packageJson.version
+const buildVersion = require('./build-count.json')
 const minecraftVersion = packageJson.minecraftVersion
 
-const Spell      = require('./src/helpers/Spell')
-const Reagents   = require('./src/helpers/Reagents')
-const Book       = require('./src/helpers/Book')
-const Scribing   = require('./src/helpers/Scribing')
+const Spell = require('./src/helpers/Spell')
+const Reagents = require('./src/helpers/Reagents')
+const Book = require('./src/helpers/Book')
+const Scribing = require('./src/helpers/Scribing')
 const tagHelpers = require('./src/helpers/tag')
-const pipe       = require('./src/helpers/pipe')
-
+const pipe = require('./src/helpers/pipe')
 const checkBuild = require('./test/check-build')
 
 const contentPath = './src/content/'
-const spellsPath  = contentPath+'/spells/'
-const booksPath   = contentPath+'/books/'
-const tagsPath    = contentPath+'/tags/'
+const spellsPath = contentPath + '/spells/'
+const booksPath = contentPath + '/books/'
+const tagsPath = contentPath + '/tags/'
 
 const spells = {}
 
 
 function copyPackMcMeta() {
-  jp.copy('./src/pack.mcmeta', './build/pack.mcmeta', {overwrite: true})
+  jp.copy('./src/pack.mcmeta', './build/pack.mcmeta', {
+    overwrite: true
+  })
 }
 
 
@@ -66,9 +67,7 @@ function writeSpells(processedSpells) {
 function buildSpells() {
   verb.buildLog('BUILDING SPELLS...')
   pipe(
-    importSpells()
-    , processSpells
-    , writeSpells
+    importSpells(), processSpells, writeSpells
   )
 }
 
@@ -105,19 +104,19 @@ function buildScribing() {
 
 function buildInit() {
   verb.buildLog('BUILDING INIT...');
-    const lines = [
-      // TODO 'function zmagic:greet'
-      // TODO 'function zmagic:version'
-      'tellraw @p {"text":"\\nThank you for using Zinnoa\'s Magic Pack!", "color":"aqua"}',
-      `tellraw @p {"text":"Version: zMagic ${version} for Minecraft ${minecraftVersion}", "color":"dark_aqua"}`,
-      'tellraw @p {"text":"\\nInitializing...", "color":"aqua"}',
-      'function zmagic:init/spells',
-      'function zmagic:init/reagents',
-      'function zmagic:init/scribing',
-      'tellraw @p {"text":"Done. Enjoy!\\n", "color":"aqua"}'
-    ]
+  const lines = [
+    // TODO 'function zmagic:greet'
+    // TODO 'function zmagic:version'
+    'tellraw @p {"text":"\\nThank you for using Zinnoa\'s Magic Pack!", "color":"aqua"}',
+    `tellraw @p {"text":"Version: zMagic ${version} for Minecraft ${minecraftVersion}", "color":"dark_aqua"}`,
+    'tellraw @p {"text":"\\nInitializing...", "color":"aqua"}',
+    'function zmagic:init/spells',
+    'function zmagic:init/reagents',
+    'function zmagic:init/scribing',
+    'tellraw @p {"text":"Done. Enjoy!\\n", "color":"aqua"}'
+  ]
   const functionPath = `./build/data/zmagic/functions/init.mcfunction`
-  verb.buildLog('  '+functionPath, 3)
+  verb.buildLog('  ' + functionPath, 3)
   jp.write(functionPath, lines.join('\n'))
 }
 
@@ -125,14 +124,14 @@ function buildInit() {
 
 function buildTick() {
   verb.buildLog('BUILDING TICK...');
-    const lines = [
-      'function zmagic:tick/triggers/spells',
-      'function zmagic:tick/triggers/scribing',
-      'function zmagic:tick/scribing',
-      'function zmagic:tick/reagents'
-    ]
+  const lines = [
+    'function zmagic:tick/triggers/spells',
+    'function zmagic:tick/triggers/scribing',
+    'function zmagic:tick/scribing',
+    'function zmagic:tick/reagents'
+  ]
   const functionPath = `./build/data/zmagic/functions/tick.mcfunction`
-  verb.buildLog('  '+functionPath, 3)
+  verb.buildLog('  ' + functionPath, 3)
   jp.write(functionPath, lines.join('\n'))
 }
 
@@ -159,13 +158,11 @@ function writeBooks(processedBooks) {
 function buildBooks() {
   verb.buildLog('BUILDING BOOKS...')
   pipe(
-    importBooks()
-    , processBooks
-    , writeBooks
+    importBooks(), processBooks, writeBooks
   )
 }
 
-verb.buildLog(`zMagic ${version} build ${buildVersion+1} for Minecraft ${minecraftVersion}`)
+verb.buildLog(`zMagic ${version} build ${buildVersion + 1} for Minecraft ${minecraftVersion}`)
 
 // BUILD
 copyPackMcMeta()
@@ -180,4 +177,4 @@ buildTick()
 //CHECK
 checkBuild()
 
-jp.write('./build-count.json', _.toString(buildVersion+1))
+jp.write('./build-count.json', _.toString(buildVersion + 1))

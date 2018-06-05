@@ -15,30 +15,30 @@ class Reagents {
     verb.buildLog('  WRITING REAGENT INIT...', 2)
     let lines = []
     lines.push('tellraw @p {"text":"- Initialize Reagents", "color":"dark_aqua"}')
-    _.forOwn(costTiers, function(value, key) {
+    _.forOwn(costTiers, function (value, key) {
       const line0 = `scoreboard objectives add ${value.resource} dummy`
       const line1 = `scoreboard objectives add ${value.name} dummy`
       lines.push(line0, line1)
-      for (var i=0; i<value.tiers.length; i++) {
+      for (var i = 0; i < value.tiers.length; i++) {
         const line = `scoreboard players set ${i} ${value.name} ${value.tiers[i]}`
         lines.push(line)
       }
     });
 
     const functionPath = `./build/data/zmagic/functions/init/reagents.mcfunction`
-    verb.buildLog('    '+functionPath, 3)
+    verb.buildLog('    ' + functionPath, 3)
     jp.write(functionPath, lines.join('\n'))
   }
 
   writeTick() {
     verb.buildLog('  WRITING REAGENT TICK...', 2)
     let lines = []
-    _.forOwn(costTiers, function(value, key) {
+    _.forOwn(costTiers, function (value, key) {
       const line = `execute as @a store result score @s ${value.resource} run clear @s minecraft:${value.resource} 0`
       lines.push(line)
     });
     const functionPath = `./build/data/zmagic/functions/tick/reagents.mcfunction`
-    verb.buildLog('    '+functionPath, 3)
+    verb.buildLog('    ' + functionPath, 3)
     jp.write(functionPath, lines.join('\n'))
   }
 

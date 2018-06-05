@@ -13,11 +13,11 @@ const verb = new Verbose()
 class Objective {
   constructor() {
     this.commandify = this.commandify.bind(this)
-    this.import     = this.import.bind(this)
-    this.importAll  = this.importAll.bind(this)
-    this.process    = this.process.bind(this)
+    this.import = this.import.bind(this)
+    this.importAll = this.importAll.bind(this)
+    this.process = this.process.bind(this)
     this.processAll = this.processAll.bind(this)
-    this.write      = this.write.bind(this)
+    this.write = this.write.bind(this)
   }
 
   commandify(objectiveObject) {
@@ -32,8 +32,8 @@ class Objective {
     return commands
   }
 
-  import(objectivePath) {
-    verb.buildLog('    '+objectivePath, 3)
+  import (objectivePath) {
+    verb.buildLog('    ' + objectivePath, 3)
     return jp.read(objectivePath)
   }
 
@@ -69,7 +69,7 @@ class Objective {
   write(commands) {
     const functionPath = `./build/data/zmagic
     /functions/init/objectives.mcfunction`
-    verb.buildLog('    '+functionPath, 3)
+    verb.buildLog('    ' + functionPath, 3)
     const mcFunction = commands.join('\n')
 
     verb.buildLog(mcFunction);

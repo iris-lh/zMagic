@@ -5,15 +5,15 @@ const glob = require('glob')
 
 class Log {
   constructor(options) {
-    this.name       = options.name       || _.toString(_.now())
-    this.extension  = options.extension  || 'log'
-    this.type       = options.type       || 'lines'
-    this.overwrite  = options.overwrite  || false
-    this.path       = options.path       || ''
+    this.name = options.name || _.toString(_.now())
+    this.extension = options.extension || 'log'
+    this.type = options.type || 'lines'
+    this.overwrite = options.overwrite || false
+    this.path = options.path || ''
     this.timeFormat = options.timeFormat || 'YYYY-MM-DD-HH-mm-ss'
-    this._renderer  = options.renderer   || ( entry => _.toString(entry) )
+    this._renderer = options.renderer || (entry => _.toString(entry))
 
-    this._entries      = []
+    this._entries = []
     this._contentLines = []
   }
 
@@ -32,15 +32,11 @@ class Log {
       this._entries.map(entry => {
         this._contentLines.push(this._renderer(entry))
       })
-    }
-
-    else if (this.type === 'lines') {
+    } else if (this.type === 'lines') {
       this._entries.map(entry => {
         this._contentLines.push(_.toString(entry))
       })
-    }
-
-    else if (this.type === 'key-value') {
+    } else if (this.type === 'key-value') {
       this._sortEntriesByKeys().map(entry => {
         const key = _.padStart(entry[0], 3, '0')
         const value = entry[1]
@@ -52,7 +48,9 @@ class Log {
   _cleanOldLogs(newLogFilename) {
     const pattern = `./logs/${this.path}/${this.name}.*.${this.extension}`
     const that = this
-    glob(pattern, {nonull:true}, function(er, files) {
+    glob(pattern, {
+      nonull: true
+    }, function (er, files) {
       const deletables = files.map(file => {
         const match = file.match(newLogFilename)
         if (match === null) {

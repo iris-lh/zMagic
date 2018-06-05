@@ -19,15 +19,15 @@ const initPath = './build/data/zmagic/functions/init/spells.mcfunction'
 
 class Spell {
   constructor() {
-    this.import           = this.import.bind(this)
-    this.importAll        = this.importAll.bind(this)
-    this.process          = this.process.bind(this)
-    this.processAll       = this.processAll.bind(this)
-    this.buildMcFunction  = this.buildMcFunction.bind(this)
+    this.import = this.import.bind(this)
+    this.importAll = this.importAll.bind(this)
+    this.process = this.process.bind(this)
+    this.processAll = this.processAll.bind(this)
+    this.buildMcFunction = this.buildMcFunction.bind(this)
     this.buildMcFunctions = this.buildMcFunctions.bind(this)
-    this.writeTriggers    = this.writeTriggers.bind(this)
-    this.write            = this.write.bind(this)
-    this.writeAll         = this.writeAll.bind(this)
+    this.writeTriggers = this.writeTriggers.bind(this)
+    this.write = this.write.bind(this)
+    this.writeAll = this.writeAll.bind(this)
 
     this.colors = _.reduce(costTiers, (result, value, key) => {
       return _.set(result, `${key}`, value.color)
@@ -35,9 +35,9 @@ class Spell {
   }
 
   payGate(spell, tier) {
-    const costTier  = spell.tier.costTier
+    const costTier = spell.tier.costTier
     const costTable = costTiers[spell.costTableName]
-    const resource  = costTiers[spell.costTableName].resource
+    const resource = costTiers[spell.costTableName].resource
     const cost = costTable.tiers[costTier]
     const cannotAffordselector = `@s[scores={${resource}=..${cost-1}}]`
     const canAffordselector = `@s[scores={${resource}=${cost}..}]`
@@ -51,8 +51,8 @@ class Spell {
     return lines
   }
 
-  import(path) {
-    verb.buildLog('    '+path, 3)
+  import (path) {
+    verb.buildLog('    ' + path, 3)
     return jp.read(path)
   }
 
@@ -71,13 +71,16 @@ class Spell {
 
   process(importedSpellYaml, tier, index) {
     const rawJson = yaml.load(importedSpellYaml)
-    const processedSpell = yaml.load(interpolateYaml(importedSpellYaml, {tier: tier, group: getEntityGroups()}))
+    const processedSpell = yaml.load(interpolateYaml(importedSpellYaml, {
+      tier: tier,
+      group: getEntityGroups()
+    }))
     processedSpell.tier = tier
     const isOneOff = rawJson.tiers.length <= 1
-    processedSpell.id = isOneOff
-      ? _.snakeCase(processedSpell.name)
-      : _.snakeCase(`${processedSpell.name}_${romanize(index + 1)}`)
-    verb.buildLog('    '+processedSpell.name+' '+(isOneOff ? '' : romanize(index + 1)), 3);
+    processedSpell.id = isOneOff ?
+      _.snakeCase(processedSpell.name) :
+      _.snakeCase(`${processedSpell.name}_${romanize(index + 1)}`)
+    verb.buildLog('    ' + processedSpell.name + ' ' + (isOneOff ? '' : romanize(index + 1)), 3);
     return processedSpell
   }
 
@@ -89,7 +92,7 @@ class Spell {
       const rawJson = yaml.load(spellYaml)
       rawJson.tiers.map(tier => {
         processedSpells.push(this.process(spellYaml, tier, i))
-        i ++
+        i++
       })
     })
     return processedSpells
@@ -127,8 +130,8 @@ class Spell {
       'scoreboard objectives add cast_spell trigger'
     ]
     const initCommand =
-    jp.write(initPath, initLines.join('\n'))
-    verb.buildLog('    '+triggerTickPath, 3)
+      jp.write(initPath, initLines.join('\n'))
+    verb.buildLog('    ' + triggerTickPath, 3)
   }
 
 
@@ -142,7 +145,7 @@ class Spell {
     const rawJson = processedSpell
     const isOneOff = rawJson.tiers.length <= 1
     const functionPath = `./build/data/zmagic/functions/cast/${processedSpell.id}.mcfunction`
-    verb.buildLog('    '+functionPath, 3)
+    verb.buildLog('    ' + functionPath, 3)
     const mcFunction = this.buildMcFunction(processedSpell).join('\n')
     jp.write(functionPath, mcFunction)
   }

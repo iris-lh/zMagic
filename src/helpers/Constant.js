@@ -13,11 +13,11 @@ const verb = new Verbose()
 class Constant {
   constructor() {
     this.commandify = this.commandify.bind(this)
-    this.import     = this.import.bind(this)
-    this.importAll  = this.importAll.bind(this)
-    this.process    = this.process.bind(this)
+    this.import = this.import.bind(this)
+    this.importAll = this.importAll.bind(this)
+    this.process = this.process.bind(this)
     this.processAll = this.processAll.bind(this)
-    this.write      = this.write.bind(this)
+    this.write = this.write.bind(this)
   }
 
   commandify(constantObject) {
@@ -32,8 +32,8 @@ class Constant {
     return commands
   }
 
-  import(constantPath) {
-    verb.buildLog('    '+constantPath, 3)
+  import (constantPath) {
+    verb.buildLog('    ' + constantPath, 3)
     return jp.read(constantPath)
   }
 
@@ -68,7 +68,7 @@ class Constant {
 
   write(commands) {
     const functionPath = `./build/data/zmagic/functions/init/constants.mcfunction`
-    verb.buildLog('    '+functionPath, 3)
+    verb.buildLog('    ' + functionPath, 3)
     const mcFunction = commands.join('\n')
 
     jp.write(functionPath, mcFunction)

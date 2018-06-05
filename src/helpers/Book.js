@@ -29,24 +29,26 @@ class Book {
       let json = {}
       if (entry) {
         // TODO Better error handling for incorrect spell IDs
-        const trigger = _.find(triggerList, {id: _.snakeCase(entry)}).trigger
+        const trigger = _.find(triggerList, {
+          id: _.snakeCase(entry)
+        }).trigger
         const spellId = entry.split(' ')[0]
         const spellTier = entry.split(' ')[1]
-        const spellTierStr = spellTier ? ' '+_.upperCase(spellTier) : ''
+        const spellTierStr = spellTier ? ' ' + _.upperCase(spellTier) : ''
         const spellData = this.spells[_.snakeCase(entry)]
         json = {
-          text:`\n${spellData.name}${spellTierStr}`,
-          color:spellHelpers.colors[spellData.costTableName],
-          italic:'true',
-          underlined:'true',
-          clickEvent:{
-            action:'run_command',
+          text: `\n${spellData.name}${spellTierStr}`,
+          color: spellHelpers.colors[spellData.costTableName],
+          italic: 'true',
+          underlined: 'true',
+          clickEvent: {
+            action: 'run_command',
             value: `/trigger cast_spell set ${trigger}`
           }
         }
       } else {
         json = {
-          text:`\n`,
+          text: `\n`,
         }
       }
 
@@ -63,8 +65,8 @@ class Book {
     return pages
   }
 
-  import(bookPath) {
-    verb.buildLog('    '+bookPath, 3)
+  import (bookPath) {
+    verb.buildLog('    ' + bookPath, 3)
     return jp.read(bookPath)
   }
 
@@ -85,7 +87,7 @@ class Book {
     const rawJson = yaml.load(bookYaml)
     const processedBook = yaml.load(interpolateYaml(bookYaml))
     processedBook.content.pages = this.constructSpellPages(processedBook.content.pages)
-    verb.buildLog('    '+processedBook.name, 3);
+    verb.buildLog('    ' + processedBook.name, 3);
     return processedBook
   }
 
@@ -100,8 +102,8 @@ class Book {
 
   write(book) {
     const functionPath = `./build/data/zmagic/functions/give/book/${_.snakeCase(book.name)}.mcfunction`
-    verb.buildLog('    '+functionPath, 3)
-    const mcFunction = 'give @p written_book'+JSON.stringify(book.content)
+    verb.buildLog('    ' + functionPath, 3)
+    const mcFunction = 'give @p written_book' + JSON.stringify(book.content)
 
     jp.write(functionPath, mcFunction)
   }

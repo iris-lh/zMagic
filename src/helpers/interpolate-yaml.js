@@ -15,7 +15,7 @@ function interpolateYaml(yamlStr, externalValues = {}, pass = 0) {
     replaceables.forEach((instance, index) => {
       const localValue = _.at(rawJson, instance.replace('$', ''))
       const externalValue = _.at(externalValues, instance.replace('$', ''))
-      const sanitized = '\\'+instance
+      const sanitized = '\\' + instance
 
       const removeableQuotes = /"/g
 
@@ -23,8 +23,7 @@ function interpolateYaml(yamlStr, externalValues = {}, pass = 0) {
         processedYaml = processedYaml.replace(new RegExp(sanitized, 'g'), JSON.stringify(localValue[0]).replace(removeableQuotes, ''))
       } else if (typeof externalValue[0] !== 'undefined') {
         processedYaml = processedYaml.replace(new RegExp(sanitized, 'g'), JSON.stringify(externalValue[0]).replace(removeableQuotes, ''))
-      }
-      else {
+      } else {
         // FIXME 'rawJson.name' will not work for other yaml content that doesnt have the 'name' field. Find a way to get the filename/path.
         const message = `Value for '${instance}' not found while interpolating yaml file '${rawJson.name}'`
         throw new Error(message)
@@ -36,7 +35,7 @@ function interpolateYaml(yamlStr, externalValues = {}, pass = 0) {
   const needsAnotherPass = match
 
   if (replaceables !== null) {
-    return interpolateYaml(processedYaml, externalValues, pass+1)
+    return interpolateYaml(processedYaml, externalValues, pass + 1)
   }
 
   return processedYaml

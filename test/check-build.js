@@ -29,7 +29,7 @@ function checkFileFor(target, file) {
   if (results.length > 0) {
     console.log(chalk.bold.red(`  File contains ${target}!`));
     const highlighted = highlightResults(results, target)
-    console.log(chalk('    '+highlighted.join('\n    ')));
+    console.log(chalk('    ' + highlighted.join('\n    ')));
   }
 
   return clean
@@ -58,13 +58,15 @@ function checkTriggers() {
 
   let clean = true
 
-  for (var i=0; i<triggerList.length; i++) {
-    const matches = _.filter(triggerList, {trigger: triggerList[i].trigger})
+  for (var i = 0; i < triggerList.length; i++) {
+    const matches = _.filter(triggerList, {
+      trigger: triggerList[i].trigger
+    })
     if (matches.length > 1) {
       clean = false
       console.log(chalk.bold.red(`  Duplicate trigger found! (${matches[0].trigger})`))
 
-      for (var i=0; i<matches.length; i++) {
+      for (var i = 0; i < matches.length; i++) {
         console.log(chalk.red('    ID:', matches[i].id))
       }
       console.log()

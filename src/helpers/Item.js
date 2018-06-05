@@ -1,7 +1,7 @@
 const _ = require('lodash')
 
-const packageJson      = require('../../package.json')
-const version          = packageJson.version
+const packageJson = require('../../package.json')
+const version = packageJson.version
 const minecraftVersion = packageJson.minecraftVersion
 
 class Item {
@@ -10,21 +10,24 @@ class Item {
   }
 
   createItem(options) {
-    const id        = options.id        || ''
-    const subId     = options.subId     || id
-    const name      = options.name      || ''
-    const color     = options.color     || 'white'
-    const lore      = options.lore      || []
-    const ench      = options.ench      || []
+    const id = options.id || ''
+    const subId = options.subId || id
+    const name = options.name || ''
+    const color = options.color || 'white'
+    const lore = options.lore || []
+    const ench = options.ench || []
     const hideFlags = options.hideFlags || 0
 
     const loreWithVersion = JSON.stringify(
       _.flatten([lore])
-      .concat(['', 'zMagic '+version, 'Minecraft '+minecraftVersion])
+      .concat(['', 'zMagic ' + version, 'Minecraft ' + minecraftVersion])
     )
     const enchStr = JSON.stringify(_.map(_.flatten([ench]), element => {
-      return {Id: element.id, Lvl: element.lvl}
-    },[]))
+      return {
+        Id: element.id,
+        Lvl: element.lvl
+      }
+    }, []))
 
     return `${id}{subId:"${subId}", display:{Name:"{\\"text\\":\\"${name}\\", \\"color\\":\\"${color}\\"}}", Lore:${loreWithVersion}}, ench:${enchStr}, HideFlags:${hideFlags}}`
   }

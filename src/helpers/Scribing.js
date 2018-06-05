@@ -12,53 +12,51 @@ const Book = require('./Book')
 const updateTriggerList = require('./trigger')
 const triggerList = require('../constants/triggers.json')
 
-const packageJson      = require('../../package.json')
-const version          = packageJson.version
+const packageJson = require('../../package.json')
+const version = packageJson.version
 const minecraftVersion = packageJson.minecraftVersion
 
-const tickPath        = './build/data/zmagic/functions/tick/scribing.mcfunction'
+const tickPath = './build/data/zmagic/functions/tick/scribing.mcfunction'
 const triggerTickPath = './build/data/zmagic/functions/tick/triggers/scribing.mcfunction'
-const initPath        = './build/data/zmagic/functions/init/scribing.mcfunction'
-const scribePath      = './build/data/zmagic/functions/scribe/'
-const givePath        = './build/data/zmagic/functions/give/page/'
+const initPath = './build/data/zmagic/functions/init/scribing.mcfunction'
+const scribePath = './build/data/zmagic/functions/scribe/'
+const givePath = './build/data/zmagic/functions/give/page/'
+
 const itemHelper = new Item()
 
 // TODO scribing tome
 
 class Scribing {
   constructor() {
-    this.writeInit        = this.writeInit.bind(this)
+    this.writeInit = this.writeInit.bind(this)
     this.writeTriggerTick = this.writeTriggerTick.bind(this)
-    this.writeGivers      = this.writeGivers.bind(this)
-    this.writeGivePapers  = this.writeGivePapers.bind(this)
-    this.writeGiveTome    = this.writeGiveTome.bind(this)
+    this.writeGivers = this.writeGivers.bind(this)
+    this.writeGivePapers = this.writeGivePapers.bind(this)
+    this.writeGiveTome = this.writeGiveTome.bind(this)
 
     this.scribingPaper = 'minecraft:paper{display:{Name:"{\\"text\\":\\"Scribing Paper\\"}"}}'
 
-    this.papers = [
-      {
-        name: 'Ignus Page',
-        triggerObjective: 'scrIgnusPage',
-        reagent: 'blaze_powder',
-        tiers: [
-          {
-            lore: 'Page detailing basic Ignan spellcasting.'
-          },
-          {
-            lore: 'Page detailing intermediate Ignan spellcasting.'
-          },
-          {
-            lore: 'Page detailing advanced Ignan spellcasting.'
-          }
-        ]
-      }
-    ]
+    this.papers = [{
+      name: 'Ignus Page',
+      triggerObjective: 'scrIgnusPage',
+      reagent: 'blaze_powder',
+      tiers: [{
+          lore: 'Page detailing basic Ignan spellcasting.'
+        },
+        {
+          lore: 'Page detailing intermediate Ignan spellcasting.'
+        },
+        {
+          lore: 'Page detailing advanced Ignan spellcasting.'
+        }
+      ]
+    }]
 
   }
 
   getIngredientsScores(paper, index) {
     let ingredients = ''
-    switch(index) {
+    switch (index) {
       case 0:
         ingredients = `${paper.reagent}=8..,scribingPaper=1..`
         break;
@@ -76,20 +74,20 @@ class Scribing {
     let ingredients = ''
     const pageName = _.snakeCase(paper.name)
     var line1 = `clear @s[scores={${this.getIngredientsScores(paper, index)}}] ${this.scribingPaper} 1`
-    switch(index) {
+    switch (index) {
       case 0:
         var line2 = `clear @s[scores={${this.getIngredientsScores(paper, index)}}] minecraft:${paper.reagent} 8`
-        ingredients = line1+'\n'+line2
+        ingredients = line1 + '\n' + line2
         break;
       case 1:
         var pageConsumed = `minecraft:paper{subId:"zmagic:${pageName}_i"}`
         var line2 = `clear @s[scores={${this.getIngredientsScores(paper, index)}}] ${pageConsumed} 4`
-        ingredients = line1+'\n'+line2
+        ingredients = line1 + '\n' + line2
         break;
       case 2:
         var pageConsumed = `minecraft:paper{subId:"zmagic:${pageName}_ii"}`
         var line2 = `clear @s[scores={${this.getIngredientsScores(paper, index)}}] ${pageConsumed} 4`
-        ingredients = line1+'\n'+line2
+        ingredients = line1 + '\n' + line2
         break;
     }
     return ingredients
@@ -105,14 +103,14 @@ class Scribing {
       lines.push(`scoreboard objectives add scribePage trigger`)
       lines.push(`scoreboard objectives add scribingPaper dummy`)
       paper.tiers.forEach((tier, index) => {
-        const id = _.snakeCase(paper.name+romanize(index + 1))
+        const id = _.snakeCase(paper.name + romanize(index + 1))
         const item = `minecraft:paper{subId:"zmagic:${id}"}`
         const line = `scoreboard objectives add ${_.camelCase(paper.name)+romanize(index + 1)} dummy`
 
         lines.push(line)
       })
     })
-    verb.buildLog('    '+initPath, 3);
+    verb.buildLog('    ' + initPath, 3);
     jp.write(initPath, lines.join('\n'))
   }
 
@@ -123,13 +121,13 @@ class Scribing {
       lines.push(`execute as @a store result score @s scribingPaper run clear @s ${this.scribingPaper} 0`)
       paper.tiers.forEach((tier, index) => {
         const ingredients = this.getIngredientsScores(paper, index)
-        const objective = _.camelCase(paper.name)+romanize(index + 1)
-        const id = _.snakeCase(paper.name+romanize(index + 1))
+        const objective = _.camelCase(paper.name) + romanize(index + 1)
+        const id = _.snakeCase(paper.name + romanize(index + 1))
         const line = `execute as @a store result score @s ${objective} run clear @s minecraft:paper{subId: "zmagic:${id}"} 0`
         lines.push(line)
       })
     })
-    verb.buildLog('    '+tickPath, 3);
+    verb.buildLog('    ' + tickPath, 3);
     jp.write(tickPath, lines.join('\n'))
   }
 
@@ -143,7 +141,7 @@ class Scribing {
       paper.tiers.forEach((tier, index) => {
         const ingredients = this.getIngredientsScores(paper, index)
 
-        const pageId = _.snakeCase(paper.name+romanize(index + 1))
+        const pageId = _.snakeCase(paper.name + romanize(index + 1))
         const trigger = updateTriggerList(pageId)
 
         const execute = `execute at @a[scores={scribePage=${trigger},${ingredients}}] run`
@@ -153,7 +151,7 @@ class Scribing {
       })
       lines.push(`scoreboard players set @a[scores={scribePage=1..}] scribePage -1`)
     })
-    verb.buildLog('    '+triggerTickPath, 3);
+    verb.buildLog('    ' + triggerTickPath, 3);
     jp.write(triggerTickPath, lines.join('\n'))
   }
 
@@ -162,7 +160,7 @@ class Scribing {
     this.papers.forEach(paper => {
       paper.tiers.forEach((tier, index) => {
         let color = ''
-        switch(index) {
+        switch (index) {
           case 0:
             color = 'green'
             break;
@@ -174,7 +172,7 @@ class Scribing {
             break;
         }
 
-        const id = _.snakeCase(paper.name+romanize(index + 1))
+        const id = _.snakeCase(paper.name + romanize(index + 1))
 
         const give = `execute as @s[scores={${this.getIngredientsScores(paper, index)}}] run function zmagic:give/page/${id}`
         const line1 = `${give}`
@@ -187,7 +185,7 @@ class Scribing {
         ]
 
         const writePath = `${scribePath}${id}.mcfunction`
-        verb.buildLog('    '+writePath, 3);
+        verb.buildLog('    ' + writePath, 3);
         jp.write(writePath, lines.join('\n'))
       })
     })
@@ -197,7 +195,7 @@ class Scribing {
     this.papers.forEach(paper => {
       paper.tiers.forEach((tier, index) => {
         let color = ''
-        switch(index) {
+        switch (index) {
           case 0:
             color = 'green'
             break;
@@ -209,15 +207,18 @@ class Scribing {
             break;
         }
 
-        const id = _.snakeCase(paper.name+romanize(index + 1))
+        const id = _.snakeCase(paper.name + romanize(index + 1))
 
         const item = itemHelper.createItem({
           id: 'minecraft:paper',
           subId: id,
-          name: paper.name+' '+romanize(index + 1),
+          name: paper.name + ' ' + romanize(index + 1),
           color: color,
           lore: tier.lore,
-          ench: {id:0,lvl:0},
+          ench: {
+            id: 0,
+            lvl: 0
+          },
           hideFlags: 1
         })
 
@@ -226,7 +227,7 @@ class Scribing {
         ]
 
         const writePath = `${givePath}${id}.mcfunction`
-        verb.buildLog('    '+writePath, 3);
+        verb.buildLog('    ' + writePath, 3);
         jp.write(writePath, lines.join('\n'))
       })
     })
@@ -234,12 +235,12 @@ class Scribing {
 
   writeGiveTome() {
     const entry = JSON.stringify({
-      text:`\nIgnus Page I`,
-      color:'green',
-      italic:'true',
-      underlined:'true',
-      clickEvent:{
-        action:'run_command',
+      text: `\nIgnus Page I`,
+      color: 'green',
+      italic: 'true',
+      underlined: 'true',
+      clickEvent: {
+        action: 'run_command',
         value: `/trigger scribePage set 10`
       }
     })
@@ -249,7 +250,10 @@ class Scribing {
       name: 'Scribing Tome',
       color: 'aqua',
       lore: 'A tome used for scribing spell pages.',
-      ench: {id:0,lvl:0},
+      ench: {
+        id: 0,
+        lvl: 0
+      },
       hideFlags: 1,
       pages: [entry]
     })
