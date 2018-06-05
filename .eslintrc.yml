@@ -5,9 +5,10 @@ extends: 'eslint:recommended'
 parserOptions:
   sourceType: module
 rules:
-  indent:
-    - error
-    - 2
+  no-unused-vars: 
+    - warn
+    - vars: all 
+      args: none
   linebreak-style:
     - error
     - unix
@@ -18,3 +19,4 @@ rules:
   semi:
     - error
     - never
+  no-console: off
